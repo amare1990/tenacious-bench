@@ -1,0 +1,84 @@
+# ----------------------
+# Python
+# ----------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# ----------------------
+# uv / packaging
+# ----------------------
+.uv/
+uv.lock
+
+# ----------------------
+# Environment variables
+# ----------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------
+# Logs & traces
+# ----------------------
+*.log
+logs/
+trace_logs/
+*.jsonl
+
+# Langfuse / tracing dumps
+langfuse/
+traces/
+
+# ----------------------
+# Data (raw or large)
+# ----------------------
+data/*
+!data/.gitkeep
+
+# ----------------------
+# Docs
+# ----------------------
+docs/*
+
+# ----------------------
+# Build / dist
+# ----------------------
+build/
+dist/
+*.egg-info/
+
+# ----------------------
+# IDE / Editor
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ----------------------
+# OS files
+# ----------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# Testing / coverage
+# ----------------------
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ----------------------
+# Misc
+# ----------------------
+*.sqlite3
+*.db
