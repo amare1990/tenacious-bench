@@ -1,9 +1,128 @@
 from __future__ import annotations
 
 from briefs.models import ConversationState, ReplyAnalysis
+from integrations.llm_client import (
+    call_openrouter_json,
+    is_llm_reply_analysis_enabled,
+    LLMClientError,
+)
+
+
+_ALLOWED_REPLY_TYPES = {
+    "interested",
+    "information_request",
+    "defer",
+    "rejection",
+    "unclear",
+}
+
+_ALLOWED_SENTIMENTS = {
+    "positive",
+    "neutral",
+    "negative",
+}
+
+_ALLOWED_NEXT_ACTIONS = {
+    "offer_scheduling",
+    "send_followup_details",
+    "set_followup_later",
+    "close_thread",
+    "respond_carefully",
+}
 
 
 def analyze_reply(reply_text: str) -> ReplyAnalysis:
+    """
+    Try LLM-based analysis first when enabled; fall back to rules if anything fails.
+    """
+    if is_llm_reply_analysis_enabled():
+        try:
+            return _analyze_reply_with_llm(reply_text)
+        except LLMClientError:
+            pass
+        except ValueError:
+            pass
+
+    return _analyze_reply_rule_based(reply_text)
+
+
+def _analyze_reply_with_llm(reply_text: str) -> ReplyAnalysis:
+    system_prompt = """
+You are classifying a sales prospect email reply for a B2B outreach workflow.
+
+Return ONLY a JSON object with exactly these keys:
+- reply_type
+- confidence
+- sentiment
+- next_action
+- reasoning
+
+Allowed reply_type values:
+- interested
+- information_request
+- defer
+- rejection
+- unclear
+
+Allowed sentiment values:
+- positive
+- neutral
+- negative
+
+Allowed next_action values:
+- offer_scheduling
+- send_followup_details
+- set_followup_later
+- close_thread
+- respond_carefully
+
+Rules:
+- Use "interested" only if the reply clearly indicates interest or willingness to talk.
+- Use "information_request" if the reply asks for more details before deciding.
+- Use "defer" if timing is the issue rather than fit.
+- Use "rejection" if the reply declines or asks to stop/remove contact.
+- Use "unclear" if intent is ambiguous.
+- confidence must be a number between 0 and 1.
+- reasoning must be brief and factual.
+""".strip()
+
+    user_prompt = f"Prospect reply:\n{reply_text}"
+
+    data = call_openrouter_json(
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+        temperature=0.1,
+    )
+
+    reply_type = str(data.get("reply_type", "")).strip()
+    sentiment = str(data.get("sentiment", "")).strip()
+    next_action = str(data.get("next_action", "")).strip()
+    reasoning = str(data.get("reasoning", "")).strip()
+
+    try:
+        confidence = float(data.get("confidence", 0.0))
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Invalid confidence from LLM") from exc
+
+    if reply_type not in _ALLOWED_REPLY_TYPES:
+        raise ValueError(f"Invalid reply_type from LLM: {reply_type}")
+    if sentiment not in _ALLOWED_SENTIMENTS:
+        raise ValueError(f"Invalid sentiment from LLM: {sentiment}")
+    if next_action not in _ALLOWED_NEXT_ACTIONS:
+        raise ValueError(f"Invalid next_action from LLM: {next_action}")
+    if not (0.0 <= confidence <= 1.0):
+        raise ValueError(f"Confidence out of range: {confidence}")
+
+    return ReplyAnalysis(
+        reply_type=reply_type,
+        confidence=round(confidence, 2),
+        sentiment=sentiment,
+        next_action=next_action,
+        reasoning=reasoning or "LLM classified the reply.",
+    )
+
+
+def _analyze_reply_rule_based(reply_text: str) -> ReplyAnalysis:
     text = reply_text.strip().lower()
 
     interested_markers = [
