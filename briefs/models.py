@@ -58,3 +58,13 @@ class ConversationState(BaseModel):
     last_message: Optional[str]
     next_action: Optional[str]
     is_handoff_required: bool = False
+    is_qualified: bool = False
+    is_booked: bool = False
+
+
+class ReplyAnalysis(BaseModel):
+    reply_type: str
+    confidence: float
+    sentiment: str
+    next_action: str
+    reasoning: str
