@@ -57,3 +57,60 @@ Tenacious
         "subject": subject,
         "body": body,
     }
+
+
+def generate_followup_email(company_name: str, analysis) -> dict:
+    if analysis.reply_type == "interested":
+        subject = f"Re: {company_name} – next step"
+        body = """
+Hi,
+
+Glad to hear that. I’d be happy to coordinate a 30-minute conversation and send over a few time options.
+
+Best,
+Tenacious
+""".strip()
+        return {"subject": subject, "body": body}
+
+    if analysis.reply_type == "information_request":
+        subject = f"Re: {company_name} – more context"
+        body = """
+Hi,
+
+Absolutely. We typically help teams that are scaling engineering capacity, filling specialized AI/data/infra gaps, or trying to move faster without overloading internal recruiting.
+
+If useful, I can also summarize the specific observation that made me reach out.
+
+Best,
+Tenacious
+""".strip()
+        return {"subject": subject, "body": body}
+
+    if analysis.reply_type == "defer":
+        subject = f"Re: {company_name} – happy to follow up later"
+        body = """
+Hi,
+
+Understood. Happy to circle back at a better time.
+
+Best,
+Tenacious
+""".strip()
+        return {"subject": subject, "body": body}
+
+    if analysis.reply_type == "unclear":
+        subject = f"Re: {company_name}"
+        body = """
+Hi,
+
+Thanks for the reply. Happy to clarify or share a bit more context if helpful.
+
+Best,
+Tenacious
+""".strip()
+        return {"subject": subject, "body": body}
+
+    return {
+        "subject": f"Re: {company_name}",
+        "body": "Understood. Thanks for the reply.",
+    }
