@@ -5,9 +5,10 @@ import argparse
 from enrichment.crunchbase import find_company_profile
 from enrichment.jobs import build_hiring_signal_brief
 from enrichment.ai_maturity import score_ai_maturity
+from enrichment.competitor_gap import build_competitor_gap_brief
 from enrichment.mock_data import (
     # get_mock_ai_maturity,
-    get_mock_gap,
+    # get_mock_gap,
     get_mock_bench,
 )
 from agent.email_agent import generate_email
@@ -25,7 +26,7 @@ def run_pipeline(company_name: str) -> None:
 
     # Still mocked for now
     ai = score_ai_maturity(company_name, signals)
-    gap = get_mock_gap()
+    gap = build_competitor_gap_brief(company_name, ai)
     bench = get_mock_bench()
 
     segment = "Segment 1 - Recently Funded"
