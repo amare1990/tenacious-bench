@@ -25,6 +25,10 @@ from integrations.hubspot import (
     log_engagement_note,
 )
 from integrations.calcom import propose_time_slots, create_booking
+from integrations.state_store import (
+    load_latest_conversation_state,
+    save_conversation_state,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -78,7 +82,17 @@ def run_pipeline(
     hubspot_lead_result = None
     hubspot_note_result = None
 
-    state = ConversationState(
+    target_recipient = recipient or os.getenv(
+        "DEFAULT_EMAIL_RECIPIENT",
+        "test@example.com",
+    )
+
+    existing_state = load_latest_conversation_state(
+        company_name=company.company_name,
+        recipient=target_recipient,
+    )
+
+    state = existing_state or ConversationState(
         company_name=company.company_name,
         channel="email",
         stage="researched",
@@ -95,10 +109,10 @@ def run_pipeline(
             policy_result=policy_result,
         )
 
-        target_recipient = recipient or os.getenv(
-            "DEFAULT_EMAIL_RECIPIENT",
-            "test@example.com",
-        )
+        # target_recipient = recipient or os.getenv(
+        #     "DEFAULT_EMAIL_RECIPIENT",
+        #     "test@example.com",
+        # )
 
         email_delivery = send_email(
             to_email=target_recipient,
@@ -199,6 +213,18 @@ def run_pipeline(
 
     duration_ms = round((time.perf_counter() - started_at) * 1000, 2)
 
+    save_conversation_state(
+        company_name=company.company_name,
+        recipient=target_recipient,
+        state=state,
+        metadata={
+            "segment_result": segment_result,
+            "policy_result": policy_result,
+            "reply_analysis": None if reply_analysis is None else reply_analysis.model_dump(),
+            "booking_result": booking_result,
+        },
+    )
+
     trace_payload = {
         "company_name": company_name,
         "company_profile": company,
@@ -273,6 +299,13 @@ def run_pipeline(
     if booking_result is not None:
         print("\n=== BOOKING RESULT ===")
         print(booking_result)
+
+    print("\n=== STATE STORE ===")
+    if existing_state is None:
+        print("No previous conversation state found.")
+    else:
+        print("Loaded previous conversation state.")
+        print(existing_state.model_dump())
 
     print("\n=== TRACE ===")
     print("Logged run to data/trace_log.jsonl")
