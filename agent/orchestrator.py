@@ -10,17 +10,20 @@ from enrichment.competitor_gap import build_competitor_gap_brief
 from enrichment.bench import build_bench_match_summary
 from agent.scoring import classify_icp_segment
 from agent.policies import decide_outreach_policy
-from agent.email_agent import generate_email
+from agent.email_agent import generate_email, generate_followup_email
+from agent.reply_handler import analyze_reply, update_conversation_state
+from briefs.models import ConversationState
 from integrations.tracing import log_trace
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run the Conversion Engine pipeline.")
     parser.add_argument("--company", required=True, help="Company name to process")
+    parser.add_argument("--reply", required=False, help="Optional reply text to simulate a second turn")
     return parser.parse_args()
 
 
-def run_pipeline(company_name: str) -> None:
+def run_pipeline(company_name: str, reply_text: str | None = None) -> None:
     started_at = time.perf_counter()
 
     company = find_company_profile(company_name)
@@ -33,6 +36,16 @@ def run_pipeline(company_name: str) -> None:
     policy_result = decide_outreach_policy(segment_result, bench)
 
     email = None
+    state = ConversationState(
+        company_name=company.company_name,
+        channel="email",
+        stage="researched",
+        next_action="send_outreach",
+    )
+
+    reply_analysis = None
+    followup_email = None
+
     if policy_result["should_contact"]:
         email = generate_email(
             company=company,
@@ -42,6 +55,22 @@ def run_pipeline(company_name: str) -> None:
             segment_result=segment_result,
             policy_result=policy_result,
         )
+
+        state = ConversationState(
+            company_name=company.company_name,
+            channel="email",
+            stage="contacted",
+            last_outbound_message=email["body"],
+            next_action="await_reply",
+            is_handoff_required=policy_result["require_handoff"],
+            is_qualified=False,
+            is_booked=False,
+        )
+
+        if reply_text:
+            reply_analysis = analyze_reply(reply_text)
+            state = update_conversation_state(state, reply_text, reply_analysis)
+            followup_email = generate_followup_email(company.company_name, reply_analysis)
 
     duration_ms = round((time.perf_counter() - started_at) * 1000, 2)
 
@@ -54,7 +83,11 @@ def run_pipeline(company_name: str) -> None:
         "bench_match_summary": bench,
         "segment_result": segment_result,
         "policy_result": policy_result,
-        "email": email,
+        "initial_email": email,
+        "reply_text": reply_text,
+        "reply_analysis": reply_analysis,
+        "followup_email": followup_email,
+        "conversation_state": state,
         "duration_ms": duration_ms,
     }
 
@@ -72,6 +105,9 @@ def run_pipeline(company_name: str) -> None:
     print("\n=== GAP ===")
     print(gap.model_dump())
 
+    print("\n=== BENCH MATCH ===")
+    print(bench.model_dump())
+
     print("\n=== SEGMENT ===")
     print(segment_result)
 
@@ -82,15 +118,27 @@ def run_pipeline(company_name: str) -> None:
         print("\n=== DECISION ===")
         print("Do not contact.")
     else:
-        print("\n=== EMAIL ===")
+        print("\n=== INITIAL EMAIL ===")
         print("Subject:", email["subject"])
         print("Body:\n", email["body"])
 
+    if reply_analysis is not None:
+        print("\n=== REPLY ANALYSIS ===")
+        print(reply_analysis.model_dump())
+
+    if followup_email is not None:
+        print("\n=== FOLLOW-UP EMAIL ===")
+        print("Subject:", followup_email["subject"])
+        print("Body:\n", followup_email["body"])
+
+    print("\n=== CONVERSATION STATE ===")
+    print(state.model_dump())
+
     print("\n=== TRACE ===")
-    print(f"Logged run to data/trace_log.jsonl")
+    print("Logged run to data/trace_log.jsonl")
     print(f"Duration: {duration_ms} ms")
 
 
 if __name__ == "__main__":
     args = parse_args()
-    run_pipeline(args.company)
+    run_pipeline(args.company, args.reply)
