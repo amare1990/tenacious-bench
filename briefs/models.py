@@ -53,10 +53,11 @@ class LeadRecord(BaseModel):
 
 class ConversationState(BaseModel):
     company_name: str
-    channel: str  # email or sms
-    stage: str  # new, contacted, replied, qualified, booked
-    last_message: Optional[str]
-    next_action: Optional[str]
+    channel: str
+    stage: str
+    last_outbound_message: Optional[str] = None
+    last_inbound_message: Optional[str] = None
+    next_action: Optional[str] = None
     is_handoff_required: bool = False
     is_qualified: bool = False
     is_booked: bool = False
