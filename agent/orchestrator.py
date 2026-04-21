@@ -4,8 +4,9 @@ import argparse
 
 from enrichment.crunchbase import find_company_profile
 from enrichment.jobs import build_hiring_signal_brief
+from enrichment.ai_maturity import score_ai_maturity
 from enrichment.mock_data import (
-    get_mock_ai_maturity,
+    # get_mock_ai_maturity,
     get_mock_gap,
     get_mock_bench,
 )
@@ -23,7 +24,7 @@ def run_pipeline(company_name: str) -> None:
     signals = build_hiring_signal_brief(company_name)
 
     # Still mocked for now
-    ai = get_mock_ai_maturity()
+    ai = score_ai_maturity(company_name, signals)
     gap = get_mock_gap()
     bench = get_mock_bench()
 
