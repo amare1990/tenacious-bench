@@ -3,8 +3,8 @@ from __future__ import annotations
 import argparse
 
 from enrichment.crunchbase import find_company_profile
+from enrichment.jobs import build_hiring_signal_brief
 from enrichment.mock_data import (
-    get_mock_signals,
     get_mock_ai_maturity,
     get_mock_gap,
     get_mock_bench,
@@ -19,33 +19,30 @@ def parse_args() -> argparse.Namespace:
 
 
 def run_pipeline(company_name: str) -> None:
-    # Step 1: Real company lookup
     company = find_company_profile(company_name)
+    signals = build_hiring_signal_brief(company_name)
 
-    # Step 2: Still mocked for now
-    signals = get_mock_signals()
+    # Still mocked for now
     ai = get_mock_ai_maturity()
     gap = get_mock_gap()
     bench = get_mock_bench()
 
-    # Step 3: Placeholder scoring
     segment = "Segment 1 - Recently Funded"
     confidence = 0.8
 
-    # Step 4: Email generation
     email = generate_email(company, signals, ai, gap)
 
     print("\n=== COMPANY ===")
     print(company.model_dump())
 
     print("\n=== SIGNALS ===")
-    print(signals.summary)
+    print(signals.model_dump())
 
     print("\n=== AI MATURITY ===")
-    print(ai.score, ai.rationale)
+    print(ai.model_dump())
 
     print("\n=== GAP ===")
-    print(gap.summary)
+    print(gap.model_dump())
 
     print("\n=== EMAIL ===")
     print("Subject:", email["subject"])
