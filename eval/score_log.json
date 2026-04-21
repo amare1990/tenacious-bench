@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp_utc": "2026-04-21T14:01:55.593349+00:00",
+    "benchmark": "tau2-bench-retail-placeholder",
+    "status": "scaffolded",
+    "pass_at_1": null,
+    "ci_95": null,
+    "cost_per_run": null,
+    "latency_ms": null,
+    "notes": "Placeholder until tau2-bench harness is wired."
+  }
+]
