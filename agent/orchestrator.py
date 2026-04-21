@@ -16,6 +16,11 @@ from agent.reply_handler import analyze_reply, update_conversation_state
 from briefs.models import ConversationState
 from integrations.tracing import log_trace
 from integrations.email_client import send_email
+from integrations.hubspot import (
+    build_lead_payload,
+    upsert_lead_record,
+    log_engagement_note,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +54,8 @@ def run_pipeline(
 
     email = None
     email_delivery = None
+    hubspot_lead_result = None
+    hubspot_note_result = None
 
     state = ConversationState(
         company_name=company.company_name,
@@ -112,6 +119,41 @@ def run_pipeline(
                 },
             )
 
+    lead_payload = build_lead_payload(
+        company=company,
+        signals=signals,
+        ai_profile=ai,
+        gap_brief=gap,
+        bench_summary=bench,
+        segment_result=segment_result,
+        policy_result=policy_result,
+        conversation_state=state,
+    )
+
+    hubspot_lead_result = upsert_lead_record(lead_payload)
+
+    note_text_parts = [
+        f"Pipeline processed for {company.company_name}.",
+        f"Segment: {segment_result['segment']} ({segment_result['confidence']}).",
+        f"Policy: should_contact={policy_result['should_contact']}, tone={policy_result['tone_mode']}.",
+        f"Conversation stage: {state.stage}.",
+    ]
+
+    if reply_analysis is not None:
+        note_text_parts.append(
+            f"Reply classified as {reply_analysis.reply_type} with next action {reply_analysis.next_action}."
+        )
+
+    hubspot_note_result = log_engagement_note(
+        company_name=company.company_name,
+        note=" ".join(note_text_parts),
+        metadata={
+            "segment_result": segment_result,
+            "policy_result": policy_result,
+            "conversation_state": state.model_dump(),
+        },
+    )
+
     duration_ms = round((time.perf_counter() - started_at) * 1000, 2)
 
     trace_payload = {
@@ -130,6 +172,8 @@ def run_pipeline(
         "followup_email": followup_email,
         "followup_email_delivery": followup_delivery,
         "conversation_state": state,
+        "hubspot_lead_result": hubspot_lead_result,
+        "hubspot_note_result": hubspot_note_result,
         "duration_ms": duration_ms,
     }
 
@@ -169,6 +213,12 @@ def run_pipeline(
 
     print("\n=== CONVERSATION STATE ===")
     print(state.model_dump())
+
+    print("\n=== HUBSPOT LEAD RESULT ===")
+    print(hubspot_lead_result)
+
+    print("\n=== HUBSPOT NOTE RESULT ===")
+    print(hubspot_note_result)
 
     print("\n=== TRACE ===")
     print("Logged run to data/trace_log.jsonl")
