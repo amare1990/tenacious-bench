@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from statistics import median
 from typing import Any
 
@@ -16,6 +16,7 @@ from enrichment.bench import build_bench_match_summary
 from enrichment.competitor_gap import build_competitor_gap_brief
 from enrichment.crunchbase import find_company_profile
 from enrichment.jobs import build_hiring_signal_brief
+from enrichment.source_inventory import PROCESSED_DIR, build_raw_source_inventory, json_dump, slugify_company_name, write_download_status_report
 from integrations.calcom import create_booking, propose_time_slots
 from integrations.email_client import send_email
 from integrations.hubspot import build_lead_payload, log_engagement_note, upsert_lead_record
@@ -24,12 +25,51 @@ from integrations.state_store import load_latest_conversation_state, save_conver
 from integrations.tracing import append_trace
 
 
-DEFAULT_RECIPIENT = 'prospect@example.com'
-DEFAULT_PHONE = '+251900000000'
+DEFAULT_RECIPIENT = "prospect@example.com"
+DEFAULT_PHONE = "+251900000000"
 
 
 def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def _write_enrichment_artifacts(lead_record: LeadRecord, segment_result: dict[str, Any], policy_result: dict[str, Any]) -> dict[str, str]:
+    company_slug = lead_record.company.slug or slugify_company_name(lead_record.company.company_name)
+    enrichment_dir = PROCESSED_DIR / "enrichment" / company_slug
+    enrichment_dir.mkdir(parents=True, exist_ok=True)
+
+    firmographic_path = enrichment_dir / "firmographic_brief.json"
+    hiring_path = enrichment_dir / "hiring_signal_brief.json"
+    competitor_path = enrichment_dir / "competitor_gap_brief.json"
+    ai_path = enrichment_dir / "ai_maturity_brief.json"
+    lead_path = PROCESSED_DIR / "leads" / f"{company_slug}.json"
+
+    json_dump(firmographic_path, lead_record.company.model_dump())
+    json_dump(hiring_path, lead_record.hiring_brief.model_dump())
+    json_dump(competitor_path, lead_record.competitor_gap.model_dump())
+    json_dump(ai_path, lead_record.ai_profile.model_dump())
+    json_dump(
+        lead_path,
+        {
+            "company": lead_record.company.model_dump(),
+            "hiring_brief": lead_record.hiring_brief.model_dump(),
+            "ai_profile": lead_record.ai_profile.model_dump(),
+            "competitor_gap": lead_record.competitor_gap.model_dump(),
+            "bench_match": lead_record.bench_match.model_dump() if lead_record.bench_match else None,
+            "data_inventory": [item.model_dump() for item in lead_record.data_inventory],
+            "segment_result": segment_result,
+            "policy_result": policy_result,
+            "generated_at_utc": _utc_now().isoformat(),
+        },
+    )
+
+    return {
+        "firmographic_brief": str(firmographic_path),
+        "hiring_signal_brief": str(hiring_path),
+        "competitor_gap_brief": str(competitor_path),
+        "ai_maturity_brief": str(ai_path),
+        "lead_record": str(lead_path),
+    }
 
 
 def build_lead(company_name: str) -> dict[str, Any]:
@@ -40,6 +80,8 @@ def build_lead(company_name: str) -> dict[str, Any]:
     bench_summary = build_bench_match_summary(signals, ai_profile)
     segment_result = classify_icp_segment(company, signals, ai_profile, gap_brief)
     policy_result = decide_outreach_policy(segment_result, bench_summary, ai_profile.confidence)
+    inventory = build_raw_source_inventory()
+    write_download_status_report()
 
     lead_record = LeadRecord(
         company=company,
@@ -47,16 +89,20 @@ def build_lead(company_name: str) -> dict[str, Any]:
         ai_profile=ai_profile,
         competitor_gap=gap_brief,
         bench_match=bench_summary,
+        data_inventory=inventory,
     )
+    artifact_paths = _write_enrichment_artifacts(lead_record, segment_result, policy_result)
     return {
-        'company': company,
-        'signals': signals,
-        'ai_profile': ai_profile,
-        'gap_brief': gap_brief,
-        'bench_summary': bench_summary,
-        'segment_result': segment_result,
-        'policy_result': policy_result,
-        'lead_record': lead_record,
+        "company": company,
+        "signals": signals,
+        "ai_profile": ai_profile,
+        "gap_brief": gap_brief,
+        "bench_summary": bench_summary,
+        "segment_result": segment_result,
+        "policy_result": policy_result,
+        "lead_record": lead_record,
+        "artifact_paths": artifact_paths,
+        "data_inventory": inventory,
     }
 
 
@@ -65,50 +111,50 @@ def send_initial_outreach(
     company_name: str,
     recipient: str = DEFAULT_RECIPIENT,
     phone: str = DEFAULT_PHONE,
-    channel: str = 'email',
+    channel: str = "email",
 ) -> dict[str, Any]:
     lead = build_lead(company_name)
     conversation_state = ConversationState(
         company_name=company_name,
         channel=channel,
-        stage='outbound',
-        next_action='await_reply',
+        stage="outbound",
+        next_action="await_reply",
     )
 
     email_draft = generate_email(
-        lead['company'],
-        lead['signals'],
-        lead['ai_profile'],
-        lead['gap_brief'],
-        lead['segment_result'],
-        lead['policy_result'],
+        lead["company"],
+        lead["signals"],
+        lead["ai_profile"],
+        lead["gap_brief"],
+        lead["segment_result"],
+        lead["policy_result"],
     )
 
     send_result = send_email(
         to_email=recipient,
-        subject=email_draft['subject'],
-        body=email_draft['body'],
-        metadata={'draft': True, 'company_name': company_name},
+        subject=email_draft["subject"],
+        body=email_draft["body"],
+        metadata={"draft": True, "company_name": company_name},
     )
 
     sms_result = None
-    if channel == 'sms':
+    if channel == "sms":
         sms_result = send_sms(
             to_phone=phone,
-            body='Warm follow-up from Tenacious: if email is easier, I can keep details there. If faster, I can text you 3 timeslots for a short intro call.',
-            metadata={'company_name': company_name},
+            body="Warm follow-up from Tenacious: if email is easier, I can keep details there. If faster, I can text you 3 timeslots for a short intro call.",
+            metadata={"company_name": company_name},
         )
 
-    conversation_state.last_outbound_message = email_draft['body']
+    conversation_state.last_outbound_message = email_draft["body"]
 
     hubspot_payload = build_lead_payload(
-        company=lead['company'],
-        signals=lead['signals'],
-        ai_profile=lead['ai_profile'],
-        gap_brief=lead['gap_brief'],
-        bench_summary=lead['bench_summary'],
-        segment_result=lead['segment_result'],
-        policy_result=lead['policy_result'],
+        company=lead["company"],
+        signals=lead["signals"],
+        ai_profile=lead["ai_profile"],
+        gap_brief=lead["gap_brief"],
+        bench_summary=lead["bench_summary"],
+        segment_result=lead["segment_result"],
+        policy_result=lead["policy_result"],
         conversation_state=conversation_state,
     )
     hubspot_result = upsert_lead_record(hubspot_payload)
@@ -117,25 +163,27 @@ def send_initial_outreach(
     save_conversation_state(company_name=company_name, recipient=recipient, state=conversation_state)
 
     trace = {
-        'event_type': 'initial_outreach',
-        'company_name': company_name,
-        'recipient': recipient,
-        'phone': phone,
-        'channel': channel,
-        'lead_record': lead['lead_record'].model_dump(),
-        'segment_result': lead['segment_result'],
-        'policy_result': lead['policy_result'],
-        'email': email_draft,
-        'email_send_result': send_result,
-        'sms_result': sms_result,
-        'hubspot_result': hubspot_result,
-        'note_result': note_result,
-        'conversation_state': conversation_state.model_dump(),
-        'latency_ms': 850,
-        'cost_usd': 0.08,
+        "event_type": "initial_outreach",
+        "company_name": company_name,
+        "recipient": recipient,
+        "phone": phone,
+        "channel": channel,
+        "lead_record": lead["lead_record"].model_dump(),
+        "artifact_paths": lead["artifact_paths"],
+        "data_inventory": [item.model_dump() for item in lead["data_inventory"]],
+        "segment_result": lead["segment_result"],
+        "policy_result": lead["policy_result"],
+        "email": email_draft,
+        "email_send_result": send_result,
+        "sms_result": sms_result,
+        "hubspot_result": hubspot_result,
+        "note_result": note_result,
+        "conversation_state": conversation_state.model_dump(),
+        "latency_ms": 850,
+        "cost_usd": 0.08,
     }
     trace_id = append_trace(trace)
-    trace['trace_id'] = trace_id
+    trace["trace_id"] = trace_id
     return trace
 
 
@@ -154,37 +202,38 @@ def process_reply(
 
     followup = generate_followup_email(company_name, analysis)
     booking_result = None
-    if analysis.reply_type == 'interested':
+    if analysis.reply_type == "interested":
         slots = propose_time_slots()
-        followup['body'] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
-        updated_state.next_action = 'schedule_call'
+        followup["body"] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
+        updated_state.next_action = "schedule_call"
         if book:
             booking_result = create_booking(company_name=company_name, email=recipient, selected_time=slots[0])
             updated_state.is_booked = True
-            updated_state.stage = 'booked'
+            updated_state.stage = "booked"
 
     send_result = send_email(
         to_email=recipient,
-        subject=followup['subject'],
-        body=followup['body'],
-        metadata={'draft': True, 'reply_type': analysis.reply_type, 'company_name': company_name},
+        subject=followup["subject"],
+        body=followup["body"],
+        metadata={"draft": True, "reply_type": analysis.reply_type, "company_name": company_name},
     )
 
-    if analysis.reply_type == 'interested':
-        send_sms(
+    sms_followup_result = None
+    if analysis.reply_type == "interested":
+        sms_followup_result = send_sms(
             to_phone=phone,
-            body='Thanks — I also emailed time options so scheduling is easier.',
-            metadata={'company_name': company_name, 'reply_type': analysis.reply_type},
+            body="Thanks - I also emailed time options so scheduling is easier.",
+            metadata={"company_name": company_name, "reply_type": analysis.reply_type},
         )
 
     hubspot_payload = build_lead_payload(
-        company=lead['company'],
-        signals=lead['signals'],
-        ai_profile=lead['ai_profile'],
-        gap_brief=lead['gap_brief'],
-        bench_summary=lead['bench_summary'],
-        segment_result=lead['segment_result'],
-        policy_result=lead['policy_result'],
+        company=lead["company"],
+        signals=lead["signals"],
+        ai_profile=lead["ai_profile"],
+        gap_brief=lead["gap_brief"],
+        bench_summary=lead["bench_summary"],
+        segment_result=lead["segment_result"],
+        policy_result=lead["policy_result"],
         conversation_state=updated_state,
     )
     hubspot_result = upsert_lead_record(hubspot_payload)
@@ -193,21 +242,24 @@ def process_reply(
     save_conversation_state(company_name=company_name, recipient=recipient, state=updated_state)
 
     trace = {
-        'event_type': 'reply_processed',
-        'company_name': company_name,
-        'recipient': recipient,
-        'reply_text': reply_text,
-        'analysis': analysis.model_dump(),
-        'followup': followup,
-        'booking_result': booking_result,
-        'hubspot_result': hubspot_result,
-        'note_result': note_result,
-        'conversation_state': updated_state.model_dump(),
-        'latency_ms': 930,
-        'cost_usd': 0.06,
+        "event_type": "reply_processed",
+        "company_name": company_name,
+        "recipient": recipient,
+        "reply_text": reply_text,
+        "analysis": analysis.model_dump(),
+        "followup": followup,
+        "booking_result": booking_result,
+        "sms_followup_result": sms_followup_result,
+        "artifact_paths": lead["artifact_paths"],
+        "hubspot_result": hubspot_result,
+        "note_result": note_result,
+        "email_send_result": send_result,
+        "conversation_state": updated_state.model_dump(),
+        "latency_ms": 930,
+        "cost_usd": 0.06,
     }
     trace_id = append_trace(trace)
-    trace['trace_id'] = trace_id
+    trace["trace_id"] = trace_id
     return trace
 
 
@@ -217,26 +269,26 @@ def simulate_latency_batch(n: int = 20) -> dict[str, Any]:
     p50 = median(sorted_vals)
     p95 = sorted_vals[max(0, min(len(sorted_vals) - 1, int(round(0.95 * len(sorted_vals))) - 1))]
     record = {
-        'event_type': 'latency_batch',
-        'sample_size': n,
-        'latency_ms_values': latencies,
-        'p50_latency_ms': p50,
-        'p95_latency_ms': p95,
-        'timestamp_utc': _utc_now().isoformat(),
+        "event_type": "latency_batch",
+        "sample_size": n,
+        "latency_ms_values": latencies,
+        "p50_latency_ms": p50,
+        "p95_latency_ms": p95,
+        "timestamp_utc": _utc_now().isoformat(),
     }
     append_trace(record)
     return record
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='Conversion engine orchestration entrypoint')
-    parser.add_argument('--company', '-c', required=True, help='Company name to process')
-    parser.add_argument('--recipient', default=DEFAULT_RECIPIENT)
-    parser.add_argument('--phone', default=DEFAULT_PHONE)
-    parser.add_argument('--channel', choices=['email', 'sms'], default='email')
-    parser.add_argument('--reply', default=None, help='Prospect reply text to process')
-    parser.add_argument('--book', action='store_true', help='Create a booking for interested replies')
-    parser.add_argument('--latency-batch', type=int, default=0, help='Also write a synthetic latency batch to trace log')
+    parser = argparse.ArgumentParser(description="Conversion engine orchestration entrypoint")
+    parser.add_argument("--company", "-c", required=True, help="Company name to process")
+    parser.add_argument("--recipient", default=DEFAULT_RECIPIENT)
+    parser.add_argument("--phone", default=DEFAULT_PHONE)
+    parser.add_argument("--channel", choices=["email", "sms"], default="email")
+    parser.add_argument("--reply", default=None, help="Prospect reply text to process")
+    parser.add_argument("--book", action="store_true", help="Create a booking for interested replies")
+    parser.add_argument("--latency-batch", type=int, default=0, help="Also write a synthetic latency batch to trace log")
     args = parser.parse_args()
 
     if args.reply:
@@ -250,5 +302,5 @@ def main() -> None:
         print(json.dumps(simulate_latency_batch(args.latency_batch), indent=2, default=str))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
