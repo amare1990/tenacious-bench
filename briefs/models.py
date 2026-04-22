@@ -14,16 +14,28 @@ class CompanyProfile(BaseModel):
     location: str | None = None
     funding_stage: str | None = None
     last_funding_date: date | str | None = None
+    slug: str | None = None
+    source: str = "fixture"
+    source_record_id: str | None = None
+    source_paths: list[str] = Field(default_factory=list)
+    raw_attributes: dict[str, Any] = Field(default_factory=dict)
 
 
 class HiringSignalBrief(BaseModel):
-    funding_signal: Any = None
-    hiring_velocity_signal: Any = None
-    layoffs_signal: Any = None
-    leadership_change_signal: Any = None
-    tech_stack_signal: Any = None
+    funding_signal: str | None = None
+    hiring_velocity_signal: str | None = None
+    layoffs_signal: str | None = None
+    leadership_change_signal: str | None = None
+    tech_stack_signal: str | None = None
     confidence_by_signal: dict[str, float] = Field(default_factory=dict)
     overall_summary: str | None = None
+    funding_details: dict[str, Any] = Field(default_factory=dict)
+    hiring_velocity_details: dict[str, Any] = Field(default_factory=dict)
+    layoffs_details: dict[str, Any] = Field(default_factory=dict)
+    leadership_change_details: dict[str, Any] = Field(default_factory=dict)
+    tech_stack_details: dict[str, Any] = Field(default_factory=dict)
+    source_paths: list[str] = Field(default_factory=list)
+    missing_inputs: list[str] = Field(default_factory=list)
 
     @property
     def summary(self) -> str | None:
@@ -35,6 +47,7 @@ class AIMaturityProfile(BaseModel):
     evidence: list[str] = Field(default_factory=list)
     confidence: float = 0.0
     rationale: str | None = None
+    signal_breakdown: dict[str, Any] = Field(default_factory=dict)
 
 
 class CompetitorGapBrief(BaseModel):
@@ -43,13 +56,25 @@ class CompetitorGapBrief(BaseModel):
     missing_practices: list[str] = Field(default_factory=list)
     confidence: float = 0.0
     summary: str | None = None
+    sector: str | None = None
+    company_size_band: str | None = None
+    observed_practices: list[str] = Field(default_factory=list)
 
 
 class BenchMatchSummary(BaseModel):
     requested_capabilities: list[str] = Field(default_factory=list)
     available_capabilities: list[str] = Field(default_factory=list)
+    matched_capabilities: list[str] = Field(default_factory=list)
     fit: bool = False
     confidence: float = 0.0
+    notes: str | None = None
+
+
+class RawSourceStatus(BaseModel):
+    source_name: str
+    path: str
+    present: bool
+    populated: bool
     notes: str | None = None
 
 
@@ -59,6 +84,7 @@ class LeadRecord(BaseModel):
     ai_profile: AIMaturityProfile
     competitor_gap: CompetitorGapBrief
     bench_match: BenchMatchSummary | None = None
+    data_inventory: list[RawSourceStatus] = Field(default_factory=list)
 
 
 class ConversationState(BaseModel):
