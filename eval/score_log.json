@@ -1,34 +1,34 @@
 [
   {
-    "timestamp_utc": "2026-04-22T08:10:32.804732+00:00",
+    "timestamp_utc": "2026-04-22T11:03:04.575860+00:00",
     "benchmark": "tau2-bench-retail-dev-slice",
     "condition": "dev_tier_baseline",
     "trials": 5,
-    "dev_slice_size": 30,
-    "mean_pass_at_1": 0.48,
+    "dev_slice_size": 2,
+    "mean_pass_at_1": 0.0,
     "ci_95": [
-      0.4067,
-      0.5533
+      0.0,
+      0.0
     ],
-    "cost_per_run_usd": 0.33,
-    "p50_latency_ms": 3830,
-    "p95_latency_ms": 4466,
-    "notes": "Deterministic local harness scaffold; replace with pinned tau2-bench execution for scored runs."
+    "cost_per_run_usd": 0.0,
+    "p50_latency_ms": 24666,
+    "p95_latency_ms": 24666,
+    "notes": "Real tau2 CLI execution via external/tau2-bench."
   },
   {
-    "timestamp_utc": "2026-04-22T08:10:32.815380+00:00",
+    "timestamp_utc": "2026-04-22T11:03:36.825515+00:00",
     "benchmark": "tau2-bench-retail-dev-slice",
     "condition": "small_scale_reproduction_check",
     "trials": 3,
-    "dev_slice_size": 30,
-    "mean_pass_at_1": 0.5,
+    "dev_slice_size": 2,
+    "mean_pass_at_1": 0.0,
     "ci_95": [
-      0.3868,
-      0.6132
+      0.0,
+      0.0
     ],
-    "cost_per_run_usd": 0.33,
-    "p50_latency_ms": 3839,
-    "p95_latency_ms": 4475,
-    "notes": "Deterministic local harness scaffold; replace with pinned tau2-bench execution for scored runs."
+    "cost_per_run_usd": 0.0,
+    "p50_latency_ms": 5374,
+    "p95_latency_ms": 5374,
+    "notes": "Real tau2 CLI execution via external/tau2-bench."
   }
 ]
