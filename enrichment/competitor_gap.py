@@ -1,3 +1,8 @@
+"""Competitor-gap enrichment stubs.
+
+Includes a small deterministic mock and a file-backed loader for richer tests.
+"""
+
 from __future__ import annotations
 
 import json
@@ -10,16 +15,24 @@ from briefs.models import CompetitorGapBrief, AIMaturityProfile
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "competitor_signals.json"
 
 
+def competitor_gap_mock(company_name: str) -> CompetitorGapBrief:
+    # Minimal stub: returns a mock gap brief
+    return CompetitorGapBrief(
+        peer_group=[f"{company_name} Competitor A", "Competitor B", "Competitor C"],
+        top_quartile_practices=["Automated CI for ML", "Dedicated MLOps engineer"],
+        missing_practices=["Dedicated MLOps engineer"],
+        confidence=0.6,
+        summary="Mock competitor gap: suggests MLOps and CI improvements",
+    )
+
+
 def _normalize_name(name: str) -> str:
     return " ".join(name.strip().lower().split())
 
 
 def _load_competitor_records() -> list[dict[str, Any]]:
     if not DATA_PATH.exists():
-        raise FileNotFoundError(
-            f"Competitor signal data file not found at {DATA_PATH}. "
-            "Create data/competitor_signals.json first."
-        )
+        return []
 
     with DATA_PATH.open("r", encoding="utf-8") as f:
         data = json.load(f)

@@ -1,3 +1,9 @@
+"""AI maturity scoring stubs.
+
+Provides a small mock scorer used by the demo plus a file-backed scoring
+implementation used for richer integration tests.
+"""
+
 from __future__ import annotations
 
 import json
@@ -10,16 +16,34 @@ from briefs.models import AIMaturityProfile, HiringSignalBrief
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "ai_signals.json"
 
 
+def score_ai_maturity_mock(company_name: str, job_signal: dict) -> AIMaturityProfile:
+    # Very simple deterministic scoring based on open_roles
+    open_roles = job_signal.get("open_roles", 0)
+    if open_roles >= 10:
+        score = 3
+        conf = 0.9
+    elif open_roles >= 5:
+        score = 2
+        conf = 0.7
+    elif open_roles >= 1:
+        score = 1
+        conf = 0.5
+    else:
+        score = 0
+        conf = 0.3
+
+    evidence = [f"{open_roles} engineering roles observed"]
+    return AIMaturityProfile(score=score, evidence=evidence, confidence=conf,
+                             rationale="mock rule: open roles -> score")
+
+
 def _normalize_name(name: str) -> str:
     return " ".join(name.strip().lower().split())
 
 
 def _load_ai_records() -> list[dict[str, Any]]:
     if not DATA_PATH.exists():
-        raise FileNotFoundError(
-            f"AI signal data file not found at {DATA_PATH}. "
-            "Create data/ai_signals.json first."
-        )
+        return []
 
     with DATA_PATH.open("r", encoding="utf-8") as f:
         data = json.load(f)

@@ -3,11 +3,25 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
+from datetime import date
 
 from briefs.models import CompanyProfile
 
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "companies.json"
+
+
+def get_company_profile_mock(name: str) -> CompanyProfile:
+    """Deterministic mock data for a vertical slice."""
+    return CompanyProfile(
+        company_name=name,
+        website=f"https://www.{name.replace(' ', '').lower()}.com",
+        industry="Software",
+        employee_count=75,
+        location="Remote",
+        funding_stage="Series A",
+        last_funding_date=date.today(),
+    )
 
 
 def _normalize_name(name: str) -> str:
@@ -16,10 +30,7 @@ def _normalize_name(name: str) -> str:
 
 def _load_company_records() -> list[dict[str, Any]]:
     if not DATA_PATH.exists():
-        raise FileNotFoundError(
-            f"Company data file not found at {DATA_PATH}. "
-            "Create data/companies.json first."
-        )
+        return []
 
     with DATA_PATH.open("r", encoding="utf-8") as f:
         data = json.load(f)
@@ -42,15 +53,18 @@ def _record_to_company_profile(record: dict[str, Any]) -> CompanyProfile:
 
 
 def find_company_profile(company_name: str) -> CompanyProfile:
-    """
-    Look up a company by name from local structured data.
+    """Look up a company by name from local structured data.
 
     Matching strategy:
     1. exact normalized match
     2. substring fallback
+    If no data file exists, raises ValueError.
     """
-    normalized_query = _normalize_name(company_name)
     records = _load_company_records()
+    if not records:
+        raise ValueError("No local company data available (data/companies.json missing)")
+
+    normalized_query = _normalize_name(company_name)
 
     exact_match: dict[str, Any] | None = None
     partial_matches: list[dict[str, Any]] = []

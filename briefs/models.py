@@ -1,63 +1,73 @@
-from pydantic import BaseModel
-from typing import List, Dict, Optional
+from __future__ import annotations
+
+from datetime import date
+from typing import Any
+
+from pydantic import BaseModel, Field
 
 
 class CompanyProfile(BaseModel):
     company_name: str
-    industry: Optional[str] = None
-    employee_count: Optional[int] = None
-    location: Optional[str] = None
-    funding_stage: Optional[str] = None
-    last_funding_date: Optional[str] = None
+    website: str | None = None
+    industry: str | None = None
+    employee_count: int | None = None
+    location: str | None = None
+    funding_stage: str | None = None
+    last_funding_date: date | str | None = None
 
 
 class HiringSignalBrief(BaseModel):
-    funding_signal: Optional[str]
-    hiring_velocity_signal: Optional[str]
-    layoffs_signal: Optional[str]
-    leadership_change_signal: Optional[str]
-    tech_stack_signal: Optional[str]
+    funding_signal: Any = None
+    hiring_velocity_signal: Any = None
+    layoffs_signal: Any = None
+    leadership_change_signal: Any = None
+    tech_stack_signal: Any = None
+    confidence_by_signal: dict[str, float] = Field(default_factory=dict)
+    overall_summary: str | None = None
 
-    confidence_by_signal: Dict[str, float]
-    summary: str
+    @property
+    def summary(self) -> str | None:
+        return self.overall_summary
 
 
 class AIMaturityProfile(BaseModel):
-    score: int  # 0–3
-    evidence: List[str]
-    confidence: float
-    rationale: str
+    score: int = 0
+    evidence: list[str] = Field(default_factory=list)
+    confidence: float = 0.0
+    rationale: str | None = None
 
 
 class CompetitorGapBrief(BaseModel):
-    peer_group: List[str]
-    top_quartile_practices: List[str]
-    missing_practices: List[str]
-    confidence: float
-    summary: str
+    peer_group: list[str] = Field(default_factory=list)
+    top_quartile_practices: list[str] = Field(default_factory=list)
+    missing_practices: list[str] = Field(default_factory=list)
+    confidence: float = 0.0
+    summary: str | None = None
 
 
 class BenchMatchSummary(BaseModel):
-    requested_capabilities: List[str]
-    available_capabilities: List[str]
-    fit: bool
-    confidence: float
-    notes: str
+    requested_capabilities: list[str] = Field(default_factory=list)
+    available_capabilities: list[str] = Field(default_factory=list)
+    fit: bool = False
+    confidence: float = 0.0
+    notes: str | None = None
 
 
 class LeadRecord(BaseModel):
-    company_name: str
-    segment: Optional[str]
-    icp_confidence: float
+    company: CompanyProfile
+    hiring_brief: HiringSignalBrief
+    ai_profile: AIMaturityProfile
+    competitor_gap: CompetitorGapBrief
+    bench_match: BenchMatchSummary | None = None
 
 
 class ConversationState(BaseModel):
     company_name: str
-    channel: str
-    stage: str
-    last_outbound_message: Optional[str] = None
-    last_inbound_message: Optional[str] = None
-    next_action: Optional[str] = None
+    channel: str = "email"
+    stage: str = "outbound"
+    last_outbound_message: str | None = None
+    last_inbound_message: str | None = None
+    next_action: str | None = None
     is_handoff_required: bool = False
     is_qualified: bool = False
     is_booked: bool = False
@@ -66,6 +76,6 @@ class ConversationState(BaseModel):
 class ReplyAnalysis(BaseModel):
     reply_type: str
     confidence: float
-    sentiment: str
-    next_action: str
-    reasoning: str
+    sentiment: str | None = None
+    next_action: str | None = None
+    reasoning: str | None = None
