@@ -92,6 +92,7 @@ def build_lead_payload(
         "conversation_is_handoff_required": conversation_state.is_handoff_required,
         "conversation_is_qualified": conversation_state.is_qualified,
         "conversation_is_booked": conversation_state.is_booked,
+        "enrichment_timestamp_utc": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -421,3 +422,34 @@ def _log_engagement_note_live(payload: dict[str, Any]) -> dict[str, Any]:
         "note_id": note_id,
         "associations": associations,
     }
+
+def log_booking_update(
+    *,
+    company_name: str,
+    contact_id: str | None,
+    company_id: str | None,
+    booking_payload: dict[str, Any],
+) -> dict[str, Any]:
+    note_lines = [
+        f"Booking completed for {company_name}.",
+        f"Selected time: {booking_payload.get('selected_time')}",
+    ]
+
+    if booking_payload.get("booking_url"):
+        note_lines.append(f"Booking URL: {booking_payload['booking_url']}")
+
+    if booking_payload.get("booking_id"):
+        note_lines.append(f"Booking ID: {booking_payload['booking_id']}")
+
+    return log_engagement_note(
+        company_name=company_name,
+        note="\n".join(note_lines),
+        metadata={
+            "booking_completed": True,
+            "selected_time": booking_payload.get("selected_time"),
+            "booking_id": booking_payload.get("booking_id"),
+            "booking_url": booking_payload.get("booking_url"),
+        },
+        contact_id=contact_id,
+        company_id=company_id,
+    )

@@ -25,7 +25,12 @@ from enrichment.source_inventory import (
 )
 from integrations.calcom import create_booking, propose_time_slots
 from integrations.email_client import send_email
-from integrations.hubspot import build_lead_payload, log_engagement_note, upsert_lead_record
+from integrations.hubspot import (
+    build_lead_payload,
+    log_engagement_note,
+    upsert_lead_record,
+    log_booking_update,
+)
 from integrations.sms_client import send_sms
 from integrations.state_store import load_latest_conversation_state, save_conversation_state
 from integrations.tracing import append_trace
@@ -38,7 +43,7 @@ import os
 
 print("DEBUG EMAIL_MODE =", os.getenv("EMAIL_MODE"))
 print("DEBUG HUBSPOT_MODE =", os.getenv("HUBSPOT_MODE"))
-print("DEBUG HUBSPOT token starts =", (os.getenv("HUBSPOT_API_KEY") or "")[:8])
+print("DEBUG HUBSPOT token starts =", (os.getenv("HUBSPOT_ACCESS_TOKEN") or "")[:8])
 
 
 DEFAULT_RECIPIENT = "prospect@example.com"
@@ -242,14 +247,16 @@ def process_reply(
     updated_state = update_conversation_state(previous_state, reply_text, analysis)
 
     followup = generate_followup_email(company_name, analysis)
+
     booking_result = None
+    booking_hubspot_result = None
+    slots: list[str] = []
 
     if analysis.reply_type == "interested":
         try:
             slots = propose_time_slots()
         except Exception as e:
             slots = []
-            # include a short note for traceability
             followup["body"] += f"\n\n(Note: I couldn't fetch live availability: {e})"
 
         if slots and len(slots) >= 3:
@@ -260,6 +267,8 @@ def process_reply(
             followup["body"] += "\n\nI don't have live booking slots right now — could you propose 2–3 times that work for you?"
 
         updated_state.next_action = "schedule_call"
+        updated_state.stage = "engaged"
+        updated_state.is_booked = False
 
         if book and slots:
             try:
@@ -268,10 +277,21 @@ def process_reply(
                     email=recipient,
                     selected_time=slots[0],
                 )
-                updated_state.is_booked = True
-                updated_state.stage = "booked"
+
+                if booking_result and booking_result.get("status") == "sent":
+                    updated_state.is_booked = True
+                    updated_state.stage = "booked"
+                    updated_state.next_action = "await_meeting"
+                else:
+                    updated_state.is_booked = False
+                    updated_state.stage = "engaged"
+                    updated_state.next_action = "schedule_call"
+
             except Exception as e:
                 booking_result = {"status": "failed", "error": str(e)}
+                updated_state.is_booked = False
+                updated_state.stage = "engaged"
+                updated_state.next_action = "schedule_call"
 
     send_result = send_email(
         to_email=recipient,
@@ -315,6 +335,22 @@ def process_reply(
         company_id=hubspot_result.get("company_id"),
     )
 
+    booking_hubspot_result = None
+
+    if booking_result and booking_result.get("status") == "sent":
+        booking_payload = {
+            "selected_time": booking_result.get("selected_time"),
+            "booking_id": booking_result.get("booking_id"),
+            "booking_url": booking_result.get("booking_url"),
+        }
+
+        booking_hubspot_result = log_booking_update(
+            company_name=lead["company"].company_name,
+            contact_id=hubspot_result.get("contact_id"),
+            company_id=hubspot_result.get("company_id"),
+            booking_payload=booking_payload,
+        )
+
     save_conversation_state(
         company_name=company_name,
         recipient=recipient,
@@ -329,6 +365,7 @@ def process_reply(
         "analysis": analysis.model_dump(),
         "followup": followup,
         "booking_result": booking_result,
+        "booking_hubspot_result": booking_hubspot_result,
         "sms_followup_result": sms_followup_result,
         "artifact_paths": lead["artifact_paths"],
         "hubspot_result": hubspot_result,
