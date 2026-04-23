@@ -163,8 +163,12 @@ def _create_booking_live(payload: dict[str, Any]) -> dict[str, Any]:
             f"Cal.com API error {response.status_code}: {response.text}"
         )
 
+    data = response.json()
+
     return {
         "status": "sent",
-        "message": "Booking created in Cal.com",
-        "response": response.json(),
+        "selected_time": payload["selected_time"],
+        "booking_id": data.get("data", {}).get("id") or data.get("id"),
+        "booking_url": data.get("data", {}).get("bookingUrl") or data.get("bookingUrl"),
+        "response": data,
     }
