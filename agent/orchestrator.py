@@ -16,13 +16,29 @@ from enrichment.bench import build_bench_match_summary
 from enrichment.competitor_gap import build_competitor_gap_brief
 from enrichment.crunchbase import find_company_profile
 from enrichment.jobs import build_hiring_signal_brief
-from enrichment.source_inventory import PROCESSED_DIR, build_raw_source_inventory, json_dump, slugify_company_name, write_download_status_report
+from enrichment.source_inventory import (
+    PROCESSED_DIR,
+    build_raw_source_inventory,
+    json_dump,
+    slugify_company_name,
+    write_download_status_report,
+)
 from integrations.calcom import create_booking, propose_time_slots
 from integrations.email_client import send_email
 from integrations.hubspot import build_lead_payload, log_engagement_note, upsert_lead_record
 from integrations.sms_client import send_sms
 from integrations.state_store import load_latest_conversation_state, save_conversation_state
 from integrations.tracing import append_trace
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import os
+
+print("DEBUG EMAIL_MODE =", os.getenv("EMAIL_MODE"))
+print("DEBUG HUBSPOT_MODE =", os.getenv("HUBSPOT_MODE"))
+print("DEBUG HUBSPOT token starts =", (os.getenv("HUBSPOT_API_KEY") or "")[:8])
 
 
 DEFAULT_RECIPIENT = "prospect@example.com"
@@ -33,7 +49,11 @@ def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
 
 
-def _write_enrichment_artifacts(lead_record: LeadRecord, segment_result: dict[str, Any], policy_result: dict[str, Any]) -> dict[str, str]:
+def _write_enrichment_artifacts(
+    lead_record: LeadRecord,
+    segment_result: dict[str, Any],
+    policy_result: dict[str, Any],
+) -> dict[str, str]:
     company_slug = lead_record.company.slug or slugify_company_name(lead_record.company.company_name)
     enrichment_dir = PROCESSED_DIR / "enrichment" / company_slug
     enrichment_dir.mkdir(parents=True, exist_ok=True)
@@ -92,6 +112,7 @@ def build_lead(company_name: str) -> dict[str, Any]:
         data_inventory=inventory,
     )
     artifact_paths = _write_enrichment_artifacts(lead_record, segment_result, policy_result)
+
     return {
         "company": company,
         "signals": signals,
@@ -114,6 +135,7 @@ def send_initial_outreach(
     channel: str = "email",
 ) -> dict[str, Any]:
     lead = build_lead(company_name)
+
     conversation_state = ConversationState(
         company_name=company_name,
         channel=channel,
@@ -134,7 +156,7 @@ def send_initial_outreach(
         to_email=recipient,
         subject=email_draft["subject"],
         body=email_draft["body"],
-        metadata={"draft": True, "company_name": company_name},
+        metadata={"company_name": company_name},
     )
 
     sms_result = None
@@ -156,11 +178,25 @@ def send_initial_outreach(
         segment_result=lead["segment_result"],
         policy_result=lead["policy_result"],
         conversation_state=conversation_state,
+        contact_email=recipient,
+        contact_first_name="Synthetic",
+        contact_last_name=lead["company"].company_name,
     )
     hubspot_result = upsert_lead_record(hubspot_payload)
-    note_result = log_engagement_note(company_name, f"Initial outreach drafted for {recipient}.")
 
-    save_conversation_state(company_name=company_name, recipient=recipient, state=conversation_state)
+    note_result = log_engagement_note(
+        company_name=lead["company"].company_name,
+        note=f"Initial outreach drafted for {recipient}.",
+        metadata={},
+        contact_id=hubspot_result.get("contact_id"),
+        company_id=hubspot_result.get("company_id"),
+    )
+
+    save_conversation_state(
+        company_name=company_name,
+        recipient=recipient,
+        state=conversation_state,
+    )
 
     trace = {
         "event_type": "initial_outreach",
@@ -196,18 +232,29 @@ def process_reply(
     book: bool = False,
 ) -> dict[str, Any]:
     lead = build_lead(company_name)
-    previous_state = load_latest_conversation_state(company_name=company_name, recipient=recipient) or ConversationState(company_name=company_name)
+
+    previous_state = load_latest_conversation_state(
+        company_name=company_name,
+        recipient=recipient,
+    ) or ConversationState(company_name=company_name)
+
     analysis = analyze_reply(reply_text)
     updated_state = update_conversation_state(previous_state, reply_text, analysis)
 
     followup = generate_followup_email(company_name, analysis)
     booking_result = None
+
     if analysis.reply_type == "interested":
         slots = propose_time_slots()
         followup["body"] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
         updated_state.next_action = "schedule_call"
+
         if book:
-            booking_result = create_booking(company_name=company_name, email=recipient, selected_time=slots[0])
+            booking_result = create_booking(
+                company_name=company_name,
+                email=recipient,
+                selected_time=slots[0],
+            )
             updated_state.is_booked = True
             updated_state.stage = "booked"
 
@@ -215,7 +262,11 @@ def process_reply(
         to_email=recipient,
         subject=followup["subject"],
         body=followup["body"],
-        metadata={"draft": True, "reply_type": analysis.reply_type, "company_name": company_name},
+        metadata={
+            # "draft": True,
+            "reply_type": analysis.reply_type,
+            "company_name": company_name,
+        },
     )
 
     sms_followup_result = None
@@ -235,11 +286,25 @@ def process_reply(
         segment_result=lead["segment_result"],
         policy_result=lead["policy_result"],
         conversation_state=updated_state,
+        contact_email=recipient,
+        contact_first_name="Synthetic",
+        contact_last_name=lead["company"].company_name,
     )
     hubspot_result = upsert_lead_record(hubspot_payload)
-    note_result = log_engagement_note(company_name, f"Reply classified as {analysis.reply_type}: {reply_text}")
 
-    save_conversation_state(company_name=company_name, recipient=recipient, state=updated_state)
+    note_result = log_engagement_note(
+        company_name=lead["company"].company_name,
+        note=f"Reply classified as {analysis.reply_type}: {reply_text}",
+        metadata={"reply_type": analysis.reply_type},
+        contact_id=hubspot_result.get("contact_id"),
+        company_id=hubspot_result.get("company_id"),
+    )
+
+    save_conversation_state(
+        company_name=company_name,
+        recipient=recipient,
+        state=updated_state,
+    )
 
     trace = {
         "event_type": "reply_processed",
@@ -292,9 +357,20 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.reply:
-        result = process_reply(company_name=args.company, reply_text=args.reply, recipient=args.recipient, phone=args.phone, book=args.book)
+        result = process_reply(
+            company_name=args.company,
+            reply_text=args.reply,
+            recipient=args.recipient,
+            phone=args.phone,
+            book=args.book,
+        )
     else:
-        result = send_initial_outreach(company_name=args.company, recipient=args.recipient, phone=args.phone, channel=args.channel)
+        result = send_initial_outreach(
+            company_name=args.company,
+            recipient=args.recipient,
+            phone=args.phone,
+            channel=args.channel,
+        )
 
     print(json.dumps(result, indent=2, default=str))
 

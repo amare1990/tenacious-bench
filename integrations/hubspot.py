@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 from typing import Any
 
+from datetime import datetime, timezone
+
 import httpx
 
 
@@ -55,6 +57,9 @@ def build_lead_payload(
     segment_result: dict[str, Any],
     policy_result: dict[str, Any],
     conversation_state,
+    contact_email: str | None = None,
+    contact_first_name: str | None = None,
+    contact_last_name: str | None = None,
 ) -> dict[str, Any]:
     return {
         "company_name": company.company_name,
@@ -63,6 +68,9 @@ def build_lead_payload(
         "location": company.location,
         "funding_stage": company.funding_stage,
         "last_funding_date": company.last_funding_date,
+        "contact_email": contact_email,
+        "contact_first_name": contact_first_name,
+        "contact_last_name": contact_last_name,
         "segment": segment_result.get("segment"),
         "segment_confidence": segment_result.get("confidence"),
         "segment_rationale": segment_result.get("rationale"),
@@ -106,12 +114,21 @@ def upsert_lead_record(payload: dict[str, Any]) -> dict[str, Any]:
     return _upsert_lead_record_live(safe_payload)
 
 
-def log_engagement_note(company_name: str, note: str, metadata: dict[str, Any] | None = None) -> dict[str, Any]:
+def log_engagement_note(
+    company_name: str,
+    note: str,
+    metadata: dict[str, Any] | None = None,
+    *,
+    contact_id: str | None = None,
+    company_id: str | None = None,
+) -> dict[str, Any]:
     mode = get_hubspot_mode()
     payload = {
         "company_name": company_name,
         "note": note,
         "metadata": _json_safe(metadata or {}),
+        "contact_id": contact_id,
+        "company_id": company_id,
     }
 
     if mode == "stub":
@@ -129,6 +146,169 @@ def log_engagement_note(company_name: str, note: str, metadata: dict[str, Any] |
     return _log_engagement_note_live(payload)
 
 
+def _headers(access_token: str) -> dict[str, str]:
+    return {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }
+
+
+def _search_contact_by_email(
+    client: httpx.Client,
+    *,
+    base_url: str,
+    headers: dict[str, str],
+    email: str,
+) -> dict[str, Any] | None:
+    url = f"{base_url}/crm/v3/objects/contacts/search"
+    body = {
+        "filterGroups": [
+            {
+                "filters": [
+                    {
+                        "propertyName": "email",
+                        "operator": "EQ",
+                        "value": email,
+                    }
+                ]
+            }
+        ],
+        "properties": ["email", "firstname", "lastname"],
+        "limit": 1,
+    }
+    response = client.post(url, headers=headers, json=body)
+    if response.status_code >= 400:
+        raise HubSpotClientError(f"HubSpot contact search error {response.status_code}: {response.text}")
+    data = response.json()
+    results = data.get("results", [])
+    return results[0] if results else None
+
+
+def _create_contact(
+    client: httpx.Client,
+    *,
+    base_url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+) -> dict[str, Any] | None:
+    email = payload.get("contact_email")
+    if not email:
+        return None
+
+    existing = _search_contact_by_email(client, base_url=base_url, headers=headers, email=email)
+    if existing:
+        return existing
+
+    url = f"{base_url}/crm/v3/objects/contacts"
+    body = {
+        "properties": {
+            "email": email,
+            "firstname": payload.get("contact_first_name") or "Synthetic",
+            "lastname": payload.get("contact_last_name") or (payload.get("company_name") or "Lead"),
+            "lifecyclestage": "lead",
+        }
+    }
+    response = client.post(url, headers=headers, json=body)
+    if response.status_code >= 400:
+        raise HubSpotClientError(f"HubSpot contact create error {response.status_code}: {response.text}")
+    return response.json()
+
+
+def _search_company_by_name(
+    client: httpx.Client,
+    *,
+    base_url: str,
+    headers: dict[str, str],
+    company_name: str,
+) -> dict[str, Any] | None:
+    url = f"{base_url}/crm/v3/objects/companies/search"
+    body = {
+        "filterGroups": [
+            {
+                "filters": [
+                    {
+                        "propertyName": "name",
+                        "operator": "EQ",
+                        "value": company_name,
+                    }
+                ]
+            }
+        ],
+        "properties": ["name", "industry", "city"],
+        "limit": 1,
+    }
+    response = client.post(url, headers=headers, json=body)
+    if response.status_code >= 400:
+        raise HubSpotClientError(f"HubSpot company search error {response.status_code}: {response.text}")
+    data = response.json()
+    results = data.get("results", [])
+    return results[0] if results else None
+
+
+def _map_hubspot_industry(value: str | None) -> str | None:
+    if not value:
+        return None
+
+    normalized = value.strip().lower()
+
+    mapping = {
+        "fintech": "FINANCIAL_SERVICES",
+        "financial technology": "FINANCIAL_SERVICES",
+        "developer tools": "COMPUTER_SOFTWARE",
+        "sales technology": "COMPUTER_SOFTWARE",
+        "saas": "COMPUTER_SOFTWARE",
+    }
+
+    return mapping.get(normalized)
+
+def _create_company(
+    client: httpx.Client,
+    *,
+    base_url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    company_name = payload.get("company_name")
+    if not company_name:
+        raise HubSpotClientError("company_name is required to create HubSpot company")
+
+    existing = _search_company_by_name(client, base_url=base_url, headers=headers, company_name=company_name)
+    if existing:
+        return existing
+
+    url = f"{base_url}/crm/v3/objects/companies"
+    body = {
+        "properties": {
+            "name": company_name,
+            "description": payload.get("competitor_gap_summary"),
+            "industry": _map_hubspot_industry(payload.get("industry")),
+            "city": payload.get("location"),
+        }
+    }
+    response = client.post(url, headers=headers, json=body)
+    if response.status_code >= 400:
+        raise HubSpotClientError(f"HubSpot company create error {response.status_code}: {response.text}")
+    return response.json()
+
+
+def _associate_contact_to_company(
+    client: httpx.Client,
+    *,
+    base_url: str,
+    headers: dict[str, str],
+    contact_id: str,
+    company_id: str,
+) -> dict[str, Any]:
+    url = f"{base_url}/crm/v3/objects/contacts/{contact_id}/associations/companies/{company_id}/contact_to_company"
+    response = client.put(url, headers=headers)
+    if response.status_code >= 400:
+        raise HubSpotClientError(f"HubSpot association error {response.status_code}: {response.text}")
+    return {
+        "status_code": response.status_code,
+        "text": response.text,
+    }
+
+
 def _upsert_lead_record_live(payload: dict[str, Any]) -> dict[str, Any]:
     access_token = _get_env("HUBSPOT_ACCESS_TOKEN")
     base_url = (_get_env("HUBSPOT_BASE_URL", "https://api.hubapi.com") or "https://api.hubapi.com").rstrip("/")
@@ -136,38 +316,51 @@ def _upsert_lead_record_live(payload: dict[str, Any]) -> dict[str, Any]:
     if not access_token:
         raise HubSpotClientError("HUBSPOT_ACCESS_TOKEN is required for HUBSPOT_MODE=live")
 
-    url = f"{base_url}/crm/v3/objects/companies"
-
-    properties = {
-        "name": payload.get("company_name"),
-        "description": payload.get("competitor_gap_summary"),
-        "industry": payload.get("industry"),
-        "city": payload.get("location"),
-    }
-
-    request_body = {
-        "properties": {k: v for k, v in properties.items() if v is not None}
-    }
-
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json",
-    }
+    headers = _headers(access_token)
 
     with httpx.Client(timeout=30.0) as client:
-        response = client.post(url, headers=headers, json=request_body)
+        contact = _create_contact(client, base_url=base_url, headers=headers, payload=payload)
+        company = _create_company(client, base_url=base_url, headers=headers, payload=payload)
 
-    if response.status_code >= 400:
-        raise HubSpotClientError(
-            f"HubSpot API error {response.status_code}: {response.text}"
-        )
+        association_result = None
+        if contact and company:
+            association_result = _associate_contact_to_company(
+                client,
+                base_url=base_url,
+                headers=headers,
+                contact_id=str(contact["id"]),
+                company_id=str(company["id"]),
+            )
 
     return {
         "status": "sent",
         "mode": "live",
         "message": "Lead record sent to HubSpot.",
         "payload": payload,
-        "response": response.json(),
+        "contact_response": contact,
+        "company_response": company,
+        "association_response": association_result,
+        "contact_id": None if not contact else str(contact["id"]),
+        "company_id": str(company["id"]),
+    }
+
+
+def _associate_note(
+    client: httpx.Client,
+    *,
+    base_url: str,
+    headers: dict[str, str],
+    note_id: str,
+    object_type: str,
+    object_id: str,
+) -> dict[str, Any]:
+    url = f"{base_url}/crm/v3/objects/notes/{note_id}/associations/{object_type}/{object_id}/note_to_{object_type}"
+    response = client.put(url, headers=headers)
+    if response.status_code >= 400:
+        raise HubSpotClientError(f"HubSpot note association error {response.status_code}: {response.text}")
+    return {
+        "status_code": response.status_code,
+        "text": response.text,
     }
 
 
@@ -179,30 +372,52 @@ def _log_engagement_note_live(payload: dict[str, Any]) -> dict[str, Any]:
         raise HubSpotClientError("HUBSPOT_ACCESS_TOKEN is required for HUBSPOT_MODE=live")
 
     url = f"{base_url}/crm/v3/objects/notes"
+    headers = _headers(access_token)
 
     request_body = {
         "properties": {
+            "hs_timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
             "hs_note_body": payload["note"],
         }
-    }
-
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json",
     }
 
     with httpx.Client(timeout=30.0) as client:
         response = client.post(url, headers=headers, json=request_body)
 
-    if response.status_code >= 400:
-        raise HubSpotClientError(
-            f"HubSpot API error {response.status_code}: {response.text}"
-        )
+        if response.status_code >= 400:
+            raise HubSpotClientError(f"HubSpot API error {response.status_code}: {response.text}")
 
+        note_response = response.json()
+        note_id = str(note_response["id"])
+
+        # associations: dict[str, Any] = {}
+        associations = {}
+        # if payload.get("contact_id"):
+        #     associations["contact"] = _associate_note(
+        #         client,
+        #         base_url=base_url,
+        #         headers=headers,
+        #         note_id=note_id,
+        #         object_type="contacts",
+        #         object_id=str(payload["contact_id"]),
+        #     )
+        # if payload.get("company_id"):
+        #     associations["company"] = _associate_note(
+        #         client,
+        #         base_url=base_url,
+        #         headers=headers,
+        #         note_id=note_id,
+        #         object_type="companies",
+        #         object_id=str(payload["company_id"]),
+        #     )
+
+    # url = f"{base_url}/crm/v3/objects/notes/{note_id}/associations/{object_type}/{object_id}/note_to_{object_type}"
     return {
         "status": "sent",
         "mode": "live",
         "message": "Engagement note sent to HubSpot.",
         "payload": payload,
-        "response": response.json(),
+        "response": note_response,
+        "note_id": note_id,
+        "associations": associations,
     }
