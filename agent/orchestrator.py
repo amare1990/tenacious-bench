@@ -245,18 +245,33 @@ def process_reply(
     booking_result = None
 
     if analysis.reply_type == "interested":
-        slots = propose_time_slots()
-        followup["body"] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
+        try:
+            slots = propose_time_slots()
+        except Exception as e:
+            slots = []
+            # include a short note for traceability
+            followup["body"] += f"\n\n(Note: I couldn't fetch live availability: {e})"
+
+        if slots and len(slots) >= 3:
+            followup["body"] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
+        elif slots:
+            followup["body"] += f"\n\nA few options from my side: {', '.join(slots)}."
+        else:
+            followup["body"] += "\n\nI don't have live booking slots right now — could you propose 2–3 times that work for you?"
+
         updated_state.next_action = "schedule_call"
 
-        if book:
-            booking_result = create_booking(
-                company_name=company_name,
-                email=recipient,
-                selected_time=slots[0],
-            )
-            updated_state.is_booked = True
-            updated_state.stage = "booked"
+        if book and slots:
+            try:
+                booking_result = create_booking(
+                    company_name=company_name,
+                    email=recipient,
+                    selected_time=slots[0],
+                )
+                updated_state.is_booked = True
+                updated_state.stage = "booked"
+            except Exception as e:
+                booking_result = {"status": "failed", "error": str(e)}
 
     send_result = send_email(
         to_email=recipient,
