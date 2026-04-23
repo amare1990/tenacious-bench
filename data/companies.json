@@ -1,0 +1,26 @@
+[
+  {
+    "company_name": "Ramp",
+    "industry": "Fintech",
+    "employee_count": 1000,
+    "location": "New York, USA",
+    "funding_stage": "Series D",
+    "last_funding_date": "2024-04"
+  },
+  {
+    "company_name": "Clay",
+    "industry": "Sales Technology",
+    "employee_count": 250,
+    "location": "New York, USA",
+    "funding_stage": "Series B",
+    "last_funding_date": "2024-09"
+  },
+  {
+    "company_name": "Retool",
+    "industry": "Developer Tools",
+    "employee_count": 450,
+    "location": "San Francisco, USA",
+    "funding_stage": "Series C",
+    "last_funding_date": "2023-08"
+  }
+]

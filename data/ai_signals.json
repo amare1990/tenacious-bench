@@ -1,0 +1,41 @@
+[
+  {
+    "company_name": "Ramp",
+    "ai_roles": 2,
+    "has_ai_leadership": false,
+    "github_ai_activity": true,
+    "executive_ai_commentary": true,
+    "modern_ml_stack": true,
+    "strategic_ai_mentions": true,
+    "evidence": [
+      "Open roles include ML-focused engineering work",
+      "Recent public commentary references AI as a product priority",
+      "Modern data and ML tooling signals are present"
+    ]
+  },
+  {
+    "company_name": "Clay",
+    "ai_roles": 1,
+    "has_ai_leadership": false,
+    "github_ai_activity": false,
+    "executive_ai_commentary": true,
+    "modern_ml_stack": false,
+    "strategic_ai_mentions": true,
+    "evidence": [
+      "Public messaging suggests AI-adjacent product direction",
+      "Some AI-related hiring signal exists"
+    ]
+  },
+  {
+    "company_name": "Retool",
+    "ai_roles": 0,
+    "has_ai_leadership": false,
+    "github_ai_activity": false,
+    "executive_ai_commentary": false,
+    "modern_ml_stack": false,
+    "strategic_ai_mentions": false,
+    "evidence": [
+      "No strong public AI signal detected in the current sample"
+    ]
+  }
+]

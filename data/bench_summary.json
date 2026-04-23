@@ -1,0 +1,12 @@
+{
+  "available_capabilities": [
+    "Python",
+    "Data Engineering",
+    "Machine Learning",
+    "MLOps",
+    "Infrastructure",
+    "Backend Engineering",
+    "AWS"
+  ],
+  "bench_notes": "Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods."
+}

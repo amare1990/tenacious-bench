@@ -1,0 +1,47 @@
+[
+  {
+    "company_name": "Ramp",
+    "funding_signal": "Raised growth funding within the last 12 months",
+    "hiring_velocity_signal": "Open engineering roles increased over the last 60 days",
+    "layoffs_signal": null,
+    "leadership_change_signal": "New VP Engineering joined within the last 90 days",
+    "tech_stack_signal": "Uses Python, AWS, and modern data tooling",
+    "confidence_by_signal": {
+      "funding": 0.9,
+      "hiring_velocity": 0.8,
+      "layoffs": 0.0,
+      "leadership_change": 0.7,
+      "tech_stack": 0.75
+    }
+  },
+  {
+    "company_name": "Clay",
+    "funding_signal": "Raised funding recently and appears to be scaling GTM and engineering",
+    "hiring_velocity_signal": "Multiple open roles across engineering and product",
+    "layoffs_signal": null,
+    "leadership_change_signal": null,
+    "tech_stack_signal": "Public signals suggest modern SaaS and data tooling",
+    "confidence_by_signal": {
+      "funding": 0.8,
+      "hiring_velocity": 0.75,
+      "layoffs": 0.0,
+      "leadership_change": 0.0,
+      "tech_stack": 0.6
+    }
+  },
+  {
+    "company_name": "Retool",
+    "funding_signal": null,
+    "hiring_velocity_signal": "Selective engineering hiring remains open",
+    "layoffs_signal": "Public restructuring signal observed in the last 120 days",
+    "leadership_change_signal": null,
+    "tech_stack_signal": "Developer tools and infrastructure-heavy stack",
+    "confidence_by_signal": {
+      "funding": 0.0,
+      "hiring_velocity": 0.55,
+      "layoffs": 0.8,
+      "leadership_change": 0.0,
+      "tech_stack": 0.7
+    }
+  }
+]

@@ -40,8 +40,25 @@ traces/
 # ----------------------
 # Data (raw or large)
 # ----------------------
-data/*
-!data/.gitkeep
+# Ignore large / regenerable raw data
+data/raw/crunchbase/*.json
+data/raw/job_posts/*
+data/raw/press/*
+data/raw/tech_stack/*
+
+# Ignore bulk processed outputs (keep selected manually)
+data/processed/enrichment/*
+!data/processed/enrichment/ramp/
+!data/processed/enrichment/clay/
+!data/processed/enrichment/retool/
+
+data/processed/leads/*
+!data/processed/leads/ramp.json
+!data/processed/leads/clay.json
+!data/processed/leads/retool.json
+
+# Ignore logs
+data/*.jsonl
 
 # ----------------------
 # Docs

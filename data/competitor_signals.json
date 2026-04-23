@@ -1,0 +1,46 @@
+[
+  {
+    "company_name": "Ramp",
+    "sector": "Fintech",
+    "company_size_band": "201-1000",
+    "peer_group": ["Brex", "Mercury", "Rippling"],
+    "top_quartile_practices": [
+      "Dedicated ML platform capability",
+      "AI-assisted internal operations",
+      "Modern data platform ownership"
+    ],
+    "observed_practices": [
+      "AI-assisted internal operations",
+      "Modern data platform ownership"
+    ]
+  },
+  {
+    "company_name": "Clay",
+    "sector": "Sales Technology",
+    "company_size_band": "51-200",
+    "peer_group": ["Apollo", "Outreach", "Salesloft"],
+    "top_quartile_practices": [
+      "Dedicated ML platform capability",
+      "AI-powered workflow automation",
+      "Structured data enrichment at scale"
+    ],
+    "observed_practices": [
+      "AI-powered workflow automation"
+    ]
+  },
+  {
+    "company_name": "Retool",
+    "sector": "Developer Tools",
+    "company_size_band": "201-1000",
+    "peer_group": ["Vercel", "Render", "HashiCorp"],
+    "top_quartile_practices": [
+      "Platform engineering specialization",
+      "AI-assisted developer tooling",
+      "Modern infrastructure automation"
+    ],
+    "observed_practices": [
+      "Platform engineering specialization",
+      "Modern infrastructure automation"
+    ]
+  }
+]
