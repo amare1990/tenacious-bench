@@ -1,0 +1,86 @@
+{
+  "tiers": [
+    {
+      "tier": "Tier 1",
+      "name": "Deal-Killing Trust Failures",
+      "severity": "very_high",
+      "description": "Immediate reputational or confidentiality risks that can terminate deals.",
+      "categories": [
+        {
+          "name": "multi_thread_leakage",
+          "probes": ["P-015", "P-016", "P-017"],
+          "business_cost": "confidentiality breach and deal loss"
+        },
+        {
+          "name": "bench_overcommitment",
+          "probes": ["P-009", "P-010", "P-011"],
+          "business_cost": "delivery failure and commercial misrepresentation"
+        },
+        {
+          "name": "signal_overclaiming",
+          "probes": ["P-005", "P-006", "P-007", "P-008"],
+          "business_cost": "brand damage and trust erosion"
+        }
+      ]
+    },
+    {
+      "tier": "Tier 2",
+      "name": "Commercial Misalignment",
+      "severity": "high",
+      "description": "Incorrect understanding of buyer context leading to poor pitch alignment.",
+      "categories": [
+        {
+          "name": "icp_misclassification",
+          "probes": ["P-001", "P-002", "P-003", "P-004"],
+          "business_cost": "wrong pitch and reduced reply rate"
+        },
+        {
+          "name": "dual_control",
+          "probes": ["P-021", "P-022", "P-023"],
+          "business_cost": "stalled threads or false commitments"
+        },
+        {
+          "name": "gap_overclaiming",
+          "probes": ["P-030", "P-031", "P-032"],
+          "business_cost": "cto defensiveness and reputational harm"
+        }
+      ]
+    },
+    {
+      "tier": "Tier 3",
+      "name": "Conversation Degradation",
+      "severity": "medium_high",
+      "description": "Reduces conversion quality and executive credibility.",
+      "categories": [
+        {
+          "name": "tone_drift",
+          "probes": ["P-012", "P-013", "P-014"],
+          "business_cost": "loss of executive trust"
+        },
+        {
+          "name": "scheduling",
+          "probes": ["P-024", "P-025", "P-026"],
+          "business_cost": "meeting friction and delays"
+        }
+      ]
+    },
+    {
+      "tier": "Tier 4",
+      "name": "Unit Economics & Reliability",
+      "severity": "medium",
+      "description": "Impacts cost efficiency and system reliability.",
+      "categories": [
+        {
+          "name": "cost_pathology",
+          "probes": ["P-018", "P-019", "P-020"],
+          "business_cost": "increased token cost and degraded UX"
+        },
+        {
+          "name": "signal_reliability",
+          "probes": ["P-027", "P-028", "P-029"],
+          "business_cost": "segmentation errors and false confidence"
+        }
+      ]
+    }
+  ]
+}
