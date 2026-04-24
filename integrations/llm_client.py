@@ -28,7 +28,11 @@ def call_openrouter_json(
 ) -> dict[str, Any]:
     api_key = _get_env("OPENROUTER_API_KEY")
     base_url = (_get_env("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1") or "https://openrouter.ai/api/v1").rstrip("/")
-    model = _get_env("OPENROUTER_MODEL", "openrouter/openai/gpt-4o-mini") or "openrouter/openai/gpt-4o-mini"
+    model = _get_env(
+        "OPENROUTER_MODEL",
+        "openrouter/qwen/qwen3-next-80b-a3b-thinking"
+    ) or "openrouter/qwen/qwen3-next-80b-a3b-thinking"
+
     timeout_seconds = float(_get_env("LLM_TIMEOUT_SECONDS", "30") or "30")
 
     if not api_key:
