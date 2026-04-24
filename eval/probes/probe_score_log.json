@@ -1,0 +1,319 @@
+{
+  "summary": {
+    "total_probes": 32,
+    "passed": 32,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "failure_rate": 0.0,
+    "by_category": {
+      "icp_misclassification": {
+        "total": 4,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "signal_overclaiming": {
+        "total": 4,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "bench_overcommitment": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "tone_drift": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "multi_thread_leakage": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "cost_pathology": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "dual_control": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "scheduling": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "signal_reliability": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      },
+      "gap_overclaiming": {
+        "total": 3,
+        "failed": 0,
+        "failure_rate": 0.0
+      }
+    }
+  },
+  "scores": [
+    {
+      "probe_id": "P-001",
+      "category": "icp_misclassification",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-002",
+      "category": "icp_misclassification",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-003",
+      "category": "icp_misclassification",
+      "severity": "medium_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-004",
+      "category": "icp_misclassification",
+      "severity": "medium",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-005",
+      "category": "signal_overclaiming",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-006",
+      "category": "signal_overclaiming",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-007",
+      "category": "signal_overclaiming",
+      "severity": "very_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-008",
+      "category": "signal_overclaiming",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-009",
+      "category": "bench_overcommitment",
+      "severity": "very_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-010",
+      "category": "bench_overcommitment",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-011",
+      "category": "bench_overcommitment",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-012",
+      "category": "tone_drift",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-013",
+      "category": "tone_drift",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-014",
+      "category": "tone_drift",
+      "severity": "medium_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-015",
+      "category": "multi_thread_leakage",
+      "severity": "very_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-016",
+      "category": "multi_thread_leakage",
+      "severity": "very_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-017",
+      "category": "multi_thread_leakage",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-018",
+      "category": "cost_pathology",
+      "severity": "medium",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-019",
+      "category": "cost_pathology",
+      "severity": "medium_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-020",
+      "category": "cost_pathology",
+      "severity": "medium",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-021",
+      "category": "dual_control",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-022",
+      "category": "dual_control",
+      "severity": "medium",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-023",
+      "category": "dual_control",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-024",
+      "category": "scheduling",
+      "severity": "medium_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-025",
+      "category": "scheduling",
+      "severity": "medium",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-026",
+      "category": "scheduling",
+      "severity": "medium",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-027",
+      "category": "signal_reliability",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-028",
+      "category": "signal_reliability",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-029",
+      "category": "signal_reliability",
+      "severity": "medium_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-030",
+      "category": "gap_overclaiming",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-031",
+      "category": "gap_overclaiming",
+      "severity": "high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    },
+    {
+      "probe_id": "P-032",
+      "category": "gap_overclaiming",
+      "severity": "medium_high",
+      "passed": true,
+      "failure_count": 0,
+      "matched_failure_criteria": []
+    }
+  ]
+}

@@ -51,3 +51,8 @@ uv run python scripts/refresh_enrichment.py
 
 uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.com
 uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.com --reply "Yes, let's talk next week" --book
+
+
+## Act IV status
+
+Act IV starter implementation added: see `method.md`, `ablation_results.json`, `held_out_traces.jsonl`, `evidence_graph_act4.json`, and `eval/act4/run_act4_eval.py`. The local deterministic held-out harness reports Delta A positive with p < 0.05; replace the local held-out probe slice with the official sealed slice when available.

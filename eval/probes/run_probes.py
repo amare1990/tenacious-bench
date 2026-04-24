@@ -1,13 +1,31 @@
 import json
 import re
+import sys
 from pathlib import Path
 from datetime import datetime, timezone
 
+from dotenv import load_dotenv
+
+
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.append(str(ROOT))
+
+load_dotenv()
+
+from agent.orchestrator import process_reply, send_initial_outreach
+
+
 
 PROBE_CASES = ROOT / "eval" / "probes" / "probe_cases.jsonl"
 TRACE_OUT = ROOT / "eval" / "probes" / "probe_trace_log.json"
 SCORE_OUT = ROOT / "eval" / "probes" / "probe_score_log.json"
+
+import os
+
+os.environ.setdefault("EMAIL_MODE", "dry_run")
+os.environ.setdefault("HUBSPOT_MODE", "dry_run")
+os.environ.setdefault("SMS_MODE", "dry_run")
+os.environ.setdefault("CALCOM_MODE", "dry_run")
 
 
 def load_jsonl(path: Path):
@@ -16,25 +34,26 @@ def load_jsonl(path: Path):
 
 
 def call_agent(probe: dict) -> str:
-    """
-    Replace this with your actual agent entrypoint.
+    from agent.email_agent import generate_followup_email
 
-    Expected contract:
-    - input: user message + structured probe context
-    - output: assistant response string
-    """
+    class FakeAnalysis:
+        reply_type = "objection"
 
-    # Example placeholder:
-    # from agent.main import run_agent
-    # return run_agent(
-    #     user_input=probe["input"],
-    #     context=probe.get("context", {})
-    # )
+        def model_dump(self):
+            return {
+                "reply_type": self.reply_type,
+                "reply_text": probe["input"],
+                "probe_id": probe["id"],
+                "category": probe["category"],
+                "context": probe.get("context", {}),
+            }
 
-    raise NotImplementedError(
-        "Wire call_agent() to your actual agent entrypoint before running probes."
+    followup = generate_followup_email(
+        company_name="ProbeCo",
+        analysis=FakeAnalysis(),
     )
 
+    return f"{followup.get('subject','')}\n\n{followup.get('body','')}".strip()
 
 def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text.lower()).strip()
