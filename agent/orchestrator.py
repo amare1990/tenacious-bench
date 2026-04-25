@@ -7,7 +7,7 @@ from statistics import median
 from typing import Any
 
 from agent.email_agent import generate_email, generate_followup_email
-from agent.policies import decide_outreach_policy
+from agent.policies import decide_outreach_policy, can_send_sms
 from agent.reply_handler import analyze_reply, update_conversation_state
 from agent.scoring import classify_icp_segment
 from briefs.models import ConversationState, LeadRecord
@@ -339,11 +339,7 @@ def process_reply(
     sms_followup_result = None
 
     # SMS is only allowed as a warm-lead follow-up after email engagement
-    if (
-        analysis.reply_type == "interested"
-        and previous_state.channel == "email"
-        and previous_state.stage in {"engaged", "info_requested"}
-    ):
+    if can_send_sms(previous_state) and analysis.reply_type == "interested":
         sms_followup_result = send_sms(
             to_phone=phone,
             body="Thanks - I also emailed time options so scheduling is easier.",
@@ -352,6 +348,7 @@ def process_reply(
                 "reply_type": analysis.reply_type,
             },
         )
+    # Channel handoff policy: SMS only after email engagement (warm lead)
 
     hubspot_payload = build_lead_payload(
         company=lead["company"],

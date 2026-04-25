@@ -4,6 +4,8 @@ from typing import Dict
 
 from briefs.models import BenchMatchSummary
 
+def can_send_sms(state) -> bool:
+    return state.channel == "email" and state.stage in {"engaged", "info_requested"} and state.last_inbound_message
 
 def apply_policies(classification: Dict, ai_profile: Dict) -> Dict:
     """Return policy decisions: whether to soften language, bench gating, and handoff."""
