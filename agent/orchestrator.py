@@ -39,15 +39,31 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import os
 
-print("DEBUG EMAIL_MODE =", os.getenv("EMAIL_MODE"))
-print("DEBUG HUBSPOT_MODE =", os.getenv("HUBSPOT_MODE"))
-print("DEBUG HUBSPOT token starts =", (os.getenv("HUBSPOT_ACCESS_TOKEN") or "")[:8])
 
 
 DEFAULT_RECIPIENT = "prospect@example.com"
 DEFAULT_PHONE = "+251900000000"
+
+
+def _outbound_variant(gap_brief) -> str:
+    """Trace tag for research-led outreach versus generic outreach."""
+    has_gap = bool(getattr(gap_brief, "missing_practices", None))
+    confidence = float(getattr(gap_brief, "confidence", 0.0) or 0.0)
+    return "gap" if has_gap and confidence >= 0.55 else "generic"
+
+
+def _thread_status(state: ConversationState, analysis: Any | None = None) -> str:
+    """Normalize conversation progress for stalled-thread measurement."""
+    if state.is_booked or state.stage == "booked":
+        return "booked"
+    if state.is_qualified or state.stage in {"engaged", "info_requested"}:
+        return "replied"
+    if state.stage in {"deferred", "closed", "awaiting_clarification"}:
+        return "stalled"
+    if analysis is not None and getattr(analysis, "reply_type", None) in {"defer", "rejection", "unclear"}:
+        return "stalled"
+    return "open"
 
 
 def _utc_now() -> datetime:
@@ -157,11 +173,18 @@ def send_initial_outreach(
         lead["policy_result"],
     )
 
+    variant = _outbound_variant(lead["gap_brief"])
+
     send_result = send_email(
         to_email=recipient,
         subject=email_draft["subject"],
         body=email_draft["body"],
-        metadata={"company_name": company_name},
+        metadata={
+            "company_name": company_name,
+            "draft": True,
+            "outbound_variant": variant,
+            "led_with_research_finding": variant == "gap",
+        },
     )
 
     sms_result = None
@@ -209,6 +232,9 @@ def send_initial_outreach(
         "recipient": recipient,
         "phone": phone,
         "channel": channel,
+        "outbound_variant": variant,
+        "led_with_research_finding": variant == "gap",
+        "thread_status": _thread_status(conversation_state),
         "lead_record": lead["lead_record"].model_dump(),
         "artifact_paths": lead["artifact_paths"],
         "data_inventory": [item.model_dump() for item in lead["data_inventory"]],
@@ -247,6 +273,7 @@ def process_reply(
     updated_state = update_conversation_state(previous_state, reply_text, analysis)
 
     followup = generate_followup_email(company_name, analysis)
+    variant = _outbound_variant(lead["gap_brief"])
 
     booking_result = None
     booking_hubspot_result = None
@@ -298,9 +325,11 @@ def process_reply(
         subject=followup["subject"],
         body=followup["body"],
         metadata={
-            # "draft": True,
+            "draft": True,
             "reply_type": analysis.reply_type,
             "company_name": company_name,
+            "outbound_variant": variant,
+            "led_with_research_finding": variant == "gap",
         },
     )
 
@@ -362,6 +391,9 @@ def process_reply(
         "company_name": company_name,
         "recipient": recipient,
         "reply_text": reply_text,
+        "outbound_variant": variant,
+        "led_with_research_finding": variant == "gap",
+        "thread_status": _thread_status(updated_state, analysis),
         "analysis": analysis.model_dump(),
         "followup": followup,
         "booking_result": booking_result,
