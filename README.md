@@ -6,6 +6,13 @@ Submission-focused Week 10 repo for the Tenacious Conversion Engine challenge. T
 
 - Amare Kassa — architecture, enrichment pipeline, orchestration, integration wiring, evaluation packaging
 
+## Directory index
+
+- agent/ — orchestration, policies, reply handling.
+- enrichment/ — Crunchbase, jobs, layoffs, AI maturity, competitor gap.
+- integrations/ — Resend, Africa's Talking, HubSpot, Cal.com, tracing.
+...
+
 ## What is in place
 
 - Tutor-provided Act I baseline artifacts:
@@ -59,6 +66,8 @@ uv run python scripts/compute_final_metrics.py
 This repo is email-first. SMS is only a warm-lead scheduling fallback after a synthetic prospect has replied by email. Voice is not required for the core submission and is treated as the final human discovery-call channel.
 
 Outbound content that uses Tenacious positioning is marked as `draft: true` in message metadata. The repo should run against synthetic prospects only unless `LIVE_OUTBOUND_ENABLED=true` is explicitly set. When this flag is unset, production deployments should route outbound to the staff sink or stub providers.
+
+After a successful Cal.com booking, `agent/orchestrator.py` immediately calls `log_booking_update()` in `integrations/hubspot.py`, attaching the booking time, booking ID, booking URL, and `booking_completed=true` to the same HubSpot contact/company record.
 
 ## Final-submission metrics
 

@@ -44,3 +44,7 @@ Delta C = full method − published tau2 reference proxy = **+0.58** using the c
 ## Limitations
 
 This is a local sealed-slice simulation derived from the Act III probe library, not the official program-held sealed partition. The harness is intentionally deterministic and transparent so the official scorer can replace the task file while preserving the same condition interfaces. The next hardening step is to wire the same gates directly into the live reply handler and rerun against official held-out tasks.
+
+Ablation 1: remove confidence-aware phrasing.
+Ablation 2: remove bench-gated commitment.
+Ablation 3: remove competitor-gap tone guard.
