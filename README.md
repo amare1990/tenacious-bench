@@ -11,7 +11,14 @@ Submission-focused Week 10 repo for the Tenacious Conversion Engine challenge. T
 - agent/ — orchestration, policies, reply handling.
 - enrichment/ — Crunchbase, jobs, layoffs, AI maturity, competitor gap.
 - integrations/ — Resend, Africa's Talking, HubSpot, Cal.com, tracing.
-...
+- app/ — FastAPI entrypoint and webhook handlers.
+- probes/ — failure taxonomy, probe library, and target failure mode.
+- scripts/ — enrichment refresh, evaluation, and metrics computation.
+- data/ — raw and processed enrichment artifacts.
+- seed/ — ICP, style guide, pricing, and supporting materials.
+- metrics/ — computed evaluation outputs.
+- eval/ — baseline and TRP evaluation artifacts.
+- docs/ — supporting documentation and diagrams.
 
 ## What is in place
 

@@ -45,6 +45,21 @@ Delta C = full method − published tau2 reference proxy = **+0.58** using the c
 
 This is a local sealed-slice simulation derived from the Act III probe library, not the official program-held sealed partition. The harness is intentionally deterministic and transparent so the official scorer can replace the task file while preserving the same condition interfaces. The next hardening step is to wire the same gates directly into the live reply handler and rerun against official held-out tasks.
 
-Ablation 1: remove confidence-aware phrasing.
-Ablation 2: remove bench-gated commitment.
-Ablation 3: remove competitor-gap tone guard.
+## Ablation variants
+
+To isolate the contribution of each mechanism, three ablation variants were evaluated:
+
+- **Ablation 1: No confidence-aware phrasing**
+  - Removes signal-confidence gating.
+  - All signals are expressed with uniform confidence.
+  - Tests whether honesty calibration drives improvements.
+
+- **Ablation 2: No bench-gated commitment**
+  - Removes staffing-capacity gating.
+  - Agent is allowed to imply delivery readiness regardless of bench match.
+  - Tests whether over-commitment control reduces trust failures.
+
+- **Ablation 3: No competitor-gap tone guard**
+  - Removes constraints on gap framing.
+  - Agent may overstate competitor gaps or imply capability absence.
+  - Tests whether tone control reduces defensiveness and reputational risk.
