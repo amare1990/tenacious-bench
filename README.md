@@ -51,7 +51,23 @@ uv run python scripts/refresh_enrichment.py
 
 uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.com
 uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.com --reply "Yes, let's talk next week" --book
+uv run python scripts/compute_final_metrics.py
+```
 
+## Channel hierarchy and safety defaults
+
+This repo is email-first. SMS is only a warm-lead scheduling fallback after a synthetic prospect has replied by email. Voice is not required for the core submission and is treated as the final human discovery-call channel.
+
+Outbound content that uses Tenacious positioning is marked as `draft: true` in message metadata. The repo should run against synthetic prospects only unless `LIVE_OUTBOUND_ENABLED=true` is explicitly set. When this flag is unset, production deployments should route outbound to the staff sink or stub providers.
+
+## Final-submission metrics
+
+Run `uv run python scripts/compute_final_metrics.py` to calculate and write:
+
+- `metrics/final_metrics.json`
+- `evidence_graph.json`
+
+The script computes competitive-gap outbound share, gap-vs-generic reply-rate delta, stalled-thread rate, cost per qualified lead, and p50/p95 latency from trace files. If TRP-provided benchmark traces are present under `eval/trp1-eval/`, they are also summarized without overwriting the organization-run artifacts.
 
 ## Act IV status
 
