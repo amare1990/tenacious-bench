@@ -6,6 +6,35 @@ Submission-focused Week 10 repo for the Tenacious Conversion Engine challenge. T
 
 - Amare Kassa — architecture, enrichment pipeline, orchestration, integration wiring, evaluation packaging
 
+## Architecture diagram
+
+```mermaid
+flowchart LR
+    A[Public / Seed Data] --> B[Signal Enrichment Pipeline]
+    B --> B1[Crunchbase ODM]
+    B --> B2[Job Posts / Playwright]
+    B --> B3[layoffs.fyi]
+    B --> B4[Leadership / Press Signals]
+    B --> C[Hiring Signal Brief]
+    C --> D[AI Maturity Scoring]
+    C --> E[Competitor Gap Brief]
+    D --> F[Lead Record Builder]
+    E --> F
+
+    F --> G[Backbone LLM / Email Agent]
+    G --> H[Email Handler / Resend]
+    H --> I[Reply Webhook]
+    I --> J[Orchestrator + Policy Router]
+
+    J --> K[SMS Handler / Africa's Talking]
+    J --> L[HubSpot CRM]
+    J --> M[Cal.com Booking]
+    M --> L
+
+    J --> N[Trace Logger / Observability]
+    N --> O[trace_log.jsonl]
+    O --> P[Final Metrics + Evidence Graph]
+
 ## Directory index
 
 - agent/ — orchestration, policies, reply handling.
