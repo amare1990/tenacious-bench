@@ -1,10 +1,10 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request
 from agent.orchestrator import process_reply
 
-app = FastAPI()
+router = APIRouter(prefix="/webhooks/africastalking", tags=["sms"])
 
 
-@app.post("/webhooks/africastalking/sms")
+@router.post("/sms")
 async def handle_sms(request: Request):
     form = await request.form()
 
@@ -24,7 +24,7 @@ async def handle_sms(request: Request):
 
     try:
         result = process_reply(
-            company_name="Ramp",
+            company_name="Ramp",  # TODO: replace with lookup if needed
             reply_text=message,
             recipient="amaremek@gmail.com",
         )

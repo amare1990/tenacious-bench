@@ -1,0 +1,109 @@
+{
+  "claims": [
+    {
+      "claim_id": "competitive_gap_outbound_fraction",
+      "value": 1.0,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "reply_rate_gap",
+      "value": 0.7097,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "reply_rate_generic",
+      "value": null,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "reply_rate_delta_gap_minus_generic",
+      "value": null,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "stalled_thread_rate",
+      "value": 0.125,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "cost_per_qualified_lead_usd",
+      "value": 0.1073,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "p50_latency_ms",
+      "value": 16884.52,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "p95_latency_ms",
+      "value": 19392.73,
+      "source_ref": "metrics/final_metrics.json + trace files",
+      "trace_files": [
+        "data/trace_log.jsonl",
+        "eval/trace_log.jsonl",
+        "held_out_traces.jsonl"
+      ]
+    },
+    {
+      "claim_id": "tenacious_manual_stalled_thread_rate",
+      "value": "30-40%",
+      "source_ref": "TRP1 Week 10 challenge document / Tenacious executive interview"
+    },
+    {
+      "claim_id": "tenacious_outsourcing_acv",
+      "value": "$240K-$720K",
+      "source_ref": "TRP1 Week 10 challenge document / Tenacious internal weighted by segment"
+    },
+    {
+      "claim_id": "tenacious_project_consulting_acv",
+      "value": "$80K-$300K",
+      "source_ref": "TRP1 Week 10 challenge document / Tenacious internal last 8 deals"
+    },
+    {
+      "claim_id": "cold_email_reply_baseline",
+      "value": "1-3%",
+      "source_ref": "TRP1 Week 10 challenge document / LeadIQ 2026 + Apollo benchmarks"
+    },
+    {
+      "claim_id": "signal_grounded_reply_top_quartile",
+      "value": "7-12%",
+      "source_ref": "TRP1 Week 10 challenge document / Clay + Smartlead case studies"
+    }
+  ]
+}

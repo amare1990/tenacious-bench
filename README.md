@@ -6,6 +6,49 @@ Submission-focused Week 10 repo for the Tenacious Conversion Engine challenge. T
 
 - Amare Kassa — architecture, enrichment pipeline, orchestration, integration wiring, evaluation packaging
 
+## Architecture diagram
+
+```mermaid
+flowchart LR
+    A[Public / Seed Data] --> B[Signal Enrichment Pipeline]
+    B --> B1[Crunchbase ODM]
+    B --> B2[Job Posts / Playwright]
+    B --> B3[layoffs.fyi]
+    B --> B4[Leadership / Press Signals]
+    B --> C[Hiring Signal Brief]
+    C --> D[AI Maturity Scoring]
+    C --> E[Competitor Gap Brief]
+    D --> F[Lead Record Builder]
+    E --> F
+
+    F --> G[Backbone LLM / Email Agent]
+    G --> H[Email Handler / Resend]
+    H --> I[Reply Webhook]
+    I --> J[Orchestrator + Policy Router]
+
+    J --> K[SMS Handler / Africa's Talking]
+    J --> L[HubSpot CRM]
+    J --> M[Cal.com Booking]
+    M --> L
+
+    J --> N[Trace Logger / Observability]
+    N --> O[trace_log.jsonl]
+    O --> P[Final Metrics + Evidence Graph]
+
+## Directory index
+
+- agent/ — orchestration, policies, reply handling.
+- enrichment/ — Crunchbase, jobs, layoffs, AI maturity, competitor gap.
+- integrations/ — Resend, Africa's Talking, HubSpot, Cal.com, tracing.
+- app/ — FastAPI entrypoint and webhook handlers.
+- probes/ — failure taxonomy, probe library, and target failure mode.
+- scripts/ — enrichment refresh, evaluation, and metrics computation.
+- data/ — raw and processed enrichment artifacts.
+- seed/ — ICP, style guide, pricing, and supporting materials.
+- metrics/ — computed evaluation outputs.
+- eval/ — baseline and TRP evaluation artifacts.
+- docs/ — supporting documentation and diagrams.
+
 ## What is in place
 
 - Tutor-provided Act I baseline artifacts:
@@ -51,3 +94,47 @@ uv run python scripts/refresh_enrichment.py
 
 uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.com
 uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.com --reply "Yes, let's talk next week" --book
+uv run python scripts/compute_final_metrics.py
+```
+
+## Test FastAPI webhooks
+
+### Run server
+uvicorn app.main:app --reload
+
+### Test email webhook:
+curl -X POST http://localhost:8000/webhooks/email/inbound \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "amaremek@gmail.com",
+    "text": "Yes, interested",
+    "metadata": {
+      "company_name": "Ramp"
+    }
+  }'
+
+### Test SMS webhook
+
+  curl -X POST http://localhost:8000/webhooks/africastalking/sms \
+  -d "from=+1234567890&text=Interested"
+
+## Channel hierarchy and safety defaults
+
+This repo is email-first. SMS is only a warm-lead scheduling fallback after a synthetic prospect has replied by email. Voice is not required for the core submission and is treated as the final human discovery-call channel.
+
+Outbound content that uses Tenacious positioning is marked as `draft: true` in message metadata. The repo should run against synthetic prospects only unless `LIVE_OUTBOUND_ENABLED=true` is explicitly set. When this flag is unset, production deployments should route outbound to the staff sink or stub providers.
+
+After a successful Cal.com booking, `agent/orchestrator.py` immediately calls `log_booking_update()` in `integrations/hubspot.py`, attaching the booking time, booking ID, booking URL, and `booking_completed=true` to the same HubSpot contact/company record.
+
+## Final-submission metrics
+
+Run `uv run python scripts/compute_final_metrics.py` to calculate and write:
+
+- `metrics/final_metrics.json`
+- `evidence_graph.json`
+
+The script computes competitive-gap outbound share, gap-vs-generic reply-rate delta, stalled-thread rate, cost per qualified lead, and p50/p95 latency from trace files. If TRP-provided benchmark traces are present under `eval/trp1-eval/`, they are also summarized without overwriting the organization-run artifacts.
+
+## Act IV status
+
+Act IV starter implementation added: see `method.md`, `ablation_results.json`, `held_out_traces.jsonl`, `evidence_graph_act4.json`, and `eval/act4/run_act4_eval.py`. The local deterministic held-out harness reports Delta A positive with p < 0.05; replace the local held-out probe slice with the official sealed slice when available.

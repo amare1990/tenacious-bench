@@ -3,21 +3,34 @@ from __future__ import annotations
 from integrations.llm_client import LLMClientError, call_openrouter_json, is_llm_reply_analysis_enabled
 
 
+def _signal_confidence(signals, key: str) -> float:
+    try:
+        return float(signals.confidence_by_signal.get(key, 0.0) or 0.0)
+    except Exception:
+        return 0.0
+
+
 def _build_opening(company, signals, tone_mode: str) -> str:
-    if tone_mode == 'direct' and signals.funding_signal:
+    funding_conf = _signal_confidence(signals, 'funding')
+    hiring_conf = _signal_confidence(signals, 'hiring_velocity')
+    if tone_mode == 'direct' and signals.funding_signal and funding_conf >= 0.65:
         return f"I noticed {company.company_name} {str(signals.funding_signal).rstrip('.').lower()}."
+    if signals.hiring_velocity_signal and hiring_conf >= 0.65:
+        return f"I noticed public hiring signals around {company.company_name}, but I am treating them as directional rather than definitive."
     if signals.hiring_velocity_signal:
-        return f"I noticed {company.company_name} appears to be hiring actively."
+        return f"I saw a few public signals around {company.company_name} that may be worth checking, though I would not want to overstate them."
     return f"I came across {company.company_name} while looking at companies in this space."
 
 
 def _build_gap_line(company, gap, claim_strength: str) -> str:
     if not gap.missing_practices:
-        return f"It looks like {company.company_name} is already showing several strong public operating signals relative to peers."
+        return f"{company.company_name} already shows several public operating signals that look strong relative to the peer sample."
     joined = ', '.join(gap.missing_practices[:2])
+    if float(getattr(gap, 'confidence', 0.0) or 0.0) < 0.65:
+        return f"The peer comparison is low-confidence, but it raised a question for me around {joined}."
     if claim_strength == 'moderate':
-        return f"Compared with peers in the same space, there may be a gap around {joined}."
-    return f"Compared with peers in the same space, I wondered whether {joined} might be worth examining."
+        return f"Compared with the peer sample, there may be a gap around {joined}."
+    return f"Compared with the peer sample, I wondered whether {joined} might be worth examining."
 
 
 def _build_cta(tone_mode: str) -> str:
@@ -35,7 +48,7 @@ def _generate_email_fallback(company, signals, ai, gap, segment_result, policy_r
         '',
         _build_opening(company, signals, policy_result['tone_mode']),
         '',
-        f"Working angle: {segment_result['segment']}. Public AI readiness appears to be {ai.score}/3.",
+        f"Working angle: {segment_result['segment']}. Public AI-readiness estimate: {ai.score}/3, confidence {round(float(ai.confidence), 2)}.",
         '',
         _build_gap_line(company, gap, policy_result['claim_strength']),
         '',

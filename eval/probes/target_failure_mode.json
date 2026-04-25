@@ -1,0 +1,60 @@
+{
+  "target_failure_mode": "signal_overclaiming",
+  "related_categories": [
+    "signal_overclaiming",
+    "signal_reliability",
+    "gap_overclaiming"
+  ],
+  "associated_probes": [
+    "P-005",
+    "P-006",
+    "P-007",
+    "P-008",
+    "P-027",
+    "P-028",
+    "P-029",
+    "P-030",
+    "P-031",
+    "P-032"
+  ],
+  "selection_rationale": {
+    "core_reason": "central to Tenacious value proposition",
+    "failure_frequency": "expected high",
+    "brand_risk": "high",
+    "detectability": "medium",
+    "fixability": "high via phrasing mechanism"
+  },
+  "business_cost_model": {
+    "assumptions": {
+      "outbound_volume": 1000,
+      "reply_rate_range": [0.07, 0.12],
+      "wrong_signal_rate": 0.05
+    },
+    "failure_chain": [
+      "overstated signal",
+      "prospect challenge",
+      "weak recovery or defense",
+      "trust loss",
+      "future outreach degraded"
+    ],
+    "impact": "brand damage outweighs personalization gains if uncontrolled"
+  },
+  "mechanism_direction": {
+    "name": "signal_confidence_aware_phrasing",
+    "rules": [
+      "high confidence -> assert",
+      "medium confidence -> suggest",
+      "low confidence -> hedge",
+      "conflict -> abstain or ask"
+    ]
+  },
+  "success_metrics": {
+    "primary": "signal_honesty_pass_rate",
+    "secondary": [
+      "tone_preservation_score",
+      "reply_quality_score",
+      "cost_per_message",
+      "abstention_rate_on_ambiguous_signals"
+    ]
+  }
+}

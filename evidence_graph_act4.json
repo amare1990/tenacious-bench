@@ -1,0 +1,21 @@
+{
+  "act_iv_claims": [
+    {
+      "claim": "Full method pass@1 is 1.00 on the local 20-probe held-out slice.",
+      "source": "ablation_results.json.conditions[condition=method].pass@1",
+      "trace_file": "held_out_traces.jsonl"
+    },
+    {
+      "claim": "Delta A is +0.60 versus Day-1 baseline.",
+      "source": "ablation_results.json.deltas.delta_A_method_minus_day1_baseline"
+    },
+    {
+      "claim": "Delta A statistical test is significant at p < 0.05.",
+      "source": "ablation_results.json.statistical_test_delta_A"
+    },
+    {
+      "claim": "The full method costs $0.004 per task in the local harness and has p95 latency of 0.73s.",
+      "source": "ablation_results.json.conditions[condition=method]"
+    }
+  ]
+}

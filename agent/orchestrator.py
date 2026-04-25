@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from statistics import median
 from typing import Any
 
 from agent.email_agent import generate_email, generate_followup_email
-from agent.policies import decide_outreach_policy
+from agent.policies import decide_outreach_policy, can_send_sms
 from agent.reply_handler import analyze_reply, update_conversation_state
 from agent.scoring import classify_icp_segment
 from briefs.models import ConversationState, LeadRecord
@@ -39,15 +39,31 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import os
 
-print("DEBUG EMAIL_MODE =", os.getenv("EMAIL_MODE"))
-print("DEBUG HUBSPOT_MODE =", os.getenv("HUBSPOT_MODE"))
-print("DEBUG HUBSPOT token starts =", (os.getenv("HUBSPOT_ACCESS_TOKEN") or "")[:8])
 
 
 DEFAULT_RECIPIENT = "prospect@example.com"
 DEFAULT_PHONE = "+251900000000"
+
+
+def _outbound_variant(gap_brief) -> str:
+    """Trace tag for research-led outreach versus generic outreach."""
+    has_gap = bool(getattr(gap_brief, "missing_practices", None))
+    confidence = float(getattr(gap_brief, "confidence", 0.0) or 0.0)
+    return "gap" if has_gap and confidence >= 0.55 else "generic"
+
+
+def _thread_status(state: ConversationState, analysis: Any | None = None) -> str:
+    """Normalize conversation progress for stalled-thread measurement."""
+    if state.is_booked or state.stage == "booked":
+        return "booked"
+    if state.is_qualified or state.stage in {"engaged", "info_requested"}:
+        return "replied"
+    if state.stage in {"deferred", "closed", "awaiting_clarification"}:
+        return "stalled"
+    if analysis is not None and getattr(analysis, "reply_type", None) in {"defer", "rejection", "unclear"}:
+        return "stalled"
+    return "open"
 
 
 def _utc_now() -> datetime:
@@ -95,6 +111,28 @@ def _write_enrichment_artifacts(
         "ai_maturity_brief": str(ai_path),
         "lead_record": str(lead_path),
     }
+
+def _demo_booking_slots(count: int = 6) -> list[str]:
+    """Generate business-hour fallback slots that avoid repeated duplicate bookings."""
+    now = _utc_now()
+    slots: list[str] = []
+
+    candidate = now + timedelta(days=3)
+    candidate = candidate.replace(minute=0, second=0, microsecond=0)
+
+    while len(slots) < count:
+        # Cal.com availability is configured in Africa/Addis_Ababa, UTC+3.
+        # 06:00-14:00 UTC maps to 09:00-17:00 Addis.
+        for hour in range(6, 14):
+            slot = candidate.replace(hour=hour)
+            if slot > now + timedelta(hours=24) and slot.weekday() < 5:
+                slots.append(slot.isoformat())
+                if len(slots) >= count:
+                    break
+
+        candidate += timedelta(days=1)
+
+    return slots
 
 
 def build_lead(company_name: str) -> dict[str, Any]:
@@ -157,20 +195,30 @@ def send_initial_outreach(
         lead["policy_result"],
     )
 
+    variant = _outbound_variant(lead["gap_brief"])
+
     send_result = send_email(
         to_email=recipient,
         subject=email_draft["subject"],
         body=email_draft["body"],
-        metadata={"company_name": company_name},
+        metadata={
+            "company_name": company_name,
+            "draft": True,
+            "outbound_variant": variant,
+            "led_with_research_finding": variant == "gap",
+        },
     )
 
     sms_result = None
+    # if channel == "sms":
+    #     sms_result = send_sms(
+    #         to_phone=phone,
+    #         body="Warm follow-up from Tenacious: if email is easier, I can keep details there. If faster, I can text you 3 timeslots for a short intro call.",
+    #         metadata={"company_name": company_name},
+    #     )
+
     if channel == "sms":
-        sms_result = send_sms(
-            to_phone=phone,
-            body="Warm follow-up from Tenacious: if email is easier, I can keep details there. If faster, I can text you 3 timeslots for a short intro call.",
-            metadata={"company_name": company_name},
-        )
+        raise ValueError("SMS is only allowed after a prior email reply.")
 
     conversation_state.last_outbound_message = email_draft["body"]
 
@@ -209,6 +257,9 @@ def send_initial_outreach(
         "recipient": recipient,
         "phone": phone,
         "channel": channel,
+        "outbound_variant": variant,
+        "led_with_research_finding": variant == "gap",
+        "thread_status": _thread_status(conversation_state),
         "lead_record": lead["lead_record"].model_dump(),
         "artifact_paths": lead["artifact_paths"],
         "data_inventory": [item.model_dump() for item in lead["data_inventory"]],
@@ -247,12 +298,16 @@ def process_reply(
     updated_state = update_conversation_state(previous_state, reply_text, analysis)
 
     followup = generate_followup_email(company_name, analysis)
+    variant = _outbound_variant(lead["gap_brief"])
 
     booking_result = None
     booking_hubspot_result = None
     slots: list[str] = []
 
     if analysis.reply_type == "interested":
+        updated_state.next_action = "schedule_call"
+        updated_state.stage = "engaged"
+        updated_state.is_booked = False
         try:
             slots = propose_time_slots()
         except Exception as e:
@@ -263,33 +318,35 @@ def process_reply(
             followup["body"] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
         elif slots:
             followup["body"] += f"\n\nA few options from my side: {', '.join(slots)}."
-        else:
+        elif not book:
             followup["body"] += "\n\nI don't have live booking slots right now — could you propose 2–3 times that work for you?"
 
-        updated_state.next_action = "schedule_call"
-        updated_state.stage = "engaged"
-        updated_state.is_booked = False
-
-        if book and slots:
-            try:
-                booking_result = create_booking(
-                    company_name=company_name,
-                    email=recipient,
-                    selected_time=slots[0],
+        if book:
+            candidate_slots = slots or _demo_booking_slots()
+            if not slots:
+                followup["body"] += (
+                    f"\n\nI can hold {candidate_slots[0]} as a demo booking slot."
                 )
 
-                if booking_result and booking_result.get("status") == "sent":
-                    updated_state.is_booked = True
-                    updated_state.stage = "booked"
-                    updated_state.next_action = "await_meeting"
-                else:
-                    updated_state.is_booked = False
-                    updated_state.stage = "engaged"
-                    updated_state.next_action = "schedule_call"
+            for selected_time in candidate_slots:
+                try:
+                    booking_result = create_booking(
+                        company_name=company_name,
+                        email=recipient,
+                        selected_time=selected_time,
+                    )
 
-            except Exception as e:
-                booking_result = {"status": "failed", "error": str(e)}
-                updated_state.is_booked = False
+                    if booking_result and booking_result.get("status") == "sent":
+                        updated_state.is_booked = True
+                        updated_state.stage = "booked"
+                        updated_state.next_action = "await_meeting"
+                        break
+
+                except Exception as e:
+                    booking_result = {"status": "failed", "error": str(e)}
+                    continue
+
+            if not updated_state.is_booked:
                 updated_state.stage = "engaged"
                 updated_state.next_action = "schedule_call"
 
@@ -298,19 +355,27 @@ def process_reply(
         subject=followup["subject"],
         body=followup["body"],
         metadata={
-            # "draft": True,
+            "draft": True,
             "reply_type": analysis.reply_type,
             "company_name": company_name,
+            "outbound_variant": variant,
+            "led_with_research_finding": variant == "gap",
         },
     )
 
     sms_followup_result = None
-    if analysis.reply_type == "interested":
+
+    # SMS is only allowed as a warm-lead follow-up after email engagement
+    if can_send_sms(previous_state) and analysis.reply_type == "interested":
         sms_followup_result = send_sms(
             to_phone=phone,
             body="Thanks - I also emailed time options so scheduling is easier.",
-            metadata={"company_name": company_name, "reply_type": analysis.reply_type},
+            metadata={
+                "company_name": company_name,
+                "reply_type": analysis.reply_type,
+            },
         )
+    # Channel handoff policy: SMS only after email engagement (warm lead)
 
     hubspot_payload = build_lead_payload(
         company=lead["company"],
@@ -362,6 +427,9 @@ def process_reply(
         "company_name": company_name,
         "recipient": recipient,
         "reply_text": reply_text,
+        "outbound_variant": variant,
+        "led_with_research_finding": variant == "gap",
+        "thread_status": _thread_status(updated_state, analysis),
         "analysis": analysis.model_dump(),
         "followup": followup,
         "booking_result": booking_result,
