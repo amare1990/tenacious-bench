@@ -12,7 +12,7 @@
     },
     {
       "claim_id": "reply_rate_gap",
-      "value": 0.6333,
+      "value": 0.7097,
       "source_ref": "metrics/final_metrics.json + trace files",
       "trace_files": [
         "data/trace_log.jsonl",
@@ -42,7 +42,7 @@
     },
     {
       "claim_id": "stalled_thread_rate",
-      "value": 0.1429,
+      "value": 0.125,
       "source_ref": "metrics/final_metrics.json + trace files",
       "trace_files": [
         "data/trace_log.jsonl",
@@ -52,7 +52,7 @@
     },
     {
       "claim_id": "cost_per_qualified_lead_usd",
-      "value": 0.1105,
+      "value": 0.1073,
       "source_ref": "metrics/final_metrics.json + trace files",
       "trace_files": [
         "data/trace_log.jsonl",

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from statistics import median
 from typing import Any
 
@@ -111,6 +111,28 @@ def _write_enrichment_artifacts(
         "ai_maturity_brief": str(ai_path),
         "lead_record": str(lead_path),
     }
+
+def _demo_booking_slots(count: int = 6) -> list[str]:
+    """Generate business-hour fallback slots that avoid repeated duplicate bookings."""
+    now = _utc_now()
+    slots: list[str] = []
+
+    candidate = now + timedelta(days=3)
+    candidate = candidate.replace(minute=0, second=0, microsecond=0)
+
+    while len(slots) < count:
+        # Cal.com availability is configured in Africa/Addis_Ababa, UTC+3.
+        # 06:00-14:00 UTC maps to 09:00-17:00 Addis.
+        for hour in range(6, 14):
+            slot = candidate.replace(hour=hour)
+            if slot > now + timedelta(hours=24) and slot.weekday() < 5:
+                slots.append(slot.isoformat())
+                if len(slots) >= count:
+                    break
+
+        candidate += timedelta(days=1)
+
+    return slots
 
 
 def build_lead(company_name: str) -> dict[str, Any]:
@@ -283,6 +305,9 @@ def process_reply(
     slots: list[str] = []
 
     if analysis.reply_type == "interested":
+        updated_state.next_action = "schedule_call"
+        updated_state.stage = "engaged"
+        updated_state.is_booked = False
         try:
             slots = propose_time_slots()
         except Exception as e:
@@ -293,33 +318,35 @@ def process_reply(
             followup["body"] += f"\n\nA few options from my side: {slots[0]}, {slots[1]}, or {slots[2]}."
         elif slots:
             followup["body"] += f"\n\nA few options from my side: {', '.join(slots)}."
-        else:
+        elif not book:
             followup["body"] += "\n\nI don't have live booking slots right now — could you propose 2–3 times that work for you?"
 
-        updated_state.next_action = "schedule_call"
-        updated_state.stage = "engaged"
-        updated_state.is_booked = False
-
-        if book and slots:
-            try:
-                booking_result = create_booking(
-                    company_name=company_name,
-                    email=recipient,
-                    selected_time=slots[0],
+        if book:
+            candidate_slots = slots or _demo_booking_slots()
+            if not slots:
+                followup["body"] += (
+                    f"\n\nI can hold {candidate_slots[0]} as a demo booking slot."
                 )
 
-                if booking_result and booking_result.get("status") == "sent":
-                    updated_state.is_booked = True
-                    updated_state.stage = "booked"
-                    updated_state.next_action = "await_meeting"
-                else:
-                    updated_state.is_booked = False
-                    updated_state.stage = "engaged"
-                    updated_state.next_action = "schedule_call"
+            for selected_time in candidate_slots:
+                try:
+                    booking_result = create_booking(
+                        company_name=company_name,
+                        email=recipient,
+                        selected_time=selected_time,
+                    )
 
-            except Exception as e:
-                booking_result = {"status": "failed", "error": str(e)}
-                updated_state.is_booked = False
+                    if booking_result and booking_result.get("status") == "sent":
+                        updated_state.is_booked = True
+                        updated_state.stage = "booked"
+                        updated_state.next_action = "await_meeting"
+                        break
+
+                except Exception as e:
+                    booking_result = {"status": "failed", "error": str(e)}
+                    continue
+
+            if not updated_state.is_booked:
                 updated_state.stage = "engaged"
                 updated_state.next_action = "schedule_call"
 

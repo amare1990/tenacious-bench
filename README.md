@@ -68,6 +68,27 @@ uv run python -m agent.orchestrator --company Ramp --recipient amaremek@gmail.co
 uv run python scripts/compute_final_metrics.py
 ```
 
+## Test FastAPI webhooks
+
+### Run server
+uvicorn app.main:app --reload
+
+### Test email webhook:
+curl -X POST http://localhost:8000/webhooks/email/inbound \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "amaremek@gmail.com",
+    "text": "Yes, interested",
+    "metadata": {
+      "company_name": "Ramp"
+    }
+  }'
+
+### Test SMS webhook
+
+  curl -X POST http://localhost:8000/webhooks/africastalking/sms \
+  -d "from=+1234567890&text=Interested"
+
 ## Channel hierarchy and safety defaults
 
 This repo is email-first. SMS is only a warm-lead scheduling fallback after a synthetic prospect has replied by email. Voice is not required for the core submission and is treated as the final human discovery-call channel.

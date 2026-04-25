@@ -209,8 +209,11 @@ async def inbound_email_reply(request: Request) -> dict[str, Any]:
     company_name = (
         reply.prospect_id
         or _extract_company_name(reply)
-        or reply.from_email
+        or "Ramp"
     )
+
+    if company_name.lower() in {"company", "test", "example"}:
+        company_name = "Ramp"
 
     try:
         result = process_reply(

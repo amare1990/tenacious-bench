@@ -4,30 +4,46 @@
     "eval/trace_log.jsonl",
     "held_out_traces.jsonl"
   ],
-  "outbound_total": 30,
+  "outbound_total": 31,
   "outbound_variant_counts": {
-    "gap": 30,
+    "gap": 31,
     "generic": 0
   },
   "competitive_gap_outbound_fraction": 1.0,
   "reply_counts_by_variant": {
-    "gap": 19,
+    "gap": 22,
     "generic": 0
   },
-  "reply_rate_gap": 0.6333,
+  "reply_rate_gap": 0.7097,
   "reply_rate_generic": null,
   "reply_rate_delta_gap_minus_generic": null,
   "thread_status_counts": {
-    "open": 9,
     "booked": 9,
-    "stalled": 4,
-    "replied": 6
+    "open": 10,
+    "replied": 9,
+    "stalled": 4
   },
-  "stalled_thread_rate": 0.1429,
-  "qualified_leads": 19,
-  "total_cost_usd": 2.1,
-  "cost_per_qualified_lead_usd": 0.1105,
+  "stalled_thread_rate": 0.125,
+  "qualified_leads": 22,
+  "total_cost_usd": 2.36,
+  "cost_per_qualified_lead_usd": 0.1073,
   "p50_latency_ms": 16884.52,
   "p95_latency_ms": 19392.73,
-  "trp1_eval_present": false
+  "trp1_eval_present": true,
+  "trp1_score_log": {
+    "avg_agent_cost": 0.0199,
+    "domain": "retail",
+    "evaluated_simulations": 150,
+    "git_commit": "d11a97072c49d093f7b5a3e4fe9da95b490d43ba",
+    "infra_error_count": 0,
+    "num_trials": 5,
+    "p50_latency_seconds": 105.9521,
+    "p95_latency_seconds": 551.6491,
+    "pass_at_1": 0.7267,
+    "pass_at_1_ci_95": [
+      0.6504,
+      0.7917
+    ],
+    "total_tasks": 30
+  }
 }
