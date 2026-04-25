@@ -21,6 +21,15 @@ class CompanyProfile(BaseModel):
     raw_attributes: dict[str, Any] = Field(default_factory=dict)
 
 
+class SignalEvidence(BaseModel):
+    name: str
+    value: str | None = None
+    confidence: float
+    source_path: str | None = None
+    collected_at_utc: str | None = None
+    timestamp_utc: str | None = None
+
+
 class HiringSignalBrief(BaseModel):
     funding_signal: str | None = None
     hiring_velocity_signal: str | None = None
@@ -36,6 +45,7 @@ class HiringSignalBrief(BaseModel):
     tech_stack_details: dict[str, Any] = Field(default_factory=dict)
     source_paths: list[str] = Field(default_factory=list)
     missing_inputs: list[str] = Field(default_factory=list)
+    signals: list[SignalEvidence] = Field(default_factory=list)
 
     @property
     def summary(self) -> str | None:
@@ -59,6 +69,9 @@ class CompetitorGapBrief(BaseModel):
     sector: str | None = None
     company_size_band: str | None = None
     observed_practices: list[str] = Field(default_factory=list)
+    distribution_percentile: float | None = None
+    practice_evidence: list[dict] = Field(default_factory=list)
+    sparse_sector_warning: str | None = None
 
 
 class BenchMatchSummary(BaseModel):
