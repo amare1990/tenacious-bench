@@ -1,0 +1,33 @@
+{
+  "source_trace_files": [
+    "data/trace_log.jsonl",
+    "eval/trace_log.jsonl",
+    "held_out_traces.jsonl"
+  ],
+  "outbound_total": 30,
+  "outbound_variant_counts": {
+    "gap": 30,
+    "generic": 0
+  },
+  "competitive_gap_outbound_fraction": 1.0,
+  "reply_counts_by_variant": {
+    "gap": 19,
+    "generic": 0
+  },
+  "reply_rate_gap": 0.6333,
+  "reply_rate_generic": null,
+  "reply_rate_delta_gap_minus_generic": null,
+  "thread_status_counts": {
+    "open": 9,
+    "booked": 9,
+    "stalled": 4,
+    "replied": 6
+  },
+  "stalled_thread_rate": 0.1429,
+  "qualified_leads": 19,
+  "total_cost_usd": 2.1,
+  "cost_per_qualified_lead_usd": 0.1105,
+  "p50_latency_ms": 16884.52,
+  "p95_latency_ms": 19392.73,
+  "trp1_eval_present": false
+}
