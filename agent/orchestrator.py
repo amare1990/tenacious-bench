@@ -188,12 +188,15 @@ def send_initial_outreach(
     )
 
     sms_result = None
+    # if channel == "sms":
+    #     sms_result = send_sms(
+    #         to_phone=phone,
+    #         body="Warm follow-up from Tenacious: if email is easier, I can keep details there. If faster, I can text you 3 timeslots for a short intro call.",
+    #         metadata={"company_name": company_name},
+    #     )
+
     if channel == "sms":
-        sms_result = send_sms(
-            to_phone=phone,
-            body="Warm follow-up from Tenacious: if email is easier, I can keep details there. If faster, I can text you 3 timeslots for a short intro call.",
-            metadata={"company_name": company_name},
-        )
+        raise ValueError("SMS is only allowed after a prior email reply.")
 
     conversation_state.last_outbound_message = email_draft["body"]
 
@@ -334,11 +337,20 @@ def process_reply(
     )
 
     sms_followup_result = None
-    if analysis.reply_type == "interested":
+
+    # SMS is only allowed as a warm-lead follow-up after email engagement
+    if (
+        analysis.reply_type == "interested"
+        and previous_state.channel == "email"
+        and previous_state.stage in {"engaged", "info_requested"}
+    ):
         sms_followup_result = send_sms(
             to_phone=phone,
             body="Thanks - I also emailed time options so scheduling is easier.",
-            metadata={"company_name": company_name, "reply_type": analysis.reply_type},
+            metadata={
+                "company_name": company_name,
+                "reply_type": analysis.reply_type,
+            },
         )
 
     hubspot_payload = build_lead_payload(
