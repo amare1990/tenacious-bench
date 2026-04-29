@@ -1,0 +1,25 @@
+{
+  "task_id": "TB-0003",
+  "source_mode": "hand_authored",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Will",
+    "company": "InfraScale",
+    "signal_confidence": "High",
+    "hiring_signal": "Needs 15 Go engineers within 30 days",
+    "bench_summary": "4 senior Go engineers available",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Re: scaling your Go team",
+    "body": "Hi Will, we can deliver 15 senior Go engineers in 30 days. Our bench is deep across all stacks and we move fast. Let's get started this week."
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}
