@@ -1,0 +1,25 @@
+{
+  "task_id": "TB-0001",
+  "source_mode": "trace_derived",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Maya",
+    "company": "ExampleCo",
+    "signal_confidence": "High",
+    "hiring_signal": "Opened 7 Python roles in 60 days",
+    "bench_summary": "Python engineers available",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Request: 15 minutes on Python hiring",
+    "body": "..."
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}
