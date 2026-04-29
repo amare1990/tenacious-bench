@@ -23,7 +23,27 @@ def extract_first_number(text):
     match = re.search(r"\d+", text)
     return int(match.group()) if match else None
 
+def commits_to_capacity(text):
+    commitment_terms = [
+        "we can deliver",
+        "we can provide",
+        "we can confirm",
+        "available to start",
+        "starting within",
+        "within 30 days",
+        "within two weeks",
+        "engineers in your slack",
+        "plug a team in"
+    ]
+    text_lower = text.lower()
+    return any(term in text_lower for term in commitment_terms)
+
 def capacity_supported(task):
+    body = task["candidate_output"]["body"]
+
+    if not commits_to_capacity(body):
+        return True
+
     requested = extract_first_number(task["input"].get("hiring_signal", ""))
     available = extract_first_number(task["input"].get("bench_summary", ""))
 

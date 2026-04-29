@@ -1,0 +1,25 @@
+{
+  "task_id": "TB-0002",
+  "source_mode": "hand_authored",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Daniel",
+    "company": "ScaleCore",
+    "signal_confidence": "Medium",
+    "hiring_signal": "2 open backend engineering roles",
+    "bench_summary": "3 backend engineers available",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Quick chat about your scaling",
+    "body": "Hi Daniel,\n\nI hope this email finds you well.\n\nWe are a world-class engineering firm providing top talent to help companies like yours scale and supercharge growth. Our bench is deep and we can support all your engineering needs.\n\nWould you be open to a quick chat next week to explore how we can synergize?\n\nBest,\nYabi"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}

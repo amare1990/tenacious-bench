@@ -1,0 +1,25 @@
+{
+  "task_id": "TB-0001",
+  "source_mode": "hand_authored",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Maya",
+    "company": "DataFlux",
+    "signal_confidence": "High",
+    "hiring_signal": "Opened 7 Python engineering roles in the last 60 days after a $12M Series A",
+    "bench_summary": "5 senior Python engineers available",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Request: 15 minutes on your Python hiring",
+    "body": "Hi Maya,\n\nYou opened 7 Python engineering roles in the last 60 days following your recent Series A. Teams at that stage usually hit a bottleneck in recruiting capacity rather than budget.\n\nWe place managed Python and data engineers with fast onboarding while you continue full-time hiring.\n\nWould 15 minutes next week be useful to compare notes?\n\nBest,\nYabi"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}
