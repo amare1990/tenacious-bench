@@ -1,0 +1,429 @@
+{
+  "summary": {
+    "train_tasks": 10,
+    "dev_tasks": 6,
+    "held_out_tasks": 4,
+    "duplicate_task_ids": 0,
+    "duplicate_outputs": 4,
+    "held_out_train_8gram_overlaps": 4,
+    "same_body_cross_partition": 64,
+    "status": "review_required"
+  },
+  "duplicate_task_ids": [],
+  "held_out_train_8gram_overlaps": [
+    {
+      "task_id": "TB-SEED-009",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_009.json",
+      "overlap_count": 52,
+      "example_overlap": "and engineering; multiple open roles across engineering and"
+    },
+    {
+      "task_id": "TB-SEED-010",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_010.json",
+      "overlap_count": 93,
+      "example_overlap": "within the last 90 days; uses python, aws,"
+    },
+    {
+      "task_id": "TB-SEED-018",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_018.json",
+      "overlap_count": 93,
+      "example_overlap": "within the last 90 days; uses python, aws,"
+    },
+    {
+      "task_id": "TB-SEED-019",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_019.json",
+      "overlap_count": 93,
+      "example_overlap": "within the last 90 days; uses python, aws,"
+    }
+  ],
+  "same_body_cross_partition": [
+    {
+      "task_a": "TB-SEED-000",
+      "partition_a": "train",
+      "task_b": "TB-SEED-003",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-001",
+      "partition_a": "train",
+      "task_b": "TB-SEED-004",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-005",
+      "partition_a": "train",
+      "task_b": "TB-SEED-002",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-006",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-008",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-011",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-012",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-014",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-016",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-007",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-013",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-015",
+      "partition_b": "dev"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-017",
+      "partition_a": "train",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-007",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-007",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-007",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-007",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-013",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-013",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-013",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-013",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-015",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-009",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-015",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-010",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-015",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-018",
+      "partition_b": "held_out"
+    },
+    {
+      "task_a": "TB-SEED-015",
+      "partition_a": "dev",
+      "task_b": "TB-SEED-019",
+      "partition_b": "held_out"
+    }
+  ],
+  "notes": [
+    "This interim check covers duplicate task IDs, exact repeated outputs across partitions, and 8-gram overlap between train and held_out.",
+    "Final submission should add embedding similarity and time-shift verification."
+  ]
+}
