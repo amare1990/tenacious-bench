@@ -66,6 +66,19 @@ def has_one_cta(text):
     text_lower = text.lower()
     return sum(term in text_lower for term in cta_terms) <= 2
 
+def leaks_internal_analysis(text):
+    leakage_terms = [
+        "working angle",
+        "public ai readiness",
+        "segment 1",
+        "segment 2",
+        "segment 3",
+        "segment 4",
+        "ai maturity score"
+    ]
+    text_lower = text.lower()
+    return any(term in text_lower for term in leakage_terms)
+
 def score_task(task):
     body = task["candidate_output"]["body"]
     subject = task["candidate_output"]["subject"]
@@ -74,7 +87,7 @@ def score_task(task):
     signal = task["input"]["hiring_signal"]
 
     score = 0
-    max_score = 7
+    max_score = 8
 
     if word_count(body) <= rubric["max_body_words"]:
         score += 1
@@ -86,6 +99,9 @@ def score_task(task):
         score += 1
 
     if not uses_bench_word(body):
+        score += 1
+
+    if not leaks_internal_analysis(body):
         score += 1
 
     if has_signal_reference(body, signal):
@@ -104,6 +120,9 @@ def score_task(task):
 
     if not capacity_supported(task):
         hard_failures.append("unsupported_capacity_commitment")
+
+    if leaks_internal_analysis(body):
+        hard_failures.append("internal_analysis_leakage")
 
     if hard_failures:
         score = min(score, 2)

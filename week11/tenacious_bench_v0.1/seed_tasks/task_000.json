@@ -1,0 +1,26 @@
+{
+  "task_id": "TB-SEED-000",
+  "failure_dimension": "internal_analysis_leakage",
+  "source_mode": "trace_derived",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Ramp",
+    "company": "Ramp",
+    "signal_confidence": "High",
+    "hiring_signal": "Raised growth funding within the last 12 months; Open engineering roles increased over the last 60 days; New VP Engineering joined within the last 90 days; Uses Python, AWS, and modern data tooling",
+    "bench_summary": "{'requested_capabilities': ['Python', 'ML'], 'available_capabilities': ['Python', 'ML'], 'fit': True, 'confidence': 0.9, 'notes': 'Strong match with available engineers'}",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Ramp \u2013 quick observation",
+    "body": "Hi,\n\nI noticed that Ramp raised growth funding within the last 12 months.\n\nWorking angle: Segment 3 - Engineering Leadership Transition. Public AI readiness appears to be 3/3.\n\nCompared with peers in the same space, it looks like there may be a gap around Dedicated ML platform capability.\n\nWould a 30-minute conversation next week be useful?\n\nBest,\nTenacious"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}

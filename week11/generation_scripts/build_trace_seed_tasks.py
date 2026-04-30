@@ -7,10 +7,9 @@ OUTPUT_DIR = Path("week11/tenacious_bench_v0.1/seed_tasks")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def convert_trace_to_task(trace, idx):
-    payload = trace["payload"]
+    payload = trace.get("payload", {})
 
     email = payload.get("email", {})
-
     subject = email.get("subject", "Context: hiring signal review")
     body = email.get("body", "No email generated. Evaluate based on inputs.")
 
@@ -22,8 +21,8 @@ def convert_trace_to_task(trace, idx):
             "prospect_name": payload.get("company_name", "Unknown"),
             "company": payload.get("company_name", "Unknown"),
             "signal_confidence": "High",
-            "hiring_signal": payload["hiring_signal_brief"]["summary"],
-            "bench_summary": str(payload["bench_match_summary"]),
+            "hiring_signal": payload.get("hiring_signal_brief", {}).get("summary", ""),
+            "bench_summary": str(payload.get("bench_match_summary", "")),
             "calendar_link": "gettenacious.com/yabi"
         },
         "candidate_output": {
@@ -40,37 +39,16 @@ def convert_trace_to_task(trace, idx):
         }
     }
 
-def has_required_fields(trace):
-    payload = trace.get("payload", {})
-
-    if trace.get("event_type") != "prospect_pipeline_run":
-        return False
-
-    if "hiring_signal_brief" not in payload:
-        return False
-
-    if "bench_match_summary" not in payload:
-        return False
-
-    # email is optional now
-    return True
-
 def main():
     created = 0
     skipped = 0
 
     with INPUT_PATH.open() as f:
-        for i, line in enumerate(f):
-            if created >= 20:
-                break
-
+        for line in f:
             trace = json.loads(line)
 
-            # print("Checking trace...")
-            # print(trace.get("event_type"))
-            # print(trace.get("payload", {}).keys())
-
-            if not has_required_fields(trace):
+            # only process correct event type
+            if trace.get("event_type") != "prospect_pipeline_run":
                 skipped += 1
                 continue
 
@@ -84,4 +62,10 @@ def main():
             print(f"Created {output_file}")
             created += 1
 
+            if created >= 20:
+                break
+
     print(f"Done. Created={created}, skipped={skipped}")
+
+if __name__ == "__main__":
+    main()

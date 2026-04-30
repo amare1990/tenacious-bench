@@ -1,0 +1,25 @@
+{
+  "task_id": "TB-SEED-005",
+  "source_mode": "trace_derived",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Retool",
+    "company": "Retool",
+    "signal_confidence": "High",
+    "hiring_signal": "Selective engineering hiring remains open; Public restructuring signal observed in the last 120 days; Developer tools and infrastructure-heavy stack",
+    "bench_summary": "{'requested_capabilities': ['Machine Learning', 'Infrastructure'], 'available_capabilities': ['Python', 'Data Engineering', 'Machine Learning', 'MLOps', 'Infrastructure', 'Backend Engineering', 'AWS'], 'fit': True, 'confidence': 0.9, 'notes': 'Requested capabilities inferred: Machine Learning, Infrastructure. Matched capabilities: Machine Learning, Infrastructure. Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods.'}",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Retool \u2013 quick observation",
+    "body": "Hi,\n\nI noticed Retool appears to be hiring actively.\n\nWorking angle: Segment 2 - Restructuring / Layoffs. Public AI readiness appears to be 0/3.\n\nCompared with peers in the same space, it looks like there may be a gap around AI-assisted developer tooling.\n\nWould a 30-minute conversation next week be useful?\n\nBest,\nTenacious"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}
