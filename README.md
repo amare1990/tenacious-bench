@@ -35,6 +35,8 @@ flowchart LR
     N --> O[trace_log.jsonl]
     O --> P[Final Metrics + Evidence Graph]
 
+```
+
 ## Directory index
 
 - agent/ — orchestration, policies, reply handling.
@@ -80,6 +82,90 @@ flowchart LR
   - `seed/email_sequences/`
   - `seed/discovery_transcripts/`
   - `seed/schemas/`
+
+---
+
+## Week 11 — Tenacious-Bench v0.1
+
+### Overview
+
+Tenacious-Bench v0.1 is a domain-specific benchmark for evaluating outbound sales messaging quality for Tenacious. It replaces reliance on τ²-Bench by focusing on grounded, honest, and production-safe communication.
+
+---
+
+### How to Run the Evaluator
+
+```bash
+uv run python week11/scoring_evaluator.py \
+week11/tenacious_bench_v0.1/examples/task_001.json
+
+```
+
+### Run full calibration:
+
+```bash
+uv run python week11/scoring_evaluator.py week11/tenacious_bench_v0.1/examples/task_001.json
+uv run python week11/scoring_evaluator.py week11/tenacious_bench_v0.1/examples/task_002.json
+uv run python week11/scoring_evaluator.py week11/tenacious_bench_v0.1/examples/task_003.json
+```
+
+### Current Status (Interim)
+
+- 20 trace-derived seed tasks generated from `data/trace_log.jsonl`
+- 3 calibration tasks (good, banned-phrase, adversarial)
+- Dataset partitioned into:
+  - train
+  - dev
+  - held_out
+- Rule-based evaluator implemented with:
+  - banned phrase detection
+  - grounding checks
+  - CTA checks
+  - capacity validation
+  - internal-analysis leakage detection
+- Hard-failure scoring caps implemented
+
+### Interim Deliverables (Acts I–II)
+- audit_memo.md
+- schema.json
+- scoring_evaluator.py
+- tenacious_bench_v0.1/ (dataset partitions)
+- datasheet.md
+- methodology.md
+- inter_rater_agreement.md
+- worked_examples.md
+- bench_composition.md
+- contamination_check.json
+- generation_scripts/
+- synthesis_memos/
+
+### Next Steps (Days 4–7)
+- Generate preference pairs (chosen vs rejected outputs)
+- Train a preference-tuned judge (Path B)
+- Run ablations on held-out dataset
+- Report Delta A / Delta B
+- Publish dataset (HuggingFace)
+- Produce memo, blog post, and demo video
+
+### Quick Eval (one command)
+
+```bash
+uv run python week11/scoring_evaluator.py \
+week11/tenacious_bench_v0.1/examples/task_001.json
+```
+
+
+### 2) Scoring scale (clarity)
+
+```md
+Scores are out of 8 and include hard-failure caps for policy violations.
+```
+
+### Reproducibility
+
+Clone the repo, run the evaluator on provided tasks, and verify scores match expected outputs within tolerance.
+
+---
 
 ## Quick start with uv
 
