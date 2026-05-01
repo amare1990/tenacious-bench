@@ -1,0 +1,102 @@
+{
+  "task_id": "trace_derived_002",
+  "source_mode": "trace_derived",
+  "failure_mode": "generic_or_internal_language",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "prospect_pipeline_run",
+    "company": "Retool",
+    "source_trace_id": "2026-04-21T10:01:54.625849+00:00",
+    "hiring_signal_brief": {
+      "funding_signal": null,
+      "hiring_velocity_signal": "Selective engineering hiring remains open",
+      "layoffs_signal": "Public restructuring signal observed in the last 120 days",
+      "leadership_change_signal": null,
+      "tech_stack_signal": "Developer tools and infrastructure-heavy stack",
+      "confidence_by_signal": {
+        "funding": 0.0,
+        "hiring_velocity": 0.55,
+        "layoffs": 0.8,
+        "leadership_change": 0.0,
+        "tech_stack": 0.7
+      },
+      "summary": "Selective engineering hiring remains open; Public restructuring signal observed in the last 120 days; Developer tools and infrastructure-heavy stack"
+    },
+    "ai_maturity_profile": {
+      "score": 0,
+      "evidence": [
+        "No strong public AI signal detected in the current sample"
+      ],
+      "confidence": 0.37,
+      "rationale": "No strong public AI signals were identified."
+    },
+    "competitor_gap_brief": {
+      "peer_group": [
+        "Vercel",
+        "Render",
+        "HashiCorp"
+      ],
+      "top_quartile_practices": [
+        "Platform engineering specialization",
+        "AI-assisted developer tooling",
+        "Modern infrastructure automation"
+      ],
+      "missing_practices": [
+        "AI-assisted developer tooling"
+      ],
+      "confidence": 0.75,
+      "summary": "Compared with peers such as Vercel, Render, HashiCorp, Retool appears to be missing public signals for AI-assisted developer tooling. The company shows only limited AI readiness, so any gap framing should remain exploratory."
+    },
+    "bench_match_summary": {
+      "requested_capabilities": [
+        "Python",
+        "ML"
+      ],
+      "available_capabilities": [
+        "Python",
+        "ML"
+      ],
+      "fit": true,
+      "confidence": 0.9,
+      "notes": "Strong match with available engineers"
+    },
+    "policy_result": {
+      "should_contact": true,
+      "tone_mode": "direct",
+      "claim_strength": "moderate",
+      "require_handoff": false,
+      "allow_capacity_language": true,
+      "reason": "Signal confidence is high enough for a direct outreach style. Bench fit is strong enough to discuss capability directionally."
+    },
+    "reply_text": null,
+    "reply_analysis": null,
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Subject: Retool – quick observation\n\nHi,\n\nI noticed Retool appears to be hiring actively.\n\nWorking angle: Segment 2 - Restructuring / Layoffs. Public AI readiness appears to be 0/3.\n\nCompared with peers in the same space, it looks like there may be a gap around AI-assisted developer tooling.\n\nWould a 30-minute conversation next week be useful?\n\nBest,\nTenacious",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "generic_or_internal_language"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 2
+  }
+}

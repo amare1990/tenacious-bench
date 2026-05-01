@@ -22,5 +22,7 @@
     "forbid_bench_word": true,
     "requires_one_ask": true,
     "requires_no_banned_phrases": true
-  }
+  },
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "medium"
 }

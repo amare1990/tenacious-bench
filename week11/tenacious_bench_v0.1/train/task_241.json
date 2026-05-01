@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "condescending_gap",
+  "difficulty": "hard",
+  "input": {
+    "company": "Veridian Health",
+    "prospect_name": "Mira Chen",
+    "prospect_title": "Director of Product",
+    "icp_segment": "Healthtech Series A",
+    "hiring_signal_brief": "Hired 2 product managers last quarter; no public layoffs",
+    "bench_summary": "1 senior product manager with healthtech experience available in 3 weeks",
+    "pricing_policy": "Fixed fee per engineer, no markup on salary"
+  },
+  "candidate_output": "You\u2019re still doing product hiring the old way? We\u2019ve got one top-tier PM who\u2019s already solved your exact problems\u2014why waste time on job boards when you could just hire the right person?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "condescending_gap",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_241",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_05_condescending_gap.txt",
+    "original_generated_id": "synthesis_021",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

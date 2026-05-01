@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "medium",
+  "input": {
+    "company": "Veridian Logistics",
+    "prospect_name": "Rita Chen",
+    "prospect_title": "Director of Engineering",
+    "icp_segment": "Mid-market Logistics Tech",
+    "hiring_signal_brief": "LinkedIn post about migrating legacy systems; no mention of layoffs or leadership changes.",
+    "bench_summary": "2 full-stack engineers (React/Node), 1 DevOps engineer with AWS experience.",
+    "pricing_policy": "Hourly billing only; no retainers or fixed monthly rates."
+  },
+  "candidate_output": "With Veridian\u2019s recent leadership overhaul and 4 new engineering hires planned, I know you\u2019re under pressure to scale fast. We\u2019ve got 3 engineers ready to take over your legacy migration\u2014no delays. Let\u2019s get started this week.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "fabricated_signal",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_026",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_06_fabricated_signal.txt"
+  }
+}

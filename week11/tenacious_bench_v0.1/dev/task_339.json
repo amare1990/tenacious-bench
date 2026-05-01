@@ -1,0 +1,57 @@
+{
+  "task_id": "task_339",
+  "source_mode": "programmatic",
+  "failure_mode": "generic_template",
+  "difficulty": "hard",
+  "input": {
+    "company": "SignalForge",
+    "prospect_name": "Sophia",
+    "prospect_title": "Founder",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Seed",
+      "funding_amount": "$14M",
+      "role_count": 8,
+      "primary_stack": "Go",
+      "signal_confidence": "low",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Helping SignalForge scale\n\nHi Sophia,\nI wanted to reach out because Tenacious helps companies like yours with engineering and AI needs.\nWe support many stacks and flexible engagement models.\nWould you be open to a conversation?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "generic_template",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1",
+    "original_generated_id": "varied_programmatic_074",
+    "merged_by": "merge_varied_programmatic_into_partitions.py",
+    "partition": "dev"
+  }
+}

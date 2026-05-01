@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "weak_signal_overassertion",
+  "difficulty": "hard",
+  "input": {
+    "company": "StratifyAI",
+    "prospect_name": "Raj Patel",
+    "prospect_title": "CTO",
+    "icp_segment": "Pre-Series A AI Startup",
+    "hiring_signal_brief": "Posted about optimizing model inference latency on Twitter; no team size updates.",
+    "bench_summary": "1 ML engineer with MLOps expertise available; no data pipeline specialists.",
+    "pricing_policy": "Minimum 4-week engagement; rate non-negotiable."
+  },
+  "candidate_output": "Your recent post on inference latency proves StratifyAI is hitting scalability bottlenecks. We have a world-class ML engineer ready to fix this immediately\u2014you can\u2019t afford to delay. Let\u2019s onboard him this week to get your models running faster.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "weak_signal_overassertion",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_222",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_00_weak_signal_overassertion.txt",
+    "original_generated_id": "synthesis_002",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

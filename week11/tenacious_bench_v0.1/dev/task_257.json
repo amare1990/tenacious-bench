@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "hard",
+  "input": {
+    "company": "StratifyAI",
+    "prospect_name": "Riley Morgan",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Pre-Series A AI Startup",
+    "hiring_signal_brief": "Posted ML Engineer role 3 weeks ago; no public signals beyond job post.",
+    "bench_summary": "1 engineer with PyTorch and NLP experience; 14-day lead time.",
+    "pricing_policy": "Project-based pricing; no retainers."
+  },
+  "candidate_output": "You\u2019re probably falling behind on AI model deployment\u2014competitors are hiring ML engineers to stay ahead. We have a world-class engineer who can deliver immediately. Let\u2019s set up a quick call to get you ahead.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_257",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_08_ai_maturity_misroute.txt",
+    "original_generated_id": "synthesis_037",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

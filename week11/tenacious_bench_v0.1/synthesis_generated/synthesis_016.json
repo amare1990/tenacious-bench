@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "generic_template",
+  "difficulty": "medium",
+  "input": {
+    "company": "Veridian Health",
+    "prospect_name": "Marcus Chen",
+    "prospect_title": "Director of Product",
+    "icp_segment": "Series A HealthTech",
+    "hiring_signal_brief": "Hiring for UX Researcher; product roadmap includes patient portal redesign",
+    "bench_summary": "1 senior UX researcher available in 3 weeks",
+    "pricing_policy": "Hourly rate with 2-week trial period"
+  },
+  "candidate_output": "Hi Marcus, we help companies like yours hire the best UX talent fast. Our team has placed 50+ researchers this year \u2014 let\u2019s connect so you can get a top-tier candidate in 2 weeks.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "generic_template",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_016",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_04_generic_template.txt"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "task_id": "varied_programmatic_049",
+  "source_mode": "programmatic",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "company": "CargoNest",
+    "prospect_name": "Marcus",
+    "prospect_title": "COO",
+    "icp_segment": "engineering_leadership_transition",
+    "hiring_signal_brief": {
+      "funding_stage": "Seed",
+      "funding_amount": "$9M",
+      "role_count": 3,
+      "primary_stack": "Python",
+      "signal_confidence": "high",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Engineering support\n\nHi Marcus,\nTenacious can help CargoNest with engineering delivery capacity.\nWe support Python teams and flexible timelines.\nWould 15 minutes be useful?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "missing_signal_reference",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": false,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1"
+  }
+}

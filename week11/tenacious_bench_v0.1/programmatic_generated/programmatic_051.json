@@ -1,0 +1,60 @@
+{
+  "task_id": "programmatic_051",
+  "source_mode": "programmatic",
+  "failure_mode": "banned_phrase",
+  "difficulty": "medium",
+  "input": {
+    "company": "Pinecone Labs",
+    "prospect_name": "Will",
+    "prospect_title": "VP Infrastructure",
+    "icp_segment": "specialized_capability_gap",
+    "hiring_signal_brief": {
+      "funding_stage": "Series B",
+      "funding_amount": "$14M",
+      "role_count": 4,
+      "primary_stack": "Go",
+      "signal_confidence": "high",
+      "ai_maturity_score": 2
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "max_supported_start_days": 21,
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Tenacious I hope this email finds you well engineering support\n\nHi Will,\nI hope this email finds you well. Tenacious provides I hope this email finds you well engineering capacity for teams like Pinecone Labs.\nWould you be open to a quick chat next week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": false,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "banned_phrase"
+  },
+  "metadata": {
+    "generator": "generate_programmatic_tasks.py",
+    "seed": 42,
+    "version": "v0.1"
+  }
+}

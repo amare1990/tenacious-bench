@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "multi_ask",
+  "difficulty": "medium",
+  "input": {
+    "company": "LogiCore",
+    "prospect_name": "Tasha Reynolds",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "Series B Logistics Tech",
+    "hiring_signal_brief": "Added three devops roles in Q1; infrastructure costs up 18%.",
+    "bench_summary": "2 DevOps engineers available in 14 days; both with Terraform and AWS experience.",
+    "pricing_policy": "Flat monthly rate; no per-hour billing."
+  },
+  "candidate_output": "Hi Tasha, your infrastructure growth is clear\u2014have you considered how to reduce costs? Are you looking to bring on more DevOps help? Would you prefer to start with one or two engineers? We have two qualified folks ready with Terraform skills. Can we connect this week?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "multi_ask",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_253",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_07_multi_ask.txt",
+    "original_generated_id": "synthesis_033",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "banned_phrase",
+  "difficulty": "hard",
+  "input": {
+    "company": "NexaHealth",
+    "prospect_name": "Jordan Lee",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B HealthTech",
+    "hiring_signal_brief": "Recently posted 3 senior backend roles on LinkedIn; no engineering blog updates in 6 months.",
+    "bench_summary": "Currently have 2 senior backend engineers available with FHIR and AWS experience.",
+    "pricing_policy": "Flat fee per engineer per month; no long-term contracts required."
+  },
+  "candidate_output": "Hi Jordan, I know you're looking for world-class backend engineers to scale your platform. We have top talent ready to jump in\u2014let\u2019s schedule a quick chat this week.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_010",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_03_banned_phrase.txt"
+  }
+}

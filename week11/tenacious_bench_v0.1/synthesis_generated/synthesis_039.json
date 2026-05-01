@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "hard",
+  "input": {
+    "company": "EcoTrack",
+    "prospect_name": "Avery Kim",
+    "prospect_title": "Director of Engineering",
+    "icp_segment": "Series A Climate Tech",
+    "hiring_signal_brief": "Hiring for Data Engineer; no funding or layoffs mentioned.",
+    "bench_summary": "1 engineer with Spark and Airflow; 12-day lead time.",
+    "pricing_policy": "Fixed monthly fee per engineer; no discounts."
+  },
+  "candidate_output": "Most climate tech teams are already scaling their data pipelines with specialized engineers\u2014you\u2019re likely lagging behind. We can deploy a world-class engineer in under a week to fix your bottleneck. Let\u2019s do a quick call?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_039",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_08_ai_maturity_misroute.txt"
+  }
+}

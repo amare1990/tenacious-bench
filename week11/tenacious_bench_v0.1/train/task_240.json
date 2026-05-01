@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "condescending_gap",
+  "difficulty": "medium",
+  "input": {
+    "company": "NexusAI",
+    "prospect_name": "Jordan Lee",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recent job post for Senior ML Engineer; team size ~15 engineers",
+    "bench_summary": "3 senior ML engineers available within 2 weeks",
+    "pricing_policy": "Fixed fee per engineer, no markup on salary"
+  },
+  "candidate_output": "Most teams like yours struggle to find ML talent\u2014why are you still posting? We\u2019ve got 3 senior engineers ready to plug in. You\u2019re clearly behind on hiring, so let\u2019s fix this before you lose another candidate.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "condescending_gap",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_240",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_05_condescending_gap.txt",
+    "original_generated_id": "synthesis_020",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "banned_phrase",
+  "difficulty": "hard",
+  "input": {
+    "company": "LogiCore",
+    "prospect_name": "Derek Wong",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "Mid-market Logistics SaaS",
+    "hiring_signal_brief": "Increased Slack activity in engineering channels; no recent job posts.",
+    "bench_summary": "1 senior DevOps engineer with Terraform and Kubernetes experience available.",
+    "pricing_policy": "Flexible monthly billing; no upfront fees."
+  },
+  "candidate_output": "Derek, your team needs 10x DevOps support to handle this growth. We\u2019ve got world-class engineers ready to help\u2014let\u2019s circle back and lock in synergy?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_014",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_03_banned_phrase.txt"
+  }
+}

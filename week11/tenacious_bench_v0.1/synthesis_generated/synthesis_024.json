@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "condescending_gap",
+  "difficulty": "medium",
+  "input": {
+    "company": "TerraFy",
+    "prospect_name": "Derek Wong",
+    "prospect_title": "Head of DevOps",
+    "icp_segment": "Cloud Infrastructure Startup",
+    "hiring_signal_brief": "Mentioned scaling Kubernetes cluster in investor deck; no layoffs reported",
+    "bench_summary": "2 DevOps engineers with Kubernetes and Terraform experience available in 3 weeks",
+    "pricing_policy": "Fixed fee per engineer, no markup on salary"
+  },
+  "candidate_output": "Your Kubernetes setup sounds like it\u2019s held together with duct tape. We\u2019ve got two engineers who\u2019ve built this at scale\u2014why are you still struggling with this when you could just hire people who\u2019ve already solved it?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "condescending_gap",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_024",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_05_condescending_gap.txt"
+  }
+}

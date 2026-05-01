@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "hard",
+  "input": {
+    "company": "CartaFlow",
+    "prospect_name": "Derek Wu",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "Fintech Startup",
+    "hiring_signal_brief": "Hiring for 2 roles on LinkedIn; no mention of investor changes or product pivots.",
+    "bench_summary": "1 full-stack engineer (React/Python), 1 DevOps (Kubernetes), 1 data analyst.",
+    "pricing_policy": "Monthly fee per engineer; no upfront payments or multi-month commitments."
+  },
+  "candidate_output": "CartaFlow\u2019s recent Series C led by Sequoia means you\u2019re expanding fast\u2014our team has 5 engineers ready to scale your payment engine. Let\u2019s move quickly before your funding runs out.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "fabricated_signal",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_249",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_06_fabricated_signal.txt",
+    "original_generated_id": "synthesis_029",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

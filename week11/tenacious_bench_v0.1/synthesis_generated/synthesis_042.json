@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "company": "Kairo Systems",
+    "prospect_name": "Lena Rodriguez",
+    "prospect_title": "CTO",
+    "icp_segment": "Healthtech Series A",
+    "hiring_signal_brief": "Hiring for DevOps and cloud infrastructure roles on LinkedIn; no layoffs or funding news.",
+    "bench_summary": "1 senior DevOps engineer with HIPAA experience available in 5 days",
+    "pricing_policy": "Monthly retainer; no trial periods"
+  },
+  "candidate_output": "Hi Lena, we connect healthtech companies with elite DevOps engineers who know HIPAA compliance inside and out. We\u2019ve got someone ready to onboard in 5 days. Let\u2019s talk about how we can help you scale securely.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "missing_signal_reference",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_042",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_09_missing_signal_reference.txt"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "pricing_violation",
+  "difficulty": "medium",
+  "input": {
+    "company": "CartaFlow",
+    "prospect_name": "Derek Chen",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "Series B Fintech",
+    "hiring_signal_brief": "Added 3 engineers in last 60 days; now at 32 total.",
+    "bench_summary": "2 mid-level backend engineers available for 4\u20136 week engagements.",
+    "pricing_policy": "Do not assign dollar values to roles or timeframes. Avoid any phrasing that implies fixed pricing or per-engineer cost."
+  },
+  "candidate_output": "We have two backend engineers ready at $1,100/week each\u2014perfect to help you ship the compliance module ahead of schedule.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "pricing_violation",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_228",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_02_pricing_violation.txt",
+    "original_generated_id": "synthesis_008",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

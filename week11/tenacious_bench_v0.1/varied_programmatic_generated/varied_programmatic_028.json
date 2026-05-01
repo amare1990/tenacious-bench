@@ -1,0 +1,54 @@
+{
+  "task_id": "varied_programmatic_028",
+  "source_mode": "programmatic",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "hard",
+  "input": {
+    "company": "CargoNest",
+    "prospect_name": "Priya",
+    "prospect_title": "New CTO",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Series B",
+      "funding_amount": "$9M",
+      "role_count": 2,
+      "primary_stack": "Go",
+      "signal_confidence": "high",
+      "ai_maturity_score": 0
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Your agentic systems roadmap\n\nHi Priya,\nSince CargoNest has an AI maturity score of 0, I assume you are ready for production agentic systems and dedicated MLOps.\nTenacious can staff a specialized ML platform squad for a 4-month scope.\nCan we discuss this week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": false,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1"
+  }
+}

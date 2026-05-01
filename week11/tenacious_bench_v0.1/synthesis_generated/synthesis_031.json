@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "multi_ask",
+  "difficulty": "medium",
+  "input": {
+    "company": "VistaMetrics",
+    "prospect_name": "Rita Chen",
+    "prospect_title": "Director of Product",
+    "icp_segment": "Series A HealthTech",
+    "hiring_signal_brief": "Launched new patient analytics dashboard; support tickets up 20%.",
+    "bench_summary": "2 mid-level frontend engineers available in 10 days; one with React + FHIR experience.",
+    "pricing_policy": "Hourly billing with 20-hour minimum commitment."
+  },
+  "candidate_output": "Hi Rita, your new dashboard launch is impressive\u2014have you thought about scaling the frontend team? Are you facing delays? Would you prefer to start with one engineer or two? We have two qualified candidates ready with FHIR experience. Can we set up a time to discuss?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "multi_ask",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_031",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_07_multi_ask.txt"
+  }
+}

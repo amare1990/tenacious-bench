@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "weak_signal_overassertion",
+  "difficulty": "medium",
+  "input": {
+    "company": "TerraNova Logistics",
+    "prospect_name": "Elena Ruiz",
+    "prospect_title": "Director of Engineering",
+    "icp_segment": "Series C Logistics Tech",
+    "hiring_signal_brief": "Updated LinkedIn bio to include 'digital transformation' focus; no job posts.",
+    "bench_summary": "2 backend engineers with logistics system experience; no DevOps specialists.",
+    "pricing_policy": "Flat monthly fee; no trial periods."
+  },
+  "candidate_output": "TerraNova\u2019s digital transformation is clearly stalled without dedicated backend support. You need two high-performing engineers now to modernize your stack. We\u2019ve got them ready to start next Monday\u2014let\u2019s lock it in before the quarter ends.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "weak_signal_overassertion",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_223",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_00_weak_signal_overassertion.txt",
+    "original_generated_id": "synthesis_003",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

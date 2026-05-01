@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "generic_template",
+  "difficulty": "hard",
+  "input": {
+    "company": "Nebula Labs",
+    "prospect_name": "Aisha Patel",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recent job post for Senior ML Engineer; team grew 15% YOY",
+    "bench_summary": "3 mid-level ML engineers available within 2 weeks",
+    "pricing_policy": "Flat fee per engineer, no long-term lock-in"
+  },
+  "candidate_output": "Hi Aisha, we\u2019re world-class at connecting top talent with innovative companies like Nebula Labs. Our 10x engineers can quickly fill your ML role and create instant synergy. Let\u2019s schedule a quick chat to discuss how we can help you scale.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "generic_template",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_235",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_04_generic_template.txt",
+    "original_generated_id": "synthesis_015",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

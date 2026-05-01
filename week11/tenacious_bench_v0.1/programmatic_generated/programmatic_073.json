@@ -1,0 +1,60 @@
+{
+  "task_id": "programmatic_073",
+  "source_mode": "programmatic",
+  "failure_mode": "bench_overcommitment",
+  "difficulty": "medium",
+  "input": {
+    "company": "BlueHarbor AI",
+    "prospect_name": "Sophia",
+    "prospect_title": "Founder",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Series B",
+      "funding_amount": "$9M",
+      "role_count": 2,
+      "primary_stack": "Python",
+      "signal_confidence": "high",
+      "ai_maturity_score": 2
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "max_supported_start_days": 21,
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Re: 12 senior Python engineers\n\nHi Sophia,\nAbsolutely, we can deliver 12 senior Python engineers in two weeks. Our bench is deep and we move fast.\nI will have contracts ready by Wednesday and engineers in your Slack by next Friday.\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": false,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "bench_overcommitment"
+  },
+  "metadata": {
+    "generator": "generate_programmatic_tasks.py",
+    "seed": 42,
+    "version": "v0.1"
+  }
+}

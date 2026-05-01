@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "weak_signal_overassertion",
+  "difficulty": "hard",
+  "input": {
+    "company": "NexaFlow",
+    "prospect_name": "Jordan Lee",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recent LinkedIn post about scaling backend infrastructure; no public hiring announcements.",
+    "bench_summary": "3 full-stack engineers available for 6-8 week engagements; no backend specialists.",
+    "pricing_policy": "Fixed monthly rate per engineer; no discounts for multi-engineer deals."
+  },
+  "candidate_output": "I saw your post about scaling backend systems\u2014NexaFlow clearly needs to accelerate hiring. We have 3 world-class backend engineers ready to deploy immediately to fill your critical gaps. Let\u2019s set up a quick call to lock in capacity before your competitors do.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "weak_signal_overassertion",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_220",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_00_weak_signal_overassertion.txt",
+    "original_generated_id": "synthesis_000",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

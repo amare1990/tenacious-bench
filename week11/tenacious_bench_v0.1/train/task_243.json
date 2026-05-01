@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "condescending_gap",
+  "difficulty": "hard",
+  "input": {
+    "company": "Luma Labs",
+    "prospect_name": "Sophie Kim",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "AI Startup Pre-Series A",
+    "hiring_signal_brief": "Posted 2 backend roles in past month; team size ~8",
+    "bench_summary": "1 backend engineer with Python/Go and AI tooling experience available in 2 weeks",
+    "pricing_policy": "Fixed fee per engineer, no markup on salary"
+  },
+  "candidate_output": "You\u2019re still managing engineering with part-time contractors? That\u2019s not scalable. We have one engineer who\u2019s done this exact stack\u2014why are you still guessing when you could just hire someone who knows how to build this?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "condescending_gap",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_243",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_05_condescending_gap.txt",
+    "original_generated_id": "synthesis_023",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

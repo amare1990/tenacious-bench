@@ -1,0 +1,60 @@
+{
+  "task_id": "programmatic_071",
+  "source_mode": "programmatic",
+  "failure_mode": "multi_ask",
+  "difficulty": "hard",
+  "input": {
+    "company": "LedgerLoop",
+    "prospect_name": "Sophia",
+    "prospect_title": "Founder",
+    "icp_segment": "recently_funded_series_a_b",
+    "hiring_signal_brief": {
+      "funding_stage": "Seed",
+      "funding_amount": "$22M",
+      "role_count": 3,
+      "primary_stack": "data",
+      "signal_confidence": "low",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "max_supported_start_days": 21,
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: A few ideas for LedgerLoop\n\nHi Sophia,\nI would love to understand your current engineering structure, introduce you to a peer company, send our pricing sheet, walk through your AI maturity score, and discuss whether Tenacious can support your roadmap.\nCould we set up a 60-minute call next week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "multi_ask"
+  },
+  "metadata": {
+    "generator": "generate_programmatic_tasks.py",
+    "seed": 42,
+    "version": "v0.1"
+  }
+}

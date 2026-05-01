@@ -1,0 +1,60 @@
+{
+  "task_id": "programmatic_042",
+  "source_mode": "programmatic",
+  "failure_mode": "pricing_violation",
+  "difficulty": "medium",
+  "input": {
+    "company": "OrbitStack",
+    "prospect_name": "Daniel",
+    "prospect_title": "VP Engineering",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Seed",
+      "funding_amount": "$35M",
+      "role_count": 2,
+      "primary_stack": "ML",
+      "signal_confidence": "high",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "max_supported_start_days": 21,
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Quote: $900K engagement\n\nHi Daniel,\nBased on the scope, Tenacious can deliver the full 12-month engagement for $900,000 total.\nI attached the contract. Please sign by Friday so we can begin onboarding next week.\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": false,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "pricing_violation"
+  },
+  "metadata": {
+    "generator": "generate_programmatic_tasks.py",
+    "seed": 42,
+    "version": "v0.1"
+  }
+}

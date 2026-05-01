@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "hard",
+  "input": {
+    "company": "Verve Analytics",
+    "prospect_name": "Marcus Chen",
+    "prospect_title": "Director of Product",
+    "icp_segment": "Early-stage AI startup",
+    "hiring_signal_brief": "LinkedIn post mentioning \u2018building the next-gen recommendation engine\u2019; no public hiring metrics.",
+    "bench_summary": "2 ML engineers with recommendation system experience available in 7\u201314 days",
+    "pricing_policy": "Weekly billing with 2-week minimum commitment"
+  },
+  "candidate_output": "Hi Marcus, we specialize in placing top-tier ML engineers who build recommendation systems. We have experts ready to integrate with your team and accelerate your product roadmap. Let\u2019s schedule a quick call to align.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "missing_signal_reference",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_261",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_09_missing_signal_reference.txt",
+    "original_generated_id": "synthesis_041",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "held_out"
+  }
+}

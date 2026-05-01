@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "banned_phrase",
+  "difficulty": "hard",
+  "input": {
+    "company": "Skyline Robotics",
+    "prospect_name": "Marcus Tran",
+    "prospect_title": "CTO",
+    "icp_segment": "Pre-Series A Robotics",
+    "hiring_signal_brief": "LinkedIn shows 1 new robotics engineer hire; no funding announcements.",
+    "bench_summary": "1 robotics engineer with ROS2 and embedded C++ experience available.",
+    "pricing_policy": "Pay-as-you-go hourly rate; no minimum commitment."
+  },
+  "candidate_output": "Marcus, your team is falling behind on autonomy development. We have world-class robotics talent ready to plug in\u2014quick chat to discuss synergy?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_012",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_03_banned_phrase.txt"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "multi_ask",
+  "difficulty": "hard",
+  "input": {
+    "company": "NexaFlow",
+    "prospect_name": "Jordan Lee",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recently added two backend engineers; team size up 15% YoY.",
+    "bench_summary": "3 senior backend engineers available within 2 weeks; 1 with Kafka expertise.",
+    "pricing_policy": "Fixed monthly fee per engineer; no trial periods."
+  },
+  "candidate_output": "Hi Jordan, I noticed your team grew recently\u2014have you considered scaling faster? Are you open to adding senior backend talent? Do you have bandwidth to interview this week? We have 3 engineers ready, including one with Kafka experience. Can we schedule a call?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "multi_ask",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_250",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_07_multi_ask.txt",
+    "original_generated_id": "synthesis_030",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

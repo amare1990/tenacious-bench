@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "generic_template",
+  "difficulty": "hard",
+  "input": {
+    "company": "TerraFirma Robotics",
+    "prospect_name": "Lena Kim",
+    "prospect_title": "CTO",
+    "icp_segment": "Pre-Series A Hardware",
+    "hiring_signal_brief": "New patent filed for autonomous navigation; team size ~12",
+    "bench_summary": "2 embedded systems engineers available in 4 weeks",
+    "pricing_policy": "Fixed project fee for 6-week contract"
+  },
+  "candidate_output": "Lena, TerraFirma is clearly a leader in robotics \u2014 our world-class engineers are ready to help you accelerate your roadmap. We\u2019ve helped 10+ startups like yours hire 10x talent. Let\u2019s set up a quick call.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "generic_template",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_237",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_04_generic_template.txt",
+    "original_generated_id": "synthesis_017",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

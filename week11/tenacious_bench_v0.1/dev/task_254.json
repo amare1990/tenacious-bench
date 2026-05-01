@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "multi_ask",
+  "difficulty": "hard",
+  "input": {
+    "company": "Omnivox",
+    "prospect_name": "Derek Tran",
+    "prospect_title": "Head of Engineering",
+    "icp_segment": "Series C EdTech",
+    "hiring_signal_brief": "Launched new LMS integration; user base up 30% in 6 months.",
+    "bench_summary": "1 full-stack engineer available in 10 days; experienced with React and Node.js.",
+    "pricing_policy": "Fixed monthly fee; no discounts for short-term."
+  },
+  "candidate_output": "Hi Derek, your user growth is impressive\u2014have you thought about speeding up feature delivery? Are you considering adding more engineers? Would you prefer a full-stack hire or a specialist? We have one strong full-stack engineer ready. Can we schedule a quick intro?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "multi_ask",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_254",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_07_multi_ask.txt",
+    "original_generated_id": "synthesis_034",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

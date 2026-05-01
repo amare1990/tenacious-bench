@@ -1,0 +1,32 @@
+{
+  "partition_counts": {
+    "train": 111,
+    "dev": 68,
+    "held_out": 36
+  },
+  "source_modes": {
+    "programmatic": 143,
+    "trace_derived": 27,
+    "synthesis": 45
+  },
+  "failure_modes": {
+    "weak_signal_overassertion": 24,
+    "bench_overcommitment": 17,
+    "pricing_violation": 18,
+    "banned_phrase": 23,
+    "condescending_gap": 23,
+    "fabricated_signal": 17,
+    "multi_ask": 23,
+    "missing_signal_reference": 36,
+    "generic_template": 20,
+    "ai_maturity_misroute": 14
+  },
+  "difficulty": {
+    "easy": 18,
+    "hard": 80,
+    "medium": 117
+  },
+  "missing_required_fields": [],
+  "exact_duplicate_candidate_outputs": 0,
+  "total_tasks": 215
+}

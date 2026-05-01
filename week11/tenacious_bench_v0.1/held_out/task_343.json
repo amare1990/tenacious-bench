@@ -1,0 +1,57 @@
+{
+  "task_id": "task_343",
+  "source_mode": "programmatic",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "hard",
+  "input": {
+    "company": "NimbusHR",
+    "prospect_name": "Maya",
+    "prospect_title": "CTO",
+    "icp_segment": "engineering_leadership_transition",
+    "hiring_signal_brief": {
+      "funding_stage": "Seed",
+      "funding_amount": "$14M",
+      "role_count": 8,
+      "primary_stack": "Go",
+      "signal_confidence": "medium",
+      "ai_maturity_score": 2
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Your agentic systems roadmap\n\nHi Maya,\nSince NimbusHR has an AI maturity score of 2, I assume you are ready for production agentic systems and dedicated MLOps.\nTenacious can staff a specialized ML platform squad for a 4-month scope.\nCan we discuss this week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1",
+    "original_generated_id": "varied_programmatic_078",
+    "merged_by": "merge_varied_programmatic_into_partitions.py",
+    "partition": "held_out"
+  }
+}

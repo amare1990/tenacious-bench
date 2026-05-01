@@ -1,0 +1,54 @@
+{
+  "task_id": "varied_programmatic_086",
+  "source_mode": "programmatic",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "medium",
+  "input": {
+    "company": "NimbusHR",
+    "prospect_name": "Felix",
+    "prospect_title": "Head of Data",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Series A",
+      "funding_amount": "$9M",
+      "role_count": 2,
+      "primary_stack": "ML",
+      "signal_confidence": "low",
+      "ai_maturity_score": 3
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Congrats on your Series B\n\nHi Felix,\nCongratulations on closing your $40M Series B last month. With that capital, scaling engineering is the obvious next move.\nTenacious can deploy a team quickly.\nWorth 15 minutes?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "fabricated_signal",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1"
+  }
+}

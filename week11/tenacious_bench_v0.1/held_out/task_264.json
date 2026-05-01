@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "company": "Luminar AI",
+    "prospect_name": "Tanya Kim",
+    "prospect_title": "Head of AI",
+    "icp_segment": "Enterprise AI, mid-stage",
+    "hiring_signal_brief": "Open role for NLP engineers on company career page; no recent press releases.",
+    "bench_summary": "1 senior NLP engineer with transformer model experience available in 7 days",
+    "pricing_policy": "Monthly fee per engineer; no upfront costs"
+  },
+  "candidate_output": "Hi Tanya, we provide world-class NLP engineers who specialize in transformer models. We have someone ready to join your team in 7 days and help you deliver on your AI roadmap. Let\u2019s chat.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "missing_signal_reference",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_264",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_09_missing_signal_reference.txt",
+    "original_generated_id": "synthesis_044",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "held_out"
+  }
+}

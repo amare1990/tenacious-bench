@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "condescending_gap",
+  "difficulty": "medium",
+  "input": {
+    "company": "FlowMetrics",
+    "prospect_name": "Raj Patel",
+    "prospect_title": "CTO",
+    "icp_segment": "Enterprise SaaS",
+    "hiring_signal_brief": "Increased headcount by 12% YoY; no public funding news",
+    "bench_summary": "2 full-stack engineers with enterprise API experience available in 4 weeks",
+    "pricing_policy": "Fixed fee per engineer, no markup on salary"
+  },
+  "candidate_output": "Most CTOs don\u2019t realize how slow their hiring is\u2014your pipeline\u2019s probably clogged. We\u2019ve got two engineers who\u2019ve done this exact work. Just say the word and we\u2019ll fix your broken process.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "condescending_gap",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_022",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_05_condescending_gap.txt"
+  }
+}

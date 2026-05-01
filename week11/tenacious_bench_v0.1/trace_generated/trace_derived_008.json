@@ -1,0 +1,60 @@
+{
+  "task_id": "trace_derived_008",
+  "source_mode": "trace_derived",
+  "failure_mode": "missing_specific_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "reply_processed",
+    "company": "Clay",
+    "source_trace_id": "fbcbee36-b2a6-46b1-b282-d854d6c1557c",
+    "hiring_signal_brief": "Raised funding recently and appears to be scaling GTM and engineering; Multiple open roles across engineering and product; Public signals suggest modern SaaS and data tooling",
+    "ai_maturity_profile": {
+      "score": 2,
+      "confidence": 0.62,
+      "rationale": "At least one AI-adjacent role is open. Executive commentary references AI strategically. Strategic communications mention AI direction. Tech-stack signal reinforces AI/data readiness."
+    },
+    "competitor_gap_brief": "Compared with peers such as Apollo, Outreach, Salesloft, Clay appears to be missing public signals for Dedicated ML platform capability, Structured data enrichment at scale. The company appears ready for a capability-gap conversation.",
+    "bench_match_summary": {
+      "bench_fit": true,
+      "bench_confidence": 0.9,
+      "bench_notes": "Requested capabilities inferred: Data Engineering, Machine Learning. Matched capabilities: Data Engineering, Machine Learning. Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods."
+    },
+    "policy_result": null,
+    "reply_text": "Can you send a bit more detail first?",
+    "reply_analysis": {
+      "reply_type": "unclear",
+      "confidence": 0.55,
+      "sentiment": "neutral",
+      "next_action": "respond_carefully",
+      "reasoning": "Reply intent is ambiguous and should be handled conservatively."
+    },
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Subject: Re: Clay\n\nHi,\n\nThanks for the reply. Happy to clarify or share a bit more context if helpful.\n\nBest,\nTenacious",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "missing_specific_signal_reference"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 8
+  }
+}

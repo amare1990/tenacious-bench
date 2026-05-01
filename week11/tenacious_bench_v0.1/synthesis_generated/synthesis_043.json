@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "hard",
+  "input": {
+    "company": "StrataFlow",
+    "prospect_name": "Derek Wu",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "B2B fintech, pre-Series A",
+    "hiring_signal_brief": "Recent tweet: \u2018We\u2019re rebuilding our core ledger system from the ground up.\u2019 No public team size or funding.",
+    "bench_summary": "2 backend engineers with distributed systems experience available in 10\u201314 days",
+    "pricing_policy": "Flexible engagement: hourly or monthly, no long-term lock-in"
+  },
+  "candidate_output": "Hi Derek, our backend engineers specialize in rebuilding core financial systems. We have two experts ready to jump in and help you ship faster. Let\u2019s find a time to connect.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "missing_signal_reference",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_043",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_09_missing_signal_reference.txt"
+  }
+}

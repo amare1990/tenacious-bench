@@ -1,0 +1,57 @@
+{
+  "task_id": "task_345",
+  "source_mode": "programmatic",
+  "failure_mode": "weak_signal_overassertion",
+  "difficulty": "hard",
+  "input": {
+    "company": "BlueHarbor AI",
+    "prospect_name": "Nora",
+    "prospect_title": "VP Product",
+    "icp_segment": "engineering_leadership_transition",
+    "hiring_signal_brief": {
+      "funding_stage": "Series A",
+      "funding_amount": "$22M",
+      "role_count": 5,
+      "primary_stack": "data",
+      "signal_confidence": "low",
+      "ai_maturity_score": 3
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Question on your hiring pace\n\nHi Nora,\nI saw BlueHarbor AI has 5 open data roles. That means you are scaling aggressively and probably feeling recruiting pressure already.\nTenacious can help you add engineers quickly while your full-time search continues.\nWorth a 15-minute call this week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "weak_signal_overassertion",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1",
+    "original_generated_id": "varied_programmatic_080",
+    "merged_by": "merge_varied_programmatic_into_partitions.py",
+    "partition": "held_out"
+  }
+}

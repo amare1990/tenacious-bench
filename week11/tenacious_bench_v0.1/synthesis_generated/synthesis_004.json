@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "weak_signal_overassertion",
+  "difficulty": "hard",
+  "input": {
+    "company": "QuillEd",
+    "prospect_name": "Derek Ngo",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "EdTech Startup",
+    "hiring_signal_brief": "Mentioned 'improving user onboarding' in company retreat notes (leaked internally); no public updates.",
+    "bench_summary": "1 frontend engineer with UX experience available; no backend or analytics specialists.",
+    "pricing_policy": "Rate based on seniority; no bundling."
+  },
+  "candidate_output": "Your team\u2019s focus on onboarding improvements means you\u2019re definitely understaffed on frontend. We have one elite frontend engineer who can overhaul your onboarding flow in 3 weeks\u2014you\u2019re falling behind without this. Let\u2019s start tomorrow.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "weak_signal_overassertion",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_004",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_00_weak_signal_overassertion.txt"
+  }
+}

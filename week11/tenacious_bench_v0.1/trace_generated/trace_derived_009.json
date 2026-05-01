@@ -1,0 +1,60 @@
+{
+  "task_id": "trace_derived_009",
+  "source_mode": "trace_derived",
+  "failure_mode": "missing_specific_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "reply_processed",
+    "company": "Retool",
+    "source_trace_id": "fcfedf18-6b9b-4bd9-8e54-0721c23227ff",
+    "hiring_signal_brief": "Selective engineering hiring remains open; Public restructuring signal observed in the last 120 days; Developer tools and infrastructure-heavy stack",
+    "ai_maturity_profile": {
+      "score": 0,
+      "confidence": 0.37,
+      "rationale": "No strong public AI signals were identified."
+    },
+    "competitor_gap_brief": "Compared with peers such as Vercel, Render, HashiCorp, Retool appears to be missing public signals for AI-assisted developer tooling. The company shows only limited AI readiness, so any gap framing should remain exploratory.",
+    "bench_match_summary": {
+      "bench_fit": true,
+      "bench_confidence": 0.9,
+      "bench_notes": "Requested capabilities inferred: Machine Learning, Infrastructure. Matched capabilities: Machine Learning, Infrastructure. Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods."
+    },
+    "policy_result": null,
+    "reply_text": "Follow up next quarter please",
+    "reply_analysis": {
+      "reply_type": "defer",
+      "confidence": 0.85,
+      "sentiment": "neutral",
+      "next_action": "set_followup_later",
+      "reasoning": "Reply indicates timing friction rather than a clear rejection."
+    },
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Subject: Re: Retool - happy to follow up later\n\nHi,\n\nUnderstood. Happy to circle back at a better time.\n\nBest,\nTenacious",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "missing_specific_signal_reference"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 9
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "programmatic_022",
+  "source_mode": "programmatic",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "hard",
+  "input": {
+    "company": "Mosaic Health",
+    "prospect_name": "Daniel",
+    "prospect_title": "VP Engineering",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Series A",
+      "funding_amount": "$14M",
+      "role_count": 7,
+      "primary_stack": "Go",
+      "signal_confidence": "low",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "max_supported_start_days": 21,
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Re: your $40M Series C\n\nHi Daniel,\nCongratulations on closing your $40M Series C last month. With that capital, scaling engineering aggressively is the obvious next move.\nWe can deploy 15 engineers within 30 days.\nWant to set up a 15-minute call?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "fabricated_signal"
+  },
+  "metadata": {
+    "generator": "generate_programmatic_tasks.py",
+    "seed": 42,
+    "version": "v0.1"
+  }
+}

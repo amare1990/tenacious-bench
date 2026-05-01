@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "medium",
+  "input": {
+    "company": "FlowMetrics",
+    "prospect_name": "Jordan Lee",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "Series B FinTech",
+    "hiring_signal_brief": "Opened 2 new engineering roles this month; no leadership changes noted.",
+    "bench_summary": "2 engineers with Python + AWS; 7-day lead time.",
+    "pricing_policy": "Hourly billing only for short-term engagements."
+  },
+  "candidate_output": "Your team is clearly overwhelmed with hiring\u2014most FinTechs are already outsourcing to 10x engineers to avoid delays. We\u2019ve got top talent ready to start tomorrow. Want a quick chat?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_038",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_08_ai_maturity_misroute.txt"
+  }
+}

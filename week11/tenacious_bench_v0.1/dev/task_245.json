@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "hard",
+  "input": {
+    "company": "NexusAI",
+    "prospect_name": "Jordan Lee",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recent tech blog post about scaling ML infrastructure; no public funding or hiring announcements.",
+    "bench_summary": "3 backend engineers available with Python/Go, 2 ML engineers with PyTorch experience.",
+    "pricing_policy": "Flat monthly fee per engineer; no per-project pricing or discounts for bulk."
+  },
+  "candidate_output": "I noticed NexusAI just raised $25M and is hiring 10+ engineers to scale your ML platform\u2014perfect timing. We have 5 top-tier ML engineers ready to jump in immediately. Let\u2019s schedule a quick chat to lock in your team\u2019s allocation before the round closes.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "fabricated_signal",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_245",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_06_fabricated_signal.txt",
+    "original_generated_id": "synthesis_025",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

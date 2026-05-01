@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "pricing_violation",
+  "difficulty": "hard",
+  "input": {
+    "company": "Lumos AI",
+    "prospect_name": "Tanya Reed",
+    "prospect_title": "CTO",
+    "icp_segment": "Pre-Series A AI Startup",
+    "hiring_signal_brief": "Raised $2.1M seed round 3 months ago; product in beta with 12 paying customers.",
+    "bench_summary": "1 senior ML engineer available for 6\u20138 week engagement; no other engineers currently available.",
+    "pricing_policy": "Never reference total contract value or implied cost savings. Pricing is always customized and never disclosed upfront."
+  },
+  "candidate_output": "We can deliver $180K in engineering capacity with one senior ML engineer to get your model from beta to production faster.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "pricing_violation",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_007",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_02_pricing_violation.txt"
+  }
+}

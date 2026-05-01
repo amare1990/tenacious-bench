@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "pricing_violation",
+  "difficulty": "hard",
+  "input": {
+    "company": "NexaFlow",
+    "prospect_name": "Rachel Kim",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recently hired two backend engineers, but engineering team still under 20.",
+    "bench_summary": "3 senior full-stack engineers available for 4\u20136 week engagements.",
+    "pricing_policy": "No fixed rates; pricing based on role seniority and engagement length. Never quote per-hour or per-engineer rates in outreach."
+  },
+  "candidate_output": "We can deploy two senior full-stack engineers at $1,200/day to accelerate your API roadmap\u2014no long-term commitment needed.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "pricing_violation",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_225",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_02_pricing_violation.txt",
+    "original_generated_id": "synthesis_005",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

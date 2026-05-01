@@ -1,0 +1,111 @@
+{
+  "task_id": "trace_derived_048",
+  "source_mode": "trace_derived",
+  "failure_mode": "generic_or_internal_language",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "prospect_pipeline_run",
+    "company": "Ramp",
+    "source_trace_id": "2026-04-21T10:19:52.326460+00:00",
+    "hiring_signal_brief": {
+      "funding_signal": "Raised growth funding within the last 12 months",
+      "hiring_velocity_signal": "Open engineering roles increased over the last 60 days",
+      "layoffs_signal": null,
+      "leadership_change_signal": "New VP Engineering joined within the last 90 days",
+      "tech_stack_signal": "Uses Python, AWS, and modern data tooling",
+      "confidence_by_signal": {
+        "funding": 0.9,
+        "hiring_velocity": 0.8,
+        "layoffs": 0.0,
+        "leadership_change": 0.7,
+        "tech_stack": 0.75
+      },
+      "summary": "Raised growth funding within the last 12 months; Open engineering roles increased over the last 60 days; New VP Engineering joined within the last 90 days; Uses Python, AWS, and modern data tooling"
+    },
+    "ai_maturity_profile": {
+      "score": 3,
+      "evidence": [
+        "Open roles include ML-focused engineering work",
+        "Recent public commentary references AI as a product priority",
+        "Modern data and ML tooling signals are present"
+      ],
+      "confidence": 0.75,
+      "rationale": "At least one AI-adjacent role is open. Public GitHub activity suggests AI-related work. Executive commentary references AI strategically. Modern data/ML tooling signals are present. Strategic communications mention AI direction. Tech-stack signal reinforces AI/data readiness."
+    },
+    "competitor_gap_brief": {
+      "peer_group": [
+        "Brex",
+        "Mercury",
+        "Rippling"
+      ],
+      "top_quartile_practices": [
+        "Dedicated ML platform capability",
+        "AI-assisted internal operations",
+        "Modern data platform ownership"
+      ],
+      "missing_practices": [
+        "Dedicated ML platform capability"
+      ],
+      "confidence": 0.8,
+      "summary": "Compared with peers such as Brex, Mercury, Rippling, Ramp appears to be missing public signals for Dedicated ML platform capability. The company appears ready for a capability-gap conversation."
+    },
+    "bench_match_summary": {
+      "requested_capabilities": [
+        "Python",
+        "Data Engineering",
+        "Machine Learning",
+        "AWS"
+      ],
+      "available_capabilities": [
+        "Python",
+        "Data Engineering",
+        "Machine Learning",
+        "MLOps",
+        "Infrastructure",
+        "Backend Engineering",
+        "AWS"
+      ],
+      "fit": true,
+      "confidence": 0.9,
+      "notes": "Requested capabilities inferred: Python, Data Engineering, Machine Learning, AWS. Matched capabilities: Python, Data Engineering, Machine Learning, AWS. Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods."
+    },
+    "policy_result": {
+      "should_contact": true,
+      "tone_mode": "direct",
+      "claim_strength": "moderate",
+      "require_handoff": false,
+      "allow_capacity_language": true,
+      "reason": "Signal confidence is high enough for a direct outreach style. Bench fit is strong enough to discuss capability directionally."
+    },
+    "reply_text": null,
+    "reply_analysis": null,
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Subject: Ramp – quick observation\n\nHi,\n\nI noticed that Ramp raised growth funding within the last 12 months.\n\nWorking angle: Segment 3 - Engineering Leadership Transition. Public AI readiness appears to be 3/3.\n\nCompared with peers in the same space, it looks like there may be a gap around Dedicated ML platform capability.\n\nWould a 30-minute conversation next week be useful?\n\nBest,\nTenacious",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "generic_or_internal_language"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 3
+  }
+}

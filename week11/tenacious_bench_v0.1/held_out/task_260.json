@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "company": "Nebula Labs",
+    "prospect_name": "Aisha Patel",
+    "prospect_title": "VP of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recent job postings for senior backend engineers; no public funding round announced.",
+    "bench_summary": "3 senior backend engineers available within 10 days",
+    "pricing_policy": "Flat monthly fee per engineer; no per-hour billing"
+  },
+  "candidate_output": "Hi Aisha, we have senior backend engineers ready to jump in and help your team scale. Our engineers are deeply experienced and can start within 10 days. Let me know if you\u2019d like to explore how we can support your hiring goals.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "missing_signal_reference",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_260",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_09_missing_signal_reference.txt",
+    "original_generated_id": "synthesis_040",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "held_out"
+  }
+}

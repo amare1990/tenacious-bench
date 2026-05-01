@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "banned_phrase",
+  "difficulty": "medium",
+  "input": {
+    "company": "EduStream",
+    "prospect_name": "Tina Patel",
+    "prospect_title": "Director of Engineering",
+    "icp_segment": "Series B EdTech",
+    "hiring_signal_brief": "Posted 2 frontend roles; website recently updated UI/UX design.",
+    "bench_summary": "2 senior frontend engineers with Next.js and TypeScript available.",
+    "pricing_policy": "Monthly subscription; no long-term lock-in."
+  },
+  "candidate_output": "Tina, your UI refresh looks great\u2014let\u2019s connect so our top talent can help you scale. We\u2019ve got quick chat slots open this week.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_013",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_03_banned_phrase.txt"
+  }
+}

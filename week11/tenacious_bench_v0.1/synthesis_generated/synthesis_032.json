@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "multi_ask",
+  "difficulty": "hard",
+  "input": {
+    "company": "StratifyAI",
+    "prospect_name": "Marcus Boone",
+    "prospect_title": "CTO",
+    "icp_segment": "Pre-Series A AI Startup",
+    "hiring_signal_brief": "Hired ML engineer last quarter; no public funding announcements.",
+    "bench_summary": "1 senior ML engineer available in 3 weeks; no NLP specialization.",
+    "pricing_policy": "Retainer model; 3-month minimum engagement."
+  },
+  "candidate_output": "Hi Marcus, your team\u2019s progress is notable\u2014have you explored hiring more ML talent? Are you planning to expand into NLP soon? Would you consider a 3-month retainer? We have one senior ML engineer ready. Can we talk about your roadmap?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "multi_ask",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_032",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_07_multi_ask.txt"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "task_id": "trace_derived_010",
+  "source_mode": "trace_derived",
+  "failure_mode": "generic_or_internal_language",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "initial_outreach",
+    "company": "Ramp",
+    "source_trace_id": "bb028336-f608-46a8-8a05-360b6c25af73",
+    "hiring_signal_brief": "Raised growth funding within the last 12 months; Open engineering roles increased over the last 60 days; New VP Engineering joined within the last 90 days; Uses Python, AWS, and modern data tooling",
+    "ai_maturity_profile": {
+      "score": 3,
+      "confidence": 0.75,
+      "rationale": "At least one AI-adjacent role is open. Public GitHub activity suggests AI-related work. Executive commentary references AI strategically. Modern data/ML tooling signals are present. Strategic communications mention AI direction. Tech-stack signal reinforces AI/data readiness."
+    },
+    "competitor_gap_brief": "Compared with peers such as Brex, Mercury, Rippling, Ramp appears to be missing public signals for Dedicated ML platform capability. The company appears ready for a capability-gap conversation.",
+    "bench_match_summary": {
+      "bench_fit": true,
+      "bench_confidence": 0.9,
+      "bench_notes": "Requested capabilities inferred: Python, Data Engineering, Machine Learning, AWS. Matched capabilities: Python, Data Engineering, Machine Learning, AWS. Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods."
+    },
+    "policy_result": null,
+    "reply_text": null,
+    "reply_analysis": null,
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Hi,\n\nI noticed Ramp appears to be hiring actively.\n\nWorking angle: Segment 3 - Engineering Leadership Transition. Public AI readiness appears to be 3/3.\n\nCompared with peers in the same space, I wondered whether Dedicated ML platform capability might be worth examining.\n\nWould it be useful to compare notes for 30 minutes?\n\nBest,\nTenacious",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "generic_or_internal_language"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 10
+  }
+}

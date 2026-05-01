@@ -1,0 +1,57 @@
+{
+  "task_id": "task_298",
+  "source_mode": "programmatic",
+  "failure_mode": "banned_phrase",
+  "difficulty": "medium",
+  "input": {
+    "company": "LedgerLoop",
+    "prospect_name": "Sophia",
+    "prospect_title": "Founder",
+    "icp_segment": "engineering_leadership_transition",
+    "hiring_signal_brief": {
+      "funding_stage": "Series A",
+      "funding_amount": "$9M",
+      "role_count": 5,
+      "primary_stack": "Python",
+      "signal_confidence": "medium",
+      "ai_maturity_score": 0
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Quick Chat engineering help\n\nHi Sophia,\nTenacious provides quick chat engineering support for companies like LedgerLoop.\nWe can help you move faster across Python and delivery work.\nOpen to a quick chat next week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1",
+    "original_generated_id": "varied_programmatic_033",
+    "merged_by": "merge_varied_programmatic_into_partitions.py",
+    "partition": "train"
+  }
+}

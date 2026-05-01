@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "hard",
+  "input": {
+    "company": "Lumina Health",
+    "prospect_name": "Marcus Tran",
+    "prospect_title": "CTO",
+    "icp_segment": "Healthtech Series A",
+    "hiring_signal_brief": "Published case study on patient data pipeline; no funding news or team expansion hints.",
+    "bench_summary": "1 data engineer (Apache Airflow), 1 frontend engineer (React), 1 security specialist.",
+    "pricing_policy": "Fixed monthly fee per engineer; no trial periods or volume discounts."
+  },
+  "candidate_output": "Lumina\u2019s $18M Series A just closed\u2014congrats! You\u2019re clearly accelerating your data platform, and we\u2019ve got 4 engineers lined up to hit the ground running. Let\u2019s lock in your team\u2019s capacity before the funding burns through.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "fabricated_signal",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_247",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_06_fabricated_signal.txt",
+    "original_generated_id": "synthesis_027",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

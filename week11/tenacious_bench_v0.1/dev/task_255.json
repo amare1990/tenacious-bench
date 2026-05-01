@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "hard",
+  "input": {
+    "company": "NexaLabs",
+    "prospect_name": "Jamie Rivera",
+    "prospect_title": "Head of Engineering",
+    "icp_segment": "Series B SaaS",
+    "hiring_signal_brief": "Recent job post for Senior DevOps Engineer; no public funding news.",
+    "bench_summary": "3 engineers available with Kubernetes and Terraform expertise; 2-week lead time.",
+    "pricing_policy": "Fixed monthly fee per engineer; no hourly billing."
+  },
+  "candidate_output": "Your team seems to be struggling with scaling infrastructure\u2014many companies in your space are hiring DevOps engineers to catch up. We have world-class engineers ready to jump in immediately. Let\u2019s schedule a quick chat to fix this gap.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_255",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_08_ai_maturity_misroute.txt",
+    "original_generated_id": "synthesis_035",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "dev"
+  }
+}

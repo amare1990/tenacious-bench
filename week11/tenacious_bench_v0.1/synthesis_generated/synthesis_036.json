@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "ai_maturity_misroute",
+  "difficulty": "medium",
+  "input": {
+    "company": "VerveHealth",
+    "prospect_name": "Taylor Chen",
+    "prospect_title": "CTO",
+    "icp_segment": "Series A MedTech",
+    "hiring_signal_brief": "Hiring for Full-Stack Developer on LinkedIn; no layoffs or funding announcements.",
+    "bench_summary": "2 engineers with React + Node.js; 10-day lead time.",
+    "pricing_policy": "Monthly retainer; no trial periods."
+  },
+  "candidate_output": "I noticed you're hiring a Full-Stack Dev\u2014most teams like yours are already using 10x engineers to accelerate product cycles. We\u2019ve got top talent ready to start next week. Can we do a quick call?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "ai_maturity_misroute",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_036",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_08_ai_maturity_misroute.txt"
+  }
+}

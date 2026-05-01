@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "banned_phrase",
+  "difficulty": "medium",
+  "input": {
+    "company": "Finova Labs",
+    "prospect_name": "Rita Chen",
+    "prospect_title": "Head of Product",
+    "icp_segment": "Series A Fintech",
+    "hiring_signal_brief": "Hired 2 product managers last quarter; no public roadmap updates.",
+    "bench_summary": "1 mid-level full-stack engineer with React and Node.js experience available.",
+    "pricing_policy": "Monthly retainer with 30-day cancellation."
+  },
+  "candidate_output": "Rita, your team could really benefit from synergy with our engineers. We've got 10x productivity folks ready to help you ship faster\u2014let\u2019s circle back soon?",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_011",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_03_banned_phrase.txt"
+  }
+}

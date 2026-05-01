@@ -1,0 +1,54 @@
+{
+  "task_id": "varied_programmatic_017",
+  "source_mode": "programmatic",
+  "failure_mode": "multi_ask",
+  "difficulty": "hard",
+  "input": {
+    "company": "NimbusHR",
+    "prospect_name": "Camila",
+    "prospect_title": "Director of Engineering",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Series B",
+      "funding_amount": "$9M",
+      "role_count": 1,
+      "primary_stack": "Python",
+      "signal_confidence": "high",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Several ideas for NimbusHR\n\nHi Camila,\nI would like to understand your engineering structure, introduce you to a peer operator, send our pricing sheet, walk through your AI maturity, and discuss whether Tenacious can support your roadmap.\nCould we schedule a 60-minute call next week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "multi_ask",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": false,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1"
+  }
+}

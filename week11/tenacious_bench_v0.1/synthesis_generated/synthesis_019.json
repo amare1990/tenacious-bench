@@ -1,0 +1,33 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "generic_template",
+  "difficulty": "hard",
+  "input": {
+    "company": "LumenAI",
+    "prospect_name": "Sophie Tran",
+    "prospect_title": "Engineering Manager",
+    "icp_segment": "Seed AI Startup",
+    "hiring_signal_brief": "Hiring for NLP engineer; launched beta with 5K users",
+    "bench_summary": "1 junior NLP engineer available in 1 week; no senior candidates on bench",
+    "pricing_policy": "Pay per hire, no upfront fees"
+  },
+  "candidate_output": "Sophie, your growth is impressive \u2014 we help fast-growing AI startups like LumenAI hire senior NLP talent immediately. Our team has placed hundreds of engineers and we\u2019re confident we can deliver the same results for you.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "generic_template",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "synthesis_019",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_04_generic_template.txt"
+  }
+}

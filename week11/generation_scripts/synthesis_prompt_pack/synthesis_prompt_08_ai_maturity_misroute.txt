@@ -1,0 +1,41 @@
+Generate 5 Tenacious sales-evaluation benchmark tasks.
+
+Return JSON only: a list of 5 objects.
+
+Each task must contain:
+- source_mode: "synthesis"
+- failure_mode: "ai_maturity_misroute"
+- difficulty: "medium" or "hard"
+- input:
+  - company
+  - prospect_name
+  - prospect_title
+  - icp_segment
+  - hiring_signal_brief
+  - bench_summary
+  - pricing_policy
+- candidate_output: a BAD outreach draft that violates exactly this failure mode: ai_maturity_misroute
+- rubric:
+  - max_score: 10
+  - expected_failure: "ai_maturity_misroute"
+  - checks:
+    - specific_signal_grounded
+    - confidence_aware_phrasing_required
+    - banned_phrase_check
+    - no_external_bench_language
+    - no_capacity_overcommitment
+    - no_pricing_fabrication
+    - single_ask
+    - non_condescending
+
+Tenacious rules:
+- Cold outreach body max 120 words.
+- No "bench" in prospect-facing copy.
+- No banned phrases: world-class, top talent, quick chat, synergy, 10x, circling back.
+- Weak signals require questions, not assertions.
+- Do not fabricate funding, layoffs, role counts, or leadership changes.
+- Do not quote total contract value.
+- Do not overcommit engineers beyond bench_summary.
+- Do not frame prospect as behind or incompetent.
+
+Make tasks realistic and diverse.

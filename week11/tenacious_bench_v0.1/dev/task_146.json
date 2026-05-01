@@ -1,0 +1,107 @@
+{
+  "task_id": "task_146",
+  "source_mode": "trace_derived",
+  "failure_mode": "generic_template",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "prospect_pipeline_run",
+    "company": "Clay",
+    "source_trace_id": "2026-04-21T10:01:54.326646+00:00",
+    "hiring_signal_brief": {
+      "funding_signal": "Raised funding recently and appears to be scaling GTM and engineering",
+      "hiring_velocity_signal": "Multiple open roles across engineering and product",
+      "layoffs_signal": null,
+      "leadership_change_signal": null,
+      "tech_stack_signal": "Public signals suggest modern SaaS and data tooling",
+      "confidence_by_signal": {
+        "funding": 0.8,
+        "hiring_velocity": 0.75,
+        "layoffs": 0.0,
+        "leadership_change": 0.0,
+        "tech_stack": 0.6
+      },
+      "summary": "Raised funding recently and appears to be scaling GTM and engineering; Multiple open roles across engineering and product; Public signals suggest modern SaaS and data tooling"
+    },
+    "ai_maturity_profile": {
+      "score": 2,
+      "evidence": [
+        "Public messaging suggests AI-adjacent product direction",
+        "Some AI-related hiring signal exists"
+      ],
+      "confidence": 0.62,
+      "rationale": "At least one AI-adjacent role is open. Executive commentary references AI strategically. Strategic communications mention AI direction. Tech-stack signal reinforces AI/data readiness."
+    },
+    "competitor_gap_brief": {
+      "peer_group": [
+        "Apollo",
+        "Outreach",
+        "Salesloft"
+      ],
+      "top_quartile_practices": [
+        "Dedicated ML platform capability",
+        "AI-powered workflow automation",
+        "Structured data enrichment at scale"
+      ],
+      "missing_practices": [
+        "Dedicated ML platform capability",
+        "Structured data enrichment at scale"
+      ],
+      "confidence": 0.75,
+      "summary": "Compared with peers such as Apollo, Outreach, Salesloft, Clay appears to be missing public signals for Dedicated ML platform capability, Structured data enrichment at scale. The company appears ready for a capability-gap conversation."
+    },
+    "bench_match_summary": {
+      "requested_capabilities": [
+        "Python",
+        "ML"
+      ],
+      "available_capabilities": [
+        "Python",
+        "ML"
+      ],
+      "fit": true,
+      "confidence": 0.9,
+      "notes": "Strong match with available engineers"
+    },
+    "policy_result": {
+      "should_contact": true,
+      "tone_mode": "direct",
+      "claim_strength": "moderate",
+      "require_handoff": false,
+      "allow_capacity_language": true,
+      "reason": "Signal confidence is high enough for a direct outreach style. Bench fit is strong enough to discuss capability directionally."
+    },
+    "reply_text": null,
+    "reply_analysis": null,
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Subject: Clay \u2013 quick observation\n\nHi,\n\nI noticed that Clay raised funding recently and appears to be scaling gtm and engineering.\n\nWorking angle: Segment 1 - Recently Funded. Public AI readiness appears to be 2/3.\n\nCompared with peers in the same space, it looks like there may be a gap around Dedicated ML platform capability, Structured data enrichment at scale.\n\nWould a 30-minute conversation next week be useful?\n\nBest,\nTenacious",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "generic_or_internal_language"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 1,
+    "original_generated_id": "trace_derived_046",
+    "merged_by": "merge_trace_into_partitions.py",
+    "partition": "dev"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "task_id": "task_144",
+  "source_mode": "trace_derived",
+  "failure_mode": "missing_signal_reference",
+  "difficulty": "medium",
+  "input": {
+    "event_type": "reply_processed",
+    "company": "Ramp",
+    "source_trace_id": "648bcb1b-4fb0-4522-a6f3-2db12598f93d",
+    "hiring_signal_brief": "Funding history shows Series D; last public funding appears older than 180 days.; Leadership collector error; Uses Python, AWS, and modern data tooling",
+    "ai_maturity_profile": {
+      "score": 3,
+      "confidence": 0.73,
+      "rationale": "At least one AI-adjacent role is open. Public GitHub activity suggests AI-related work. Executive commentary references AI strategically. Modern data/ML tooling signals are present. Strategic communications mention AI direction. Tech-stack signal reinforces AI/data readiness."
+    },
+    "competitor_gap_brief": "Peer coverage is sparse for Ramp; use the competitor-gap finding as directional research rather than a hard benchmark.",
+    "bench_match_summary": {
+      "bench_fit": true,
+      "bench_confidence": 0.9,
+      "bench_notes": "Requested capabilities inferred: Python, Data Engineering, Machine Learning, AWS. Matched capabilities: Python, Data Engineering, Machine Learning, AWS. Current bench includes strong Python, data, ML, and infra coverage for small to mid-sized delivery pods."
+    },
+    "policy_result": null,
+    "reply_text": "Yes, let's talk next week",
+    "reply_analysis": {
+      "reply_type": "interested",
+      "confidence": 0.9,
+      "sentiment": "positive",
+      "next_action": "offer_scheduling",
+      "reasoning": "Reply includes direct interest or scheduling intent."
+    },
+    "evaluation_instruction": "Score the candidate outreach against Tenacious rules: grounded signal use, confidence-aware phrasing, banned phrases, no external bench language, capacity truthfulness, pricing scope, single ask, word limit, and non-condescending framing."
+  },
+  "candidate_output": "Subject: Re: Ramp - next step\n\nHi,\n\nGlad to hear that. I would be happy to coordinate a 30-minute conversation and send over a few time options.\n\nBest,\nTenacious\n\nI can hold 2026-04-28T06:00:00+00:00 as a demo booking slot.",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "missing_specific_signal_reference"
+  },
+  "metadata": {
+    "generator": "generate_trace_derived_tasks.py",
+    "seed": 43,
+    "version": "v0.1",
+    "source": "week10_conversion_engine_trace_log",
+    "expanded_from_usable_index": 44,
+    "original_generated_id": "trace_derived_044",
+    "merged_by": "merge_trace_into_partitions.py",
+    "partition": "dev"
+  }
+}

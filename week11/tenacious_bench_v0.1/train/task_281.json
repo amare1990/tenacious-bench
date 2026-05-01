@@ -1,0 +1,57 @@
+{
+  "task_id": "task_281",
+  "source_mode": "programmatic",
+  "failure_mode": "fabricated_signal",
+  "difficulty": "hard",
+  "input": {
+    "company": "Mosaic Health",
+    "prospect_name": "Maya",
+    "prospect_title": "CTO",
+    "icp_segment": "mid_market_cost_restructure",
+    "hiring_signal_brief": {
+      "funding_stage": "Series A",
+      "funding_amount": "$22M",
+      "role_count": 3,
+      "primary_stack": "data",
+      "signal_confidence": "low",
+      "ai_maturity_score": 1
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Congrats on your Series C\n\nHi Maya,\nCongratulations on closing your $52M Series C last month. With that capital, scaling engineering is the obvious next move.\nTenacious can deploy a team quickly.\nWorth 15 minutes?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "fabricated_signal",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1",
+    "original_generated_id": "varied_programmatic_016",
+    "merged_by": "merge_varied_programmatic_into_partitions.py",
+    "partition": "train"
+  }
+}

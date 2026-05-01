@@ -1,0 +1,54 @@
+{
+  "task_id": "varied_programmatic_013",
+  "source_mode": "programmatic",
+  "failure_mode": "banned_phrase",
+  "difficulty": "hard",
+  "input": {
+    "company": "CargoNest",
+    "prospect_name": "Marcus",
+    "prospect_title": "COO",
+    "icp_segment": "specialized_capability_gap",
+    "hiring_signal_brief": {
+      "funding_stage": "Seed",
+      "funding_amount": "$14M",
+      "role_count": 2,
+      "primary_stack": "Go",
+      "signal_confidence": "medium",
+      "ai_maturity_score": 2
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Quick Chat engineering help\n\nHi Marcus,\nTenacious provides quick chat engineering support for companies like CargoNest.\nWe can help you move faster across Go and delivery work.\nOpen to a quick chat next week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "banned_phrase",
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true
+    }
+  },
+  "metadata": {
+    "generator": "generate_varied_programmatic_tasks.py",
+    "seed": 99,
+    "version": "v0.1"
+  }
+}

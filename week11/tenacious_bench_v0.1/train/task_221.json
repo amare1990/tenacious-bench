@@ -1,0 +1,36 @@
+{
+  "source_mode": "synthesis",
+  "failure_mode": "weak_signal_overassertion",
+  "difficulty": "medium",
+  "input": {
+    "company": "VerveLabs",
+    "prospect_name": "Maya Chen",
+    "prospect_title": "Head of Product",
+    "icp_segment": "Series A HealthTech",
+    "hiring_signal_brief": "Added two new product managers to team in last quarter; no public hiring for engineering roles.",
+    "bench_summary": "2 frontend engineers available; no product or UX specialists.",
+    "pricing_policy": "Rate locked at $120/hr; no volume discounts."
+  },
+  "candidate_output": "VerveLabs is clearly prioritizing product velocity\u2014your team needs more frontend capacity to keep up. We have two top-tier frontend engineers ready to jump in and deliver features faster than your current sprint cycle. Let\u2019s get you on the calendar today.",
+  "rubric": {
+    "max_score": 10,
+    "expected_failure": "weak_signal_overassertion",
+    "checks": [
+      "specific_signal_grounded",
+      "confidence_aware_phrasing_required",
+      "banned_phrase_check",
+      "no_external_bench_language",
+      "no_capacity_overcommitment",
+      "no_pricing_fabrication",
+      "single_ask",
+      "non_condescending"
+    ]
+  },
+  "task_id": "task_221",
+  "metadata": {
+    "source_prompt": "synthesis_prompt_00_weak_signal_overassertion.txt",
+    "original_generated_id": "synthesis_001",
+    "merged_by": "merge_synthesis_into_partitions.py",
+    "partition": "train"
+  }
+}

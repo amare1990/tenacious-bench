@@ -1,0 +1,60 @@
+{
+  "task_id": "programmatic_005",
+  "source_mode": "programmatic",
+  "failure_mode": "condescending_gap",
+  "difficulty": "easy",
+  "input": {
+    "company": "Northstar Data",
+    "prospect_name": "Maya",
+    "prospect_title": "CTO",
+    "icp_segment": "recently_funded_series_a_b",
+    "hiring_signal_brief": {
+      "funding_stage": "Series A",
+      "funding_amount": "$35M",
+      "role_count": 2,
+      "primary_stack": "Go",
+      "signal_confidence": "medium",
+      "ai_maturity_score": 3
+    },
+    "bench_summary": {
+      "available_capacity": {
+        "Python": 6,
+        "Go": 4,
+        "data": 5,
+        "ML": 3,
+        "infra": 4
+      },
+      "max_supported_start_days": 21,
+      "requires_human_review_above_engineers": 8
+    },
+    "pricing_policy": {
+      "allowed": "public pricing bands only",
+      "forbidden": "multi-phase total contract value, invented discounts, contracts"
+    }
+  },
+  "candidate_output": "Subject: Your AI maturity is behind the curve\n\nHi Maya,\nYour competitors are clearly ahead of Northstar Data on AI maturity. You are falling behind and need to close the gap before your next board meeting.\nTenacious can help you catch up.\nCan we speak this week?\nBest,\nYabi",
+  "rubric": {
+    "max_score": 10,
+    "checks": {
+      "specific_signal_grounded": true,
+      "confidence_aware_phrasing_required": true,
+      "banned_phrase_check": true,
+      "no_external_bench_language": true,
+      "no_capacity_overcommitment": true,
+      "no_pricing_fabrication": true,
+      "single_ask": true,
+      "non_condescending": true,
+      "word_limit": {
+        "cold_outreach": 120,
+        "warm_reply": 200,
+        "reengagement": 100
+      }
+    },
+    "expected_failure": "condescending_gap"
+  },
+  "metadata": {
+    "generator": "generate_programmatic_tasks.py",
+    "seed": 42,
+    "version": "v0.1"
+  }
+}
