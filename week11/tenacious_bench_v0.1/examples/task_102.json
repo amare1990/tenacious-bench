@@ -1,0 +1,26 @@
+{
+  "task_id": "TB-EX-102",
+  "source_mode": "hand_authored",
+  "failure_dimension": "weak_cta",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Jordan",
+    "company": "InfraScale",
+    "signal_confidence": "High",
+    "hiring_signal": "Expanding infra hiring after recent funding",
+    "bench_summary": "{'requested_capabilities': ['Infra'], 'available_capabilities': ['Infra'], 'fit': True}",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Infra hiring note",
+    "body": "Hi,\n\nI noticed you're expanding infrastructure hiring after recent funding.\n\nIt looks like there may be an opportunity to accelerate team buildout.\n\nLet me know your thoughts.\n\nBest,\nTenacious"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}

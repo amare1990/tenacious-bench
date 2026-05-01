@@ -1,6 +1,7 @@
 {
   "task_id": "TB-0001",
   "source_mode": "hand_authored",
+  "failure_dimension": "grounded_outreach_quality",
   "input": {
     "channel": "email",
     "prospect_name": "Maya",

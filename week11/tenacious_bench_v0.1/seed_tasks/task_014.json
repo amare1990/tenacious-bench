@@ -1,7 +1,7 @@
 {
   "task_id": "TB-SEED-014",
   "source_mode": "trace_derived",
-  "failure_dimension": "internal_analysis_leakage",
+  "failure_dimension": "generation_failure",
   "input": {
     "channel": "email",
     "prospect_name": "Ramp",

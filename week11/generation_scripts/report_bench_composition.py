@@ -5,7 +5,7 @@ from pathlib import Path
 DATASET_DIR = Path("week11/tenacious_bench_v0.1")
 REPORT_PATH = Path("week11/bench_composition.md")
 
-PARTITIONS = ["train", "dev", "held_out", "seed_tasks", "examples"]
+PARTITIONS = ["train", "dev", "held_out", "examples"]
 
 def load_tasks():
     tasks = []

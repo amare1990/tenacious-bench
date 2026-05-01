@@ -6,6 +6,24 @@ OUTPUT_DIR = Path("week11/tenacious_bench_v0.1/seed_tasks")
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+def infer_failure_dimension(subject, body):
+    text = f"{subject}\n{body}".lower()
+
+    if "no email generated" in text:
+        return "generation_failure"
+
+    if (
+        "working angle" in text
+        or "public ai readiness" in text
+        or "segment 1" in text
+        or "segment 2" in text
+        or "segment 3" in text
+        or "segment 4" in text
+    ):
+        return "internal_analysis_leakage"
+
+    return "weak_grounding"
+
 def convert_trace_to_task(trace, idx):
     payload = trace.get("payload", {})
 
@@ -16,6 +34,7 @@ def convert_trace_to_task(trace, idx):
     return {
         "task_id": f"TB-SEED-{idx:03d}",
         "source_mode": "trace_derived",
+        "failure_dimension": infer_failure_dimension(subject, body),
         "input": {
             "channel": "email",
             "prospect_name": payload.get("company_name", "Unknown"),
@@ -36,7 +55,7 @@ def convert_trace_to_task(trace, idx):
             "forbid_bench_word": True,
             "requires_one_ask": True,
             "requires_no_banned_phrases": True
-        }
+        },        
     }
 
 def main():

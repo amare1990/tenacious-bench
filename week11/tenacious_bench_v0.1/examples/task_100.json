@@ -1,0 +1,26 @@
+{
+  "task_id": "TB-EX-100",
+  "source_mode": "hand_authored",
+  "failure_dimension": "weak_grounding",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Maya",
+    "company": "DataFlux",
+    "signal_confidence": "High",
+    "hiring_signal": "Opened 7 Python engineering roles in the last 60 days after a $12M Series A",
+    "bench_summary": "{'requested_capabilities': ['Python'], 'available_capabilities': ['Python'], 'fit': True}",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Quick thought",
+    "body": "Hi,\n\nI noticed your company seems to be growing quickly.\n\nWe help teams like yours scale engineering.\n\nWould a conversation be useful?\n\nBest,\nTenacious"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "task_id": "TB-EX-103",
+  "source_mode": "hand_authored",
+  "failure_dimension": "unsupported_capacity_commitment",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Sam",
+    "company": "BuildOps",
+    "signal_confidence": "High",
+    "hiring_signal": "Hiring ML engineers after product expansion",
+    "bench_summary": "{'requested_capabilities': ['ML'], 'available_capabilities': ['ML'], 'fit': True}",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "ML hiring",
+    "body": "Hi,\n\nI noticed you're hiring ML engineers.\n\nWe can deploy 10 senior ML engineers within 2 weeks to support your roadmap.\n\nWould a 30-minute call next week work?\n\nBest,\nTenacious"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}

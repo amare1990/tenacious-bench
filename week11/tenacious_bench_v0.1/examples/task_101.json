@@ -1,0 +1,26 @@
+{
+  "task_id": "TB-EX-101",
+  "source_mode": "hand_authored",
+  "failure_dimension": "generic_tone",
+  "input": {
+    "channel": "email",
+    "prospect_name": "Alex",
+    "company": "CloudForge",
+    "signal_confidence": "High",
+    "hiring_signal": "Hiring backend engineers and scaling infra team",
+    "bench_summary": "{'requested_capabilities': ['Backend'], 'available_capabilities': ['Backend'], 'fit': True}",
+    "calendar_link": "gettenacious.com/yabi"
+  },
+  "candidate_output": {
+    "subject": "Helping teams scale",
+    "body": "Hi,\n\nWe work with companies like yours to scale engineering teams efficiently.\n\nWould you be open to a quick conversation?\n\nBest,\nTenacious"
+  },
+  "rubric": {
+    "max_body_words": 120,
+    "max_subject_chars": 60,
+    "requires_specific_signal": true,
+    "forbid_bench_word": true,
+    "requires_one_ask": true,
+    "requires_no_banned_phrases": true
+  }
+}

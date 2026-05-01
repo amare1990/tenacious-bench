@@ -1,7 +1,7 @@
 {
   "task_id": "TB-SEED-002",
   "source_mode": "trace_derived",
- "failure_dimension": "internal_analysis_leakage",
+  "failure_dimension": "internal_analysis_leakage",
   "input": {
     "channel": "email",
     "prospect_name": "Retool",

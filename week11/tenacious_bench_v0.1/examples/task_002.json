@@ -1,6 +1,7 @@
 {
   "task_id": "TB-0002",
   "source_mode": "hand_authored",
+  "failure_dimension": "banned_phrase_violation",
   "input": {
     "channel": "email",
     "prospect_name": "Daniel",
