@@ -1,0 +1,12 @@
+{
+  "path": "B",
+  "format": "preference_pairs",
+  "train_pairs": 111,
+  "dev_pairs": 68,
+  "excluded_partition": "held_out",
+  "notes": [
+    "Held-out tasks are not used for training data construction.",
+    "Rejected responses come from benchmark candidate outputs.",
+    "Chosen responses are rule-based Tenacious-compliant rewrites."
+  ]
+}
