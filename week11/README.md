@@ -1,50 +1,53 @@
 
 ---
 
+
 # Week 11 — Tenacious-Bench v0.1
 
 ## Overview
 
-Tenacious-Bench is a domain-specific evaluation benchmark for outbound B2B sales messaging.
+Tenacious-Bench is a domain-specific benchmark for evaluating B2B outbound sales messaging.
 
-It evaluates:
+It measures:
+
 - grounding to public signals
 - tone alignment
 - policy violations (pricing, capacity, hallucination)
-- outreach structure (CTA, single ask, clarity)
+- outreach structure (clarity, CTA, single ask)
 
 ---
 
 ## External Artifacts
 
-Dataset:
-https://huggingface.co/datasets/amaremek/tenacious-bench-v0.1
+Dataset:  
+https://huggingface.co/datasets/amaremek/tenacious-bench-v0.1  
 
-Model:
-https://huggingface.co/amaremek/tenacious-judge-pathb
+Model:  
+https://huggingface.co/amaremek/tenacious-judge-pathb  
 
 ---
 
 ## Dataset
 
-```
+````
 
 tenacious_bench_v0.1/
 
 ```
 
-- 215 tasks total
-- train / dev / held_out split
-- multi-source:
+- 215 tasks
+- splits: train / dev / held_out
+- generation modes:
   - trace-derived
   - programmatic
-  - synthesis
+  - multi-LLM synthesis
+  - hand-authored adversarial
 
 ---
 
 ## Training (Path B)
 
-Preference learning:
+Preference learning setup:
 
 ```
 
@@ -53,7 +56,7 @@ prompt + chosen (good) + rejected (bad)
 ```
 
 - chosen: Tenacious-aligned rewrite
-- rejected: original candidate_output
+- rejected: original candidate output
 
 ```
 
@@ -89,29 +92,41 @@ ablations/evaluate_path_b_heldout.py
 
 Outputs:
 
-- `ablation_results.json`
-- `held_out_traces.jsonl`
+- ablation_results.json
+- held_out_traces.jsonl
 
 ---
 
-## Evaluation Type
+## Evaluation Methodology
 
-**Deterministic proxy scoring**
-
-This is:
-- NOT model inference
-- NOT LLM judge pass
-
-Used for:
-- directional improvement measurement
-- cost-free evaluation
+- deterministic proxy scoring
+- bootstrap confidence intervals
+- paired sign-test p-values
+- cost and latency instrumentation
 
 ---
 
 ## Results
 
-- ΔA: +1.36 (trained vs baseline)
-- ΔB: +0.74 (trained vs prompt)
+- ΔA (trained vs baseline): +1.36
+- ΔB (trained vs prompt): +0.74
+
+---
+
+## Contamination Validation
+
+```
+
+validation/contamination_check.py
+
+```
+
+Checks:
+
+- 8-gram overlap
+- embedding similarity (cosine)
+- cross-partition leakage
+- time-shift validation
 
 ---
 
@@ -121,29 +136,47 @@ Used for:
 
 evidence_graph.json
 
-```
+````
 
 Links:
 - dataset audit
 - training data
-- model
+- model artifacts
 - evaluation results
+
+---
+
+## Reproducibility
+
+```bash
+uv run python week11/training/train_path_b_judge.py
+uv run python week11/ablations/evaluate_path_b_heldout.py
+````
 
 ---
 
 ## Limitations
 
-- proxy evaluation only
-- synthetic bias
-- no production deployment loop
+* proxy scoring (no LLM inference pass)
+* synthetic data bias
+* no production integration loop
 
 ---
 
 ## Next Steps
 
-- integrate judge into generation pipeline
-- replace proxy with LLM judge
-- expand adversarial coverage
+* integrate critic into generation system
+* replace proxy with LLM judge
+* expand adversarial coverage
+* add human evaluation layer
+
+---
+
+## License
+
+See root LICENSE file
 
 
 ---
+
+

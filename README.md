@@ -2,7 +2,6 @@
 
 ---
 
-
 # Tenacious-Bench v0.1  
 **TRP1 Week 10 → Week 11: Conversion Engine + Sales Evaluation Benchmark**
 
@@ -12,24 +11,24 @@
 
 This repository contains two integrated systems:
 
-### Week 10 — Conversion Engine  
-A full outbound sales system that:
+### Week 10 — Conversion Engine
+A production-style outbound sales system that:
 - identifies prospects
 - grounds outreach in public signals
-- orchestrates email, SMS, and booking workflows
-- logs structured traces for evaluation
+- generates structured messages (email/SMS)
+- logs execution traces for evaluation
 
-### Week 11 — Tenacious-Bench + Learned Judge  
-A domain-specific benchmark and trained critic that answers:
+### Week 11 — Tenacious-Bench + Learned Judge
+A domain-specific evaluation benchmark and trained critic answering:
 
-> *Does the system produce high-quality, production-safe sales outreach for Tenacious?*
+> *Does the system produce high-quality, production-safe B2B outreach?*
 
 ---
 
 ## 🔗 Artifacts
 
 - Dataset: https://huggingface.co/datasets/amaremek/tenacious-bench-v0.1  
-- Model: https://huggingface.co/amaremek/tenacious-judge-pathb  
+- Model (Path B Judge): https://huggingface.co/amaremek/tenacious-judge-pathb  
 
 ---
 
@@ -50,74 +49,40 @@ A domain-specific benchmark and trained critic that answers:
 - **95% CI:** [0.65, 0.82]
 
 **Evaluation type:**  
-`deterministic proxy held-out evaluation`
+Deterministic proxy held-out evaluation (see limitations)
 
 ---
 
 ## What Was Built (Week 11)
 
 ### 1. Tenacious-Bench Dataset
-
-- 215 tasks
-- 0 duplicates after cleaning
+- 215 tasks (train/dev/held_out)
 - multi-source:
   - trace-derived
   - programmatic
-  - synthesis
-
-```
-
-week11/tenacious_bench_v0.1/
-
-```
-
----
+  - multi-LLM synthesis
+  - hand-authored adversarial
 
 ### 2. Preference Training Data (Path B)
-
-- 111 train pairs  
-- 68 dev pairs  
+- 111 train pairs
+- 68 dev pairs
 - held_out excluded (no contamination)
 
-```
-
-week11/training_data/path_b_preference/
-
-```
-
----
-
-### 3. Trained Judge (LoRA Adapter)
-
-- Base model: `Qwen2.5-0.5B-Instruct`
-- Method: **DPO + LoRA**
-- Function: preference critic for sales-quality violations
-
-```
-
-week11/training/outputs/path_b_judge_lora/
-
-```
-
----
+### 3. Trained Judge (LoRA)
+- Base: Qwen2.5-0.5B-Instruct
+- Method: DPO + LoRA
+- Role: preference critic
 
 ### 4. Held-Out Evaluation
-
-- 36 tasks
-- bootstrap confidence intervals
-- cost-free deterministic scoring proxy
-
-```
-
-week11/ablations/
-
-```
+- bootstrap CI + p-values
+- cost/timing instrumentation
+- ablation harness
 
 ---
 
 ## Why Tenacious-Bench Exists
 
-Standard benchmarks fail to capture:
+Standard benchmarks miss:
 
 - public-signal grounding
 - pricing hallucination
@@ -126,60 +91,93 @@ Standard benchmarks fail to capture:
 
 This project introduces:
 
-> **A domain-specific benchmark + trained critic for sales reliability**
+> **A domain-specific benchmark + learned critic for sales reliability**
 
 ---
 
-## Limitations
+## Setup & Reproduction
 
-- evaluation is **proxy-based (not full LLM judge)**
-- dataset partially synthetic
-- trained judge not yet integrated into live generation loop
+### Install
 
----
+```bash
+git clone <repo-url>
+cd conversion-engine
+uv pip install -r requirements.txt
+````
 
-## Future Work (v0.2)
+### Build Dataset
 
-- eval-tier LLM judge pass
-- integrate critic into generation pipeline
-- expand adversarial probes
-- human validation layer
+```bash
+uv run python week11/dataset/build_dataset.py
+```
+
+### Run Contamination Checks
+
+```bash
+uv run python week11/validation/contamination_check.py
+```
+
+### Train Path B Judge
+
+```bash
+uv run python week11/training/train_path_b_judge.py
+```
+
+### Run Evaluation
+
+```bash
+uv run python week11/ablations/evaluate_path_b_heldout.py
+```
 
 ---
 
 ## Repository Structure
 
 ```
-
-week10_conversion_engine/   # outbound system
+week10_conversion_engine/
 week11/
 ├── tenacious_bench_v0.1/
+├── dataset/
 ├── training_data/
 ├── training/
 ├── ablations/
-└── evidence_graph.json
-
+├── validation/
+├── judge/
+└── docs/
 ```
 
 ---
 
-## Week 10 — Conversion Engine
+## Limitations
 
-
-## Author
-
-Amare Kassa 
-
-amaremek@gmail.com
+* proxy evaluation (not full LLM judge inference)
+* partial synthetic dataset
+* trained critic not yet integrated into generation loop
 
 ---
 
-## Artifacts
+## Future Work
 
-- Dataset: Tenacious-Bench v0.1  
-- Model: Path B LoRA judge  
-- Evaluation: held-out ablation results  
-- Evidence: evidence_graph.json
+* eval-tier LLM judge pass
+* integrate critic into generation pipeline
+* expand adversarial dataset coverage
+* human evaluation layer
+
+---
+
+## License
+
+MIT License (see LICENSE file)
+
+---
+
+## Author
+
+Amare Kassa
+
+[amaremek@gmail.com](mailto:amaremek@gmail.com)
+
+
 
 ---
 
