@@ -1,0 +1,32 @@
+seed: 42
+
+model:
+  backbone: "Qwen/Qwen2.5-7B-Instruct"
+  revision: "main"
+  training_type: "lora_only"
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+
+training:
+  learning_rate: 0.0002
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  epochs: 3
+  warmup_ratio: 0.03
+  scheduler: "cosine"
+  max_seq_length: 2048
+  weight_decay: 0.01
+
+logging:
+  output_dir: "week11/training/runs"
+  log_every_steps: 10
+  use_wandb: false
+  wandb_project: "tenacious-bench-week11"

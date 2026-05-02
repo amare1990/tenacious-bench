@@ -4,27 +4,51 @@
   "prompt_only_mean": 7.3194,
   "trained_judge_mean": 8.0556,
   "delta_a_trained_vs_baseline": {
+    "description": "Path B trained judge/critic intervention vs Week 10 baseline evaluator on Tenacious-Bench held-out.",
     "mean": 1.3611,
     "bootstrap_95_ci": [
-      1.2222,
+      1.2361,
       1.5
-    ]
+    ],
+    "p_value_sign_test": 0.0
   },
   "delta_b_trained_vs_prompt": {
+    "description": "Same backbone with prompt-engineered critic behavior only; no training.",
     "mean": 0.7361,
     "bootstrap_95_ci": [
       0.6528,
       0.8194
-    ]
+    ],
+    "p_value_sign_test": 0.0
+  },
+  "delta_c_tau2_reference": {
+    "mode": "informational_only",
+    "benchmark": "tau2-Bench retail",
+    "description": "Public benchmark reference contrast. It is not rerun here; it is used to distinguish general retail task completion from Tenacious-specific outreach, grounding, bench, pricing, and tone constraints.",
+    "rerun": false
   },
   "cost_pareto": {
+    "mean_latency_ms": 0.2823,
+    "total_latency_ms": 10.164,
+    "mean_token_estimate": 53.5556,
+    "total_token_estimate": 1928,
     "baseline_cost_per_task_usd": 0.0,
     "prompt_only_cost_per_task_usd": 0.0,
     "trained_judge_cost_per_task_usd": 0.0,
-    "note": "Local proxy scoring; API eval-tier pass not run yet."
+    "note": "Local proxy scoring; API eval-tier pass not run yet. Token counts are deterministic estimates for instrumentation."
+  },
+  "harness_design": {
+    "shared_interface": "score_task(task)",
+    "comparisons": [
+      "delta_a_trained_vs_baseline",
+      "delta_b_trained_vs_prompt",
+      "delta_c_tau2_reference",
+      "cost_pareto"
+    ],
+    "failure_handling": "Raises ValueError when held-out task directory is empty."
   },
   "limitations": [
-    "This is a deterministic proxy evaluator, not a full held-out LLM judge pass.",
+    "This is a deterministic proxy evaluator, not a full held-out LLM judge inference pass.",
     "The trained LoRA adapter is saved separately; this script records evaluation-ready ablation artifacts.",
     "Final report should clearly label these as proxy scores unless replaced by model inference."
   ]
