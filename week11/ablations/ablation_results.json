@@ -1,0 +1,31 @@
+{
+  "held_out_task_count": 36,
+  "baseline_mean": 6.6944,
+  "prompt_only_mean": 7.3194,
+  "trained_judge_mean": 8.0556,
+  "delta_a_trained_vs_baseline": {
+    "mean": 1.3611,
+    "bootstrap_95_ci": [
+      1.2222,
+      1.5
+    ]
+  },
+  "delta_b_trained_vs_prompt": {
+    "mean": 0.7361,
+    "bootstrap_95_ci": [
+      0.6528,
+      0.8194
+    ]
+  },
+  "cost_pareto": {
+    "baseline_cost_per_task_usd": 0.0,
+    "prompt_only_cost_per_task_usd": 0.0,
+    "trained_judge_cost_per_task_usd": 0.0,
+    "note": "Local proxy scoring; API eval-tier pass not run yet."
+  },
+  "limitations": [
+    "This is a deterministic proxy evaluator, not a full held-out LLM judge pass.",
+    "The trained LoRA adapter is saved separately; this script records evaluation-ready ablation artifacts.",
+    "Final report should clearly label these as proxy scores unless replaced by model inference."
+  ]
+}
