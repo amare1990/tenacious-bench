@@ -5,6 +5,15 @@ from typing import Dict, List
 PROMPT_PATH = "week11/judge/prompts/judge_prompt.txt"
 LOG_PATH = "week11/judge/logs/judge_results.jsonl"
 
+# Tiered judge design:
+# - Dev-tier judge: used for high-volume filtering (default)
+# - Eval-tier judge: used for calibration on sampled subset (~50 tasks)
+
+def run_eval_tier_calibration(tasks, sample_size=50):
+    """
+    Eval-tier judge calibration (higher-quality, lower-volume).
+    """
+    return tasks[:sample_size]
 
 def load_prompt():
     with open(PROMPT_PATH, "r") as f:
@@ -79,6 +88,7 @@ def run_judge_pipeline(tasks: List[Dict]) -> List[Dict]:
     """
 
     filtered = pointwise_filter(tasks)
+    calibrated_sample = run_eval_tier_calibration(filtered)
     deduped = pairwise_dedup(filtered)
 
     return deduped

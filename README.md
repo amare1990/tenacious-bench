@@ -25,10 +25,21 @@ A domain-specific evaluation benchmark and trained critic answering:
 
 ---
 
+
 ## 🔗 Artifacts
 
 - Dataset: https://huggingface.co/datasets/amaremek/tenacious-bench-v0.1  
 - Model (Path B Judge): https://huggingface.co/amaremek/tenacious-judge-pathb  
+
+---
+
+
+
+## Community Engagement
+
+- GitHub repository: https://github.com/amare1990/tenacious-bench.git
+- HuggingFace dataset + model published
+- Submission shared for peer review within TRP1 cohort
 
 ---
 
@@ -102,7 +113,7 @@ This project introduces:
 ```bash
 git clone <repo-url>
 cd conversion-engine
-uv pip install -r requirements.txt
+uv sync
 ````
 
 ### Build Dataset

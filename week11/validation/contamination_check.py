@@ -17,6 +17,11 @@ EMBEDDING_THRESHOLD = 0.85
 NGRAM_SIZE = 8
 
 
+# Coverage:
+# - train vs held_out
+# - dev vs held_out
+# - cross-partition duplicate detection
+
 def load_partition(name, path):
     tasks = []
     if not path.exists():
@@ -98,21 +103,16 @@ def task_text(task):
 
 
 def time_shift_ok(task):
-    """
-    Time-shift validation placeholder.
-
-    For public-data tasks, this should verify that any public signals used
-    by the task fall inside the declared signal window and before the
-    held-out evaluation cutoff.
-    """
     input_obj = task.get("input", {})
-    signal_window = input_obj.get("public_signal_window")
+    window = input_obj.get("public_signal_window")
 
-    if signal_window is None:
+    if not window:
         return True
 
-    if isinstance(signal_window, dict):
-        return bool(signal_window.get("start") and signal_window.get("end"))
+    if isinstance(window, dict):
+        start = window.get("start")
+        end = window.get("end")
+        return bool(start and end and start < end)
 
     return True
 
@@ -184,6 +184,21 @@ def main():
                     }
                 )
 
+    dev_ngrams = set()
+    for task in partitions["dev"]:
+        dev_ngrams |= ngrams(task_text(task), n=NGRAM_SIZE)
+
+    dev_heldout_overlaps = []
+    for task in partitions["held_out"]:
+        overlap = dev_ngrams & ngrams(task_text(task), n=NGRAM_SIZE)
+        if overlap:
+            dev_heldout_overlaps.append({
+                "task_id": task.get("task_id"),
+                "file": task.get("_file"),
+                "overlap_count": len(overlap),
+                "example_overlap": " ".join(next(iter(overlap))),
+            })
+
     time_shift_violations = [
         {
             "task_id": task.get("task_id"),
@@ -218,6 +233,8 @@ def main():
             same_body_cross_partition,
             embedding_overlaps,
             time_shift_violations,
+            # dev_ngrams,
+            dev_heldout_overlaps,
         ]
     )
 
@@ -233,6 +250,8 @@ def main():
             "time_shift_violations": len(time_shift_violations),
             "same_body_cross_partition": len(same_body_cross_partition),
             "status": "review_required" if review_required else "pass",
+            "dev_heldout_overlaps": len(dev_heldout_overlaps),
+            "dev_heldout_8gram_overlaps": dev_heldout_overlaps,
         },
         "duplicate_task_ids": duplicate_task_ids,
         "duplicate_outputs": duplicate_outputs,
