@@ -26,6 +26,13 @@ A domain-specific benchmark and trained critic that answers:
 
 ---
 
+## 🔗 Artifacts
+
+- Dataset: https://huggingface.co/datasets/amaremek/tenacious-bench-v0.1  
+- Model: https://huggingface.co/amaremek/tenacious-judge-pathb  
+
+---
+
 ## Week 11 — Key Results
 
 | Metric | Score |

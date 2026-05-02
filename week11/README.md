@@ -15,6 +15,16 @@ It evaluates:
 
 ---
 
+## External Artifacts
+
+Dataset:
+https://huggingface.co/datasets/amaremek/tenacious-bench-v0.1
+
+Model:
+https://huggingface.co/amaremek/tenacious-judge-pathb
+
+---
+
 ## Dataset
 
 ```
