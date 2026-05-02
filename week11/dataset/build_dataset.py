@@ -4,8 +4,13 @@ import json
 import os
 from collections import Counter
 
+import sys
+sys.path.append("week11")
+
 # Import all four modes
 from authoring.hand_adversarial import generate_hand_adversarial_tasks
+
+from judge.filter_pipeline import run_judge_pipeline
 
 # Placeholder imports — replace with your real ones
 def generate_trace_tasks():
@@ -42,6 +47,9 @@ def build_dataset():
     all_tasks.extend(prog_tasks)
     all_tasks.extend(llm_tasks)
     all_tasks.extend(adv_tasks)
+
+    # after collecting all_tasks
+    all_tasks = run_judge_pipeline(all_tasks)
 
     # Basic validation: ensure source_mode exists
     for t in all_tasks:
