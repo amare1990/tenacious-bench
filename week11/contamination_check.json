@@ -1,429 +1,1177 @@
 {
   "summary": {
-    "train_tasks": 10,
-    "dev_tasks": 6,
-    "held_out_tasks": 4,
+    "train_tasks": 111,
+    "dev_tasks": 68,
+    "held_out_tasks": 36,
     "duplicate_task_ids": 0,
-    "duplicate_outputs": 4,
-    "held_out_train_8gram_overlaps": 4,
-    "same_body_cross_partition": 64,
+    "duplicate_outputs": 0,
+    "held_out_train_8gram_overlaps": 26,
+    "embedding_overlaps": 124,
+    "time_shift_violations": 0,
+    "same_body_cross_partition": 0,
     "status": "review_required"
   },
   "duplicate_task_ids": [],
+  "duplicate_outputs": [],
   "held_out_train_8gram_overlaps": [
     {
-      "task_id": "TB-SEED-009",
-      "file": "week11/tenacious_bench_v0.1/held_out/task_009.json",
+      "task_id": "task_088",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_088.json",
+      "overlap_count": 9,
+      "example_overlap": "5, 'ml': 3, 'infra': 4}, 'max_supported_start_days': 21, 'requires_human_review_above_engineers':"
+    },
+    {
+      "task_id": "task_089",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_089.json",
+      "overlap_count": 48,
+      "example_overlap": "4}, 'max_supported_start_days': 21, 'requires_human_review_above_engineers': 8} subject: your ai"
+    },
+    {
+      "task_id": "task_090",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_090.json",
+      "overlap_count": 45,
+      "example_overlap": "{'python': 6, 'go': 4, 'data': 5, 'ml': 3,"
+    },
+    {
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
       "overlap_count": 52,
-      "example_overlap": "and engineering; multiple open roles across engineering and"
+      "example_overlap": "'requires_human_review_above_engineers': 8} subject: a few ideas for ledgerloop"
     },
     {
-      "task_id": "TB-SEED-010",
-      "file": "week11/tenacious_bench_v0.1/held_out/task_010.json",
-      "overlap_count": 93,
-      "example_overlap": "within the last 90 days; uses python, aws,"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "overlap_count": 48,
+      "example_overlap": "delivery. do you have 15 minutes this week?"
     },
     {
-      "task_id": "TB-SEED-018",
-      "file": "week11/tenacious_bench_v0.1/held_out/task_018.json",
-      "overlap_count": 93,
-      "example_overlap": "within the last 90 days; uses python, aws,"
+      "task_id": "task_093",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_093.json",
+      "overlap_count": 46,
+      "example_overlap": "{'python': 6, 'go': 4, 'data': 5, 'ml': 3,"
     },
     {
-      "task_id": "TB-SEED-019",
-      "file": "week11/tenacious_bench_v0.1/held_out/task_019.json",
-      "overlap_count": 93,
-      "example_overlap": "within the last 90 days; uses python, aws,"
+      "task_id": "task_094",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_094.json",
+      "overlap_count": 37,
+      "example_overlap": "the full 12-month engagement for $900,000 total. i"
+    },
+    {
+      "task_id": "task_095",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_095.json",
+      "overlap_count": 17,
+      "example_overlap": "i hope this email finds you well. tenacious"
+    },
+    {
+      "task_id": "task_098",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_098.json",
+      "overlap_count": 45,
+      "example_overlap": "{'python': 6, 'go': 4, 'data': 5, 'ml': 3,"
+    },
+    {
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "overlap_count": 53,
+      "example_overlap": "whether tenacious can support your roadmap. could we"
+    },
+    {
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "overlap_count": 28,
+      "example_overlap": "time options. best, tenacious a few options from"
+    },
+    {
+      "task_id": "task_155",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_155.json",
+      "overlap_count": 7,
+      "example_overlap": "it be useful to compare notes for 30"
+    },
+    {
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "overlap_count": 28,
+      "example_overlap": "time options. best, tenacious a few options from"
+    },
+    {
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "overlap_count": 28,
+      "example_overlap": "time options. best, tenacious a few options from"
+    },
+    {
+      "task_id": "task_343",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_343.json",
+      "overlap_count": 36,
+      "example_overlap": "4}, 'requires_human_review_above_engineers': 8} subject: your agentic systems roadmap"
+    },
+    {
+      "task_id": "task_344",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_344.json",
+      "overlap_count": 29,
+      "example_overlap": "{'python': 6, 'go': 4, 'data': 5, 'ml': 3,"
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "overlap_count": 39,
+      "example_overlap": "continues. worth a 15-minute call this week? best,"
+    },
+    {
+      "task_id": "task_346",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_346.json",
+      "overlap_count": 29,
+      "example_overlap": "have engineers onboarded immediately after signature. best, yabi"
+    },
+    {
+      "task_id": "task_347",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_347.json",
+      "overlap_count": 35,
+      "example_overlap": "{'python': 6, 'go': 4, 'data': 5, 'ml': 3,"
+    },
+    {
+      "task_id": "task_348",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_348.json",
+      "overlap_count": 25,
+      "example_overlap": "{'python': 6, 'go': 4, 'data': 5, 'ml': 3,"
+    },
+    {
+      "task_id": "task_349",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_349.json",
+      "overlap_count": 34,
+      "example_overlap": "flexible engagement models. would you be open to"
+    },
+    {
+      "task_id": "task_350",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_350.json",
+      "overlap_count": 47,
+      "example_overlap": "moves past you. tenacious can help you catch"
+    },
+    {
+      "task_id": "task_351",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_351.json",
+      "overlap_count": 36,
+      "example_overlap": "8} subject: congrats on your series b hi"
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "overlap_count": 47,
+      "example_overlap": "whether tenacious can support your roadmap. could we"
+    },
+    {
+      "task_id": "task_353",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_353.json",
+      "overlap_count": 43,
+      "example_overlap": "4}, 'requires_human_review_above_engineers': 8} subject: your agentic systems roadmap"
+    },
+    {
+      "task_id": "task_354",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_354.json",
+      "overlap_count": 18,
+      "example_overlap": "5, 'ml': 3, 'infra': 4}, 'requires_human_review_above_engineers': 8} subject:"
     }
   ],
-  "same_body_cross_partition": [
+  "embedding_overlaps": [
     {
-      "task_a": "TB-SEED-000",
-      "partition_a": "train",
-      "task_b": "TB-SEED-003",
-      "partition_b": "dev"
+      "task_id": "task_089",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_089.json",
+      "train_task_id": "task_025",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_025.json",
+      "similarity": 0.969,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-001",
-      "partition_a": "train",
-      "task_b": "TB-SEED-004",
-      "partition_b": "dev"
+      "task_id": "task_089",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_089.json",
+      "train_task_id": "task_033",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_033.json",
+      "similarity": 0.982,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-005",
-      "partition_a": "train",
-      "task_b": "TB-SEED-002",
-      "partition_b": "dev"
+      "task_id": "task_089",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_089.json",
+      "train_task_id": "task_041",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_041.json",
+      "similarity": 0.969,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_089",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_089.json",
+      "train_task_id": "task_049",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_049.json",
+      "similarity": 0.975,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_089",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_089.json",
+      "train_task_id": "task_057",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_057.json",
+      "similarity": 0.969,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_090",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_090.json",
+      "train_task_id": "task_026",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_026.json",
+      "similarity": 0.985,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_090",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_090.json",
+      "train_task_id": "task_042",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_042.json",
+      "similarity": 0.985,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_027",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_027.json",
+      "similarity": 0.969,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_043",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_043.json",
+      "similarity": 0.988,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-006",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_051",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_051.json",
+      "similarity": 0.97,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_059",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_059.json",
+      "similarity": 0.975,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_272",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_272.json",
+      "similarity": 0.87,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_282",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_282.json",
+      "similarity": 0.87,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_292",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_292.json",
+      "similarity": 0.864,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_302",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_302.json",
+      "similarity": 0.883,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_091",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_091.json",
+      "train_task_id": "task_312",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_312.json",
+      "similarity": 0.865,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-008",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "train_task_id": "task_020",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_020.json",
+      "similarity": 0.941,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "train_task_id": "task_028",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_028.json",
+      "similarity": 0.973,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "train_task_id": "task_036",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_036.json",
+      "similarity": 0.954,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "train_task_id": "task_044",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_044.json",
+      "similarity": 0.967,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "train_task_id": "task_052",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_052.json",
+      "similarity": 0.954,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_092",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_092.json",
+      "train_task_id": "task_060",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_060.json",
+      "similarity": 0.96,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_093",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_093.json",
+      "train_task_id": "task_021",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_021.json",
+      "similarity": 0.987,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-011",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_093",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_093.json",
+      "train_task_id": "task_029",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_029.json",
+      "similarity": 0.937,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_093",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_093.json",
+      "train_task_id": "task_037",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_037.json",
+      "similarity": 0.937,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_093",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_093.json",
+      "train_task_id": "task_053",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_053.json",
+      "similarity": 0.949,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_093",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_093.json",
+      "train_task_id": "task_061",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_061.json",
+      "similarity": 0.937,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_094",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_094.json",
+      "train_task_id": "task_022",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_022.json",
+      "similarity": 0.984,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_094",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_094.json",
+      "train_task_id": "task_038",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_038.json",
+      "similarity": 0.984,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_095",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_095.json",
+      "train_task_id": "task_023",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_023.json",
+      "similarity": 0.871,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-012",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_095",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_095.json",
+      "train_task_id": "task_031",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_031.json",
+      "similarity": 0.871,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_095",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_095.json",
+      "train_task_id": "task_039",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_039.json",
+      "similarity": 0.879,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_095",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_095.json",
+      "train_task_id": "task_063",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_063.json",
+      "similarity": 0.871,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_098",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_098.json",
+      "train_task_id": "task_026",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_026.json",
+      "similarity": 0.985,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_098",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_098.json",
+      "train_task_id": "task_042",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_042.json",
+      "similarity": 0.985,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_027",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_027.json",
+      "similarity": 0.964,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_043",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_043.json",
+      "similarity": 0.97,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-014",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_051",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_051.json",
+      "similarity": 0.988,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_059",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_059.json",
+      "similarity": 0.97,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_272",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_272.json",
+      "similarity": 0.868,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_282",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_282.json",
+      "similarity": 0.868,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_292",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_292.json",
+      "similarity": 0.862,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_302",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_302.json",
+      "similarity": 0.868,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_099",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_099.json",
+      "train_task_id": "task_312",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_312.json",
+      "similarity": 0.888,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-016",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_119",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_119.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-007",
-      "partition_b": "dev"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_121",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_121.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-013",
-      "partition_b": "dev"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_123",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_123.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-015",
-      "partition_b": "dev"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_125",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_125.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_126",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_126.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_127",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_127.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_152",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_152.json",
+      "train_task_id": "task_133",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_133.json",
+      "similarity": 0.948,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-017",
-      "partition_a": "train",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_119",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_119.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-007",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_121",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_121.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-007",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_123",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_123.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-007",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_125",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_125.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-007",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_126",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_126.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-013",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_127",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_127.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-013",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_157",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_157.json",
+      "train_task_id": "task_133",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_133.json",
+      "similarity": 0.948,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-013",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_119",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_119.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-013",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_121",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_121.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-015",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-009",
-      "partition_b": "held_out"
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_123",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_123.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-015",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-010",
-      "partition_b": "held_out"
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_125",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_125.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-015",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-018",
-      "partition_b": "held_out"
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_126",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_126.json",
+      "similarity": 0.939,
+      "threshold": 0.85
     },
     {
-      "task_a": "TB-SEED-015",
-      "partition_a": "dev",
-      "task_b": "TB-SEED-019",
-      "partition_b": "held_out"
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_127",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_127.json",
+      "similarity": 0.939,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_159",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_159.json",
+      "train_task_id": "task_133",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_133.json",
+      "similarity": 0.948,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_343",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_343.json",
+      "train_task_id": "task_273",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_273.json",
+      "similarity": 0.951,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_343",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_343.json",
+      "train_task_id": "task_283",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_283.json",
+      "similarity": 0.952,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_343",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_343.json",
+      "train_task_id": "task_293",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_293.json",
+      "similarity": 0.957,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_343",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_343.json",
+      "train_task_id": "task_303",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_303.json",
+      "similarity": 0.957,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_343",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_343.json",
+      "train_task_id": "task_313",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_313.json",
+      "similarity": 0.951,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_344",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_344.json",
+      "train_task_id": "task_274",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_274.json",
+      "similarity": 0.944,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_344",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_344.json",
+      "train_task_id": "task_284",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_284.json",
+      "similarity": 0.977,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_344",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_344.json",
+      "train_task_id": "task_294",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_294.json",
+      "similarity": 0.921,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_344",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_344.json",
+      "train_task_id": "task_304",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_304.json",
+      "similarity": 0.955,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_344",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_344.json",
+      "train_task_id": "task_314",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_314.json",
+      "similarity": 0.977,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "train_task_id": "task_265",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_265.json",
+      "similarity": 0.931,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "train_task_id": "task_275",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_275.json",
+      "similarity": 0.931,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "train_task_id": "task_285",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_285.json",
+      "similarity": 0.924,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "train_task_id": "task_295",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_295.json",
+      "similarity": 0.931,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "train_task_id": "task_305",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_305.json",
+      "similarity": 0.931,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_345",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_345.json",
+      "train_task_id": "task_315",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_315.json",
+      "similarity": 0.924,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_346",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_346.json",
+      "train_task_id": "task_266",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_266.json",
+      "similarity": 0.91,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_346",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_346.json",
+      "train_task_id": "task_276",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_276.json",
+      "similarity": 0.851,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_346",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_346.json",
+      "train_task_id": "task_286",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_286.json",
+      "similarity": 0.866,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_346",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_346.json",
+      "train_task_id": "task_296",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_296.json",
+      "similarity": 0.851,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_346",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_346.json",
+      "train_task_id": "task_306",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_306.json",
+      "similarity": 0.851,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_347",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_347.json",
+      "train_task_id": "task_277",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_277.json",
+      "similarity": 0.969,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_347",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_347.json",
+      "train_task_id": "task_287",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_287.json",
+      "similarity": 0.984,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_347",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_347.json",
+      "train_task_id": "task_297",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_297.json",
+      "similarity": 0.969,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_347",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_347.json",
+      "train_task_id": "task_307",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_307.json",
+      "similarity": 0.984,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_348",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_348.json",
+      "train_task_id": "task_268",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_268.json",
+      "similarity": 0.936,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_348",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_348.json",
+      "train_task_id": "task_288",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_288.json",
+      "similarity": 0.873,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_349",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_349.json",
+      "train_task_id": "task_269",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_269.json",
+      "similarity": 0.957,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_349",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_349.json",
+      "train_task_id": "task_279",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_279.json",
+      "similarity": 0.948,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_349",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_349.json",
+      "train_task_id": "task_289",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_289.json",
+      "similarity": 0.957,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_349",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_349.json",
+      "train_task_id": "task_299",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_299.json",
+      "similarity": 0.957,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_349",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_349.json",
+      "train_task_id": "task_309",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_309.json",
+      "similarity": 0.948,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_350",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_350.json",
+      "train_task_id": "task_270",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_270.json",
+      "similarity": 0.954,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_350",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_350.json",
+      "train_task_id": "task_280",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_280.json",
+      "similarity": 0.955,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_350",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_350.json",
+      "train_task_id": "task_290",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_290.json",
+      "similarity": 0.954,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_350",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_350.json",
+      "train_task_id": "task_300",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_300.json",
+      "similarity": 0.98,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_350",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_350.json",
+      "train_task_id": "task_310",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_310.json",
+      "similarity": 0.948,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_351",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_351.json",
+      "train_task_id": "task_271",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_271.json",
+      "similarity": 0.983,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_351",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_351.json",
+      "train_task_id": "task_281",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_281.json",
+      "similarity": 0.898,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_351",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_351.json",
+      "train_task_id": "task_291",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_291.json",
+      "similarity": 0.898,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_027",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_027.json",
+      "similarity": 0.859,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_043",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_043.json",
+      "similarity": 0.877,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_051",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_051.json",
+      "similarity": 0.862,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_059",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_059.json",
+      "similarity": 0.864,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_272",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_272.json",
+      "similarity": 0.965,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_282",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_282.json",
+      "similarity": 0.965,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_292",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_292.json",
+      "similarity": 0.986,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_302",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_302.json",
+      "similarity": 0.965,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_352",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_352.json",
+      "train_task_id": "task_312",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_312.json",
+      "similarity": 0.959,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_353",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_353.json",
+      "train_task_id": "task_273",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_273.json",
+      "similarity": 0.952,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_353",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_353.json",
+      "train_task_id": "task_283",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_283.json",
+      "similarity": 0.966,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_353",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_353.json",
+      "train_task_id": "task_293",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_293.json",
+      "similarity": 0.958,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_353",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_353.json",
+      "train_task_id": "task_303",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_303.json",
+      "similarity": 0.958,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_353",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_353.json",
+      "train_task_id": "task_313",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_313.json",
+      "similarity": 0.966,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_354",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_354.json",
+      "train_task_id": "task_274",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_274.json",
+      "similarity": 0.921,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_354",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_354.json",
+      "train_task_id": "task_284",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_284.json",
+      "similarity": 0.932,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_354",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_354.json",
+      "train_task_id": "task_294",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_294.json",
+      "similarity": 0.921,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_354",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_354.json",
+      "train_task_id": "task_304",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_304.json",
+      "similarity": 0.955,
+      "threshold": 0.85
+    },
+    {
+      "task_id": "task_354",
+      "file": "week11/tenacious_bench_v0.1/held_out/task_354.json",
+      "train_task_id": "task_314",
+      "train_file": "week11/tenacious_bench_v0.1/train/task_314.json",
+      "similarity": 0.932,
+      "threshold": 0.85
     }
   ],
+  "time_shift_violations": [],
+  "same_body_cross_partition": [],
   "notes": [
-    "This interim check covers duplicate task IDs, exact repeated outputs across partitions, and 8-gram overlap between train and held_out.",
-    "Final submission should add embedding similarity and time-shift verification."
+    "Checks train/dev/held_out partitions under week11/tenacious_bench_v0.1.",
+    "Implements 8-gram overlap detection between train and held_out input/output text.",
+    "Implements lightweight cosine similarity with threshold 0.85 as a cheap embedding-style contamination screen.",
+    "Implements time-shift validation hook using public_signal_window metadata when available.",
+    "Writes a structured contamination report to week11/contamination_check.json."
   ]
 }
