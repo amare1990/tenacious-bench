@@ -60,8 +60,14 @@ data/processed/
 # !data/processed/leads/clay.json
 # !data/processed/leads/retool.json
 
-# Ignore logs
-data/*.jsonl
+
+# Ignore all JSONL by default
+*.jsonl
+
+# BUT keep Week 11 required artifacts
+!week11/ablations/held_out_traces.jsonl
+!week11/training_data/path_b_preference/train_preferences.jsonl
+!week11/training_data/path_b_preference/dev_preferences.jsonl
 
 # ----------------------
 # Docs
@@ -108,3 +114,10 @@ htmlcov/
 external/
 
 seed/
+
+
+# training artifacts
+**/checkpoint-*
+**/optimizer.pt
+**/scheduler.pt
+**/trainer_state.json
