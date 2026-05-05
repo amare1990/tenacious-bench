@@ -1,6 +1,10 @@
-# Evening Call Summary
+# Evening Call Summary Day 1
 
-In the initial review, I found that the explainer correctly described the LoRA formulation (ΔW = BA) and the intuition that fine-tuning updates lie in a low-dimensional subspace. However, I pointed out a key gap: it did not clearly explain *why* gradient updates are low-rank in practice, nor did it connect that mechanism directly to the rank choice stated in my partner’s model_card.md (rank 16 for a 618-pair dataset).
+Written by Amare Kassa | Confirmed by Yonas Eshete
+
+On Yonas’s explainer (LoRA intrinsic dimension): The LoRA formulation came through but some sections stated that gradient updates are low-rank without explaining why. I asked for the actual mechanism not just that it happens, but what property of fine-tuning causes it. I also asked for a rank recommendation tied to my specific dataset size rather than a general heuristic. Yonas revised to explain the task-specific subspace argument and pretraining feature reuse, and added a concrete number: rank 4–8 is likely sufficient for 618 pairs, rank 16 is a safe upper bound. That answered what I needed.
+
+On my explainer in the initial review, I found that the explainer correctly described the LoRA formulation (ΔW = BA) and the intuition that fine-tuning updates lie in a low-dimensional subspace. However, I pointed out a key gap: it did not clearly explain _why_ gradient updates are low-rank in practice, nor did it connect that mechanism directly to the rank choice stated in my partner’s model_card.md (rank 16 for a 618-pair dataset).
 
 During the discussion, I pushed on two points:
 
