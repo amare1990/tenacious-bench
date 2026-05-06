@@ -297,7 +297,12 @@ def process_reply(
     analysis = analyze_reply(reply_text)
     updated_state = update_conversation_state(previous_state, reply_text, analysis)
 
-    followup = generate_followup_email(company_name, analysis)
+    followup = generate_followup_email(
+        company_name,
+        analysis,
+        context=analysis.model_dump(),
+        policy_result=lead["policy_result"],
+    )
     variant = _outbound_variant(lead["gap_brief"])
 
     booking_result = None

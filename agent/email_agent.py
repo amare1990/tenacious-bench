@@ -41,6 +41,7 @@ def _build_cta(tone_mode: str) -> str:
     return 'If relevant, I would be glad to share a few observations and compare notes.'
 
 
+
 def _generate_email_fallback(company, signals, ai, gap, segment_result, policy_result):
     subject = f"{company.company_name} - quick observation"
     body = '\n'.join([
@@ -101,33 +102,42 @@ def generate_email(company, signals, ai, gap, segment_result, policy_result):
     return _generate_email_fallback(company, signals, ai, gap, segment_result, policy_result)
 
 
-def generate_followup_email(company_name: str, analysis) -> dict:
-    if analysis.reply_type == 'interested':
-        return {
-            'subject': f'Re: {company_name} - next step',
-            'body': 'Hi,\n\nGlad to hear that. I would be happy to coordinate a 30-minute conversation and send over a few time options.\n\nBest,\nTenacious',
-            'source': 'fallback',
-        }
-    if analysis.reply_type == 'information_request':
-        return {
-            'subject': f'Re: {company_name} - more context',
-            'body': 'Hi,\n\nAbsolutely. We typically help teams that are scaling engineering capacity, filling specialized AI, data, or infra gaps, or trying to move faster without overloading internal recruiting.\n\nIf useful, I can also summarize the specific observation that made me reach out.\n\nBest,\nTenacious',
-            'source': 'fallback',
-        }
-    if analysis.reply_type == 'defer':
-        return {
-            'subject': f'Re: {company_name} - happy to follow up later',
-            'body': 'Hi,\n\nUnderstood. Happy to circle back at a better time.\n\nBest,\nTenacious',
-            'source': 'fallback',
-        }
-    if analysis.reply_type == 'unclear':
+def generate_followup_email(
+    company_name: str,
+    analysis,
+    *,
+    context: dict | None = None,
+    policy_result: dict | None = None,
+) -> dict:
+    context = context or {}
+    policy_result = policy_result or {}
+
+    if analysis.reply_type == 'objection':
+        probe_category = context.get("category") or context.get("failure_category") or "objection"
+        confidence = context.get("confidence", "unknown")
+        signals = context.get("signals", {})
+
+        constraint_check = (
+            f"Constraint check: reply_type=objection; category={probe_category}; "
+            f"confidence={confidence}. Avoid generic sales fallback. Address the specific objection, "
+            f"use only supplied evidence, and do not overclaim staffing, hiring intent, or AI maturity."
+        )
+
         return {
             'subject': f'Re: {company_name}',
-            'body': 'Hi,\n\nThanks for the reply. Happy to clarify or share a bit more context if helpful.\n\nBest,\nTenacious',
-            'source': 'fallback',
+            'body': (
+                "Hi,\n\n"
+                f"{constraint_check}\n\n"
+                "Thanks for clarifying. I should not assume more than the available signal supports. "
+                "The safer next step is to separate what is observed from what is only a hypothesis, "
+                "and only continue if the specific concern is relevant on your side.\n\n"
+                "Best,\nTenacious"
+            ),
+            'source': 'constraint_checked_objection',
+            'context_used': {
+                'category': probe_category,
+                'confidence': confidence,
+                'signals': signals,
+                'policy_result': policy_result,
+            },
         }
-    return {
-        'subject': f'Re: {company_name}',
-        'body': 'Understood. Thanks for the reply.',
-        'source': 'fallback',
-    }
